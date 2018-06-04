@@ -7,7 +7,7 @@ console.log(a)     // 5050
 
 ```
 
-####温习闭包####
+#### 温习闭包
 ```javascript
 function f1(){
     var n = 999;
