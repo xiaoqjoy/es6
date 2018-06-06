@@ -6,8 +6,9 @@ for(var i = 0; i < 101; i++){
 console.log(a)     // 5050
 
 ```
+***
 
-#### 温习闭包
+####温习闭包####
 ```javascript
 function f1(){
     var n = 999;
@@ -39,6 +40,7 @@ nAdd();
 result();     //1000
 ```
 
+    
 函数f1中的局部变量n一直保存在内存中，并没有在f1调用后被自动清除
 
 f1是f2的父函数，而f2被赋给了一个全局变量，这导致f2始终在内存中，
@@ -50,3 +52,43 @@ f1是f2的父函数，而f2被赋给了一个全局变量，这导致f2始终在
 其次，nAdd的值是一个匿名函数（anonymous function），
 而这个匿名函数本身也是一个闭包，
 所以nAdd相当于是一个setter，可以在函数外部对函数内部的局部变量进行操作。
+    
+***
+
+#### 订阅模式-实现公共js库
+```javascript
+var moudle = (function(){
+    var str;
+    function fn(){};
+    return {
+        fn: fn,
+        str: str
+    }
+})()
+```
+## ES6语法
+
+ES6 新增了let命令，用来声明变量。它的用法类似于var，
+但是所声明的变量，只在let命令所在的代码块内有效。
+
+```javascript
+{
+  let a = 10;
+  var b = 1;
+}
+a // ReferenceError: a is not defined.
+b // 1
+```
+let声明的变量只在它所在的代码块有效
+
+#### 不存在变量提升
+
+```javascript
+// var 的情况
+console.log(foo); // 输出undefined
+var foo = 2;
+
+// let 的情况
+console.log(bar); // 报错ReferenceError
+let bar = 2;
+```
