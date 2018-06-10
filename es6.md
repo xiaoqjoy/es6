@@ -92,3 +92,64 @@ var foo = 2;
 console.log(bar); // 报错ReferenceError
 let bar = 2;
 ```
+
+ES6 模块之中，顶层的this指向undefined，即不应该在顶层代码使用this
+
+## export命令 ##
+
+export命令用于规定模块的对外接口，import命令用于输入其他模块提供的功能
+
+Module 的加载实现
+
+```javascript
+<script src="path/to/myModule.js" defer></script>
+<script src="path/to/myModule.js" async></script>
+```
+
+
+script标签打开defer或async属性，脚本就会异步加载。
+渲染引擎遇到这一行命令，就会开始下载外部脚本，但不会等它下载和执行，
+而是直接执行后面的命令。
+
+defer要等到整个页面在内存中正常渲染结束（DOM 结构完全生成，以及其他脚本执行完成，
+才会执行
+
+async一旦下载完，渲染引擎就会中断渲染，执行这个脚本以后，再继续渲染  
+
+defer是“渲染完再执行”，async是“下载完就执行”   ES6模块 异步加载
+
+<span style='color:red'>
+1、加载es6模块需要服务器环境<br/>
+2、在同级目录路径 import a from './a.js'   前面需要加相对地址
+</span
+
+因为export default命令的本质是将后面的值，赋给default变量，
+所以可以直接将一个值写在export default之后
+
+
+CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用<br/>
+CommonJS 模块是运行时加载，ES6 模块是编译时输出接口
+
+CommonJS会缓存原始类型的值，而ES6模块不会缓存
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
