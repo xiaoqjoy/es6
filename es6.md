@@ -507,6 +507,144 @@ delete(value)：删除某个值，返回一个布尔值，表示删除是否成�
 has(value)：返回一个布尔值，表示该值是否为Set的成员。       
 clear()：清除所有成员，没有返回值。  
 
+### 对象的扩展 ###
+
+```javascript
+const foo = 'bar';
+const baz = {foo};
+baz // {foo: "bar"}
+
+// 等同于
+const baz = {foo: foo};
+
+
+function f(x, y) {
+  return {x, y};
+}
+
+// 等同于
+
+function f(x, y) {
+  return {x: x, y: y};
+}
+
+f(1, 2) // Object {x: 1, y: 2}
+
+理解:  在对象括号内变量名只要赋值了，就既是键也是键值
+
+
+const o = {
+  method() {
+    return "Hello!";
+  }
+};
+
+理解：   上面Vue的实例方法就是这样写的
+
+// 等同于
+
+const o = {
+  method: function() {
+    return "Hello!";
+  }
+};
+
+
+let birth = '2000/01/01';
+
+const Person = {
+
+  name: '张三',
+
+  //等同于birth: birth
+  birth,
+
+  // 等同于hello: function ()...
+  hello() { console.log('我的名字是', this.name); }
+
+};
+
+理解：  融合的，既有es5的写法也有es6的写法
+
+```
+
+### Generator 函数 ###
+（英语中，generator 这个词是“生成器”的意思）
+特征：      
+    一是，function关键字与函数名之间有一个星号；    
+    二是，函数体内部使用yield表达式，定义不同的内部状态（yield在英语里的意思就是“产出”）
+
+```javascript
+function* helloWorldGenerator() {
+  yield 'hello';
+  yield 'world';
+  return 'ending';
+}
+
+var hw = helloWorldGenerator();
+
+hw.next()
+// { value: 'hello', done: false }
+
+hw.next()
+// { value: 'world', done: false }
+
+hw.next()
+// { value: 'ending', done: true }
+
+hw.next()
+// { value: undefined, done: true }
+
+```
+理解：   类似于 switch case 语句，直接用一个函数解决了  
+
+调用 Generator 函数，返回一个遍历器对象
+
+value属性表示当前的内部状态的值           
+是yield表达式后面那个表达式的值      
+done属性是一个布尔值，表示是否遍历结束
+
+
+Generator 函数可以不用yield表达式，这时就变成了一个单纯的暂缓执行函数
+
+```javascript
+function* f() {
+  console.log('执行了！')
+}
+
+var generator = f();
+
+setTimeout(function () {
+  generator.next()
+}, 2000);
+
+理解: 函数f如果是普通函数，在为变量generator赋值时就会执行。
+    但是，函数f是一个 Generator 函数，就变成只有调用next方法时，函数f才会执行
+```
+
+#### HTTP协议 ####
+
+常见的HTTP状态码：
+
+200 - 请求成功      
+301 - 资源（网页等）被永久转移到其它URL     
+404 - 请求的资源（网页等）不存在        
+500 - 内部服务器错误        
+
+HTTP状态码分类：
+
+1**    信息，服务器收到请求，需要请求者继续执行操作     
+2**	   成功，操作被成功接收并处理       
+3**	   重定向，需要进一步的操作以完成请求       
+4**	   客户端错误，请求包含语法错误或无法完成请求       
+5**	   服务器错误，服务器在处理请求的过程中发生了错误       
+
+Remote Address   远程地址
+
+general   一般的
+
+Referer  来源网址
+
 
 
 
