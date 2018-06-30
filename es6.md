@@ -668,7 +668,23 @@ get是从服务器上获取数据，post是向服务器传送数据
 
 对于post方式，服务器端用Request.Form获取提交的数据
 
+#### vue2.0之axios使用  ####
 
+在浏览器中发送 XMLHttpRequests 请求     
+在 node.js 中发送 http请求      
+支持 Promise API        
+拦截请求和响应          
+转换请求和响应数据      
+自动转换 JSON 数据      
+客户端支持保护安全免受 XSRF 攻击      
+理解： 就是 ajax 请求 
+
+#####  CSRF防御  cross-site request forgery（跨站点请求伪造）
+
+通过 referer、token 或者 验证码 来检测用户提交  （图片验证码）    
+尽量不要在页面的链接中暴露用户隐私信息          
+对于用户修改删除等操作最好都使用post 操作           
+避免全站通用的cookie，严格设置cookie的域    
 
 
 
