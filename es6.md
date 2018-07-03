@@ -694,9 +694,13 @@ ref 被用来给元素或子组件注册引用信息。引用信息将会注册�
 
 input的引用信息为input1 ，$refs 是所有注册过的ref的一个集合，
 
+```javascript
+
 console.log(this.$refs.input1)//<input type="text" id="input1">
 
 console.log(document.getElementById('input1'))//<input type="text" id="input1">
+
+```
 
 这两种方法获得的都是Dom节点，而$refs相对document.getElementById的方法，会减少获取dom节点的消耗。
 
