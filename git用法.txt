@@ -23,26 +23,61 @@ git push origin master  将文件给推到服务器上
 
 git pull origin master  将服务器文件拉到本地
 
-git merge master 合并分支
+git merge master        合并分支
 
 
 
-git branch 查看本地所有分支
+git branch     查看本地所有分支
 
 git branch -a  查看远程所有分支
 
-git status 查看当前状态 
+git status     查看当前状态 
 
-git log    显示提交日志
+git log        显示提交日志
 
-git init   初始化版本库
+git init       初始化版本库
 
-git checkout . #  撤销所有修改
+git checkout . #           撤销所有修改
 
-git checkout dev  切换分支
+git checkout dev           切换分支
 
 git reset --hard HEAD^     git强制回退到上一个版本
 
 git命令大全地址  
 
 https://blog.csdn.net/halaoda/article/details/78661334
+
+
+合并分支   Dev分支上的代码合并到master上面去
+
+git add . -A
+git commit -m ‘'
+git push origin dev
+
+首先切换到master分支上
+
+git checkout master  （到主分支上面去）
+
+如果是多人开发的话 需要把远程master上的代码pull下来
+
+git pull origin master 
+
+如果是自己一个开发就没有必要了，为了保险期间还是pull
+
+然后我们把dev分支的代码合并到master上
+
+git merge dev  （在主分支上面merge dev分支）
+
+然后查看状态
+
+git status   （保持主分支状态）
+
+On branch master
+Your branch is ahead of 'origin/master' by 12 commits.
+  (use "git push" to publish your local commits)
+nothing to commit, working tree clean
+
+上面的意思就是你有12个commit，需要push到远程master上 
+执行下面命令即可
+
+git push origin master   （在主分支上面push）   （注意：这里不需要add和commit）
