@@ -711,9 +711,32 @@ $refs  this.$refs.comp._data.comp(读取子组件数据)  ref
 
 相对于事件传值来说，又提供了一种子组件向父组件传值的方式
 
+####    JS对象遍历
 
+```javascript
+var obj = {
+    a: 1,
+    b: 2,
+    c: 3
+}
+//for-in遍历对象属性,i指代属性名
+for(var i in obj){
+    console.log(i+": "+obj[i])
+}
 
+对象的另外一种访问方式：
+obj['a']
+注意： 这里的a属性需要加引号
+```
+关于各种数据的遍历方法：
+https://www.cnblogs.com/yangshifu/p/7377102.html
 
+#####  javascript原生遍历方法的建议用法：
+
+用for循环遍历数组       
+用for-in遍历对象        
+用for-of遍历类数组对象（ES6）       
+用Object.keys()获取对象属性名的集合    
 
 
 
