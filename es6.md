@@ -731,7 +731,12 @@ obj['a']
 关于各种数据的遍历方法：
 https://www.cnblogs.com/yangshifu/p/7377102.html
 
+#####  javascript原生遍历方法的建议用法：
 
+用for循环遍历数组       
+用for-in遍历对象        
+用for-of遍历类数组对象（ES6）       
+用Object.keys()获取对象属性名的集合    
 
 
 
