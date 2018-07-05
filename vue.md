@@ -10,4 +10,26 @@ Vue 最好去掉ESLint 不然代码里老是有红线报错
 
 父组件可以使用 props 把数据传给子组件。
 
-子组件可以使用 $emit 触发父组件的自定义事件。
+子组件可以使用 $emit 触发父组件的自定义事件。       emit  映射父组件的事件/ this.$parent  
+
+
+
+
+watch 可以随时监听路由变化   
+
+```javascript
+watch: {
+	'$route'(to,from){
+		var path = to.path;
+		console.log(path);
+		if(path == '/homePage'){
+		  this.reloadTop();
+		}
+	}
+}
+
+this.$router.push({      //控制路由路径变化
+  path: '/',
+})
+
+```
