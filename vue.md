@@ -6,3 +6,8 @@ mvvm模式  Model(json数据)-View(HTML模板)-ViewModel(Vue实例)
 
 
 Vue 最好去掉ESLint 不然代码里老是有红线报错
+
+
+父组件可以使用 props 把数据传给子组件。
+
+子组件可以使用 $emit 触发父组件的自定义事件。
