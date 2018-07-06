@@ -1,0 +1,575 @@
+.clear {
+    display: inline-block;
+    cursor: pointer;
+    line-height: 32px;
+    text-align: center;
+    width: 80px;
+    height: 32px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    border: solid 1px rgba(206, 206, 206, 0.7);
+    margin-right: 20px;
+}
+
+.clearfix:after {
+    content: "";
+    display: block;
+    visibility: hidden;
+    height: 0;
+    clear: both;
+}
+
+.clearfix {
+    zoom: 1;
+}
+
+.search {
+    display: inline-block;
+    cursor: pointer;
+    line-height: 32px;
+    color: white;
+    text-align: center;
+    width: 80px;
+    height: 32px;
+    background-color: #267bf7;
+    border-radius: 4px;
+    margin: 0 20px;
+}
+
+.searchWidth {
+    width: 200px;
+}
+
+.contentBorder {
+    border: 1px solid #eff2f5 !important;
+}
+
+.btn-color {
+    background-color: #24bdaf;
+    color: white;
+}
+
+em,
+i {
+    font-style: normal
+}
+
+.common-border {
+    color: #fff;
+    width: 100%;
+    position: relative;
+    height: 100%;
+}
+
+.common-border-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.inputWidthCommon {
+    width: 120px;
+}
+
+.floatLeft {
+    float: left;
+}
+
+.floatRight {
+    float: right;
+}
+
+.highAuto {
+    height: auto;
+    overflow: hidden;
+}
+
+h3 {
+    font-size: 14px;
+    color: #267bf7;
+}
+
+.block {
+    text-align: right;
+    margin-top: 20px;
+}
+
+
+/*最高最低血糖值*/
+
+.specialMin {
+    color: #edb344;
+}
+
+.specialMax {
+    color: #f36868;
+}
+
+.specialNormal {
+    color: #333;
+}
+
+.pr {
+    position: relative;
+    left: 0;
+    top: 0;
+}
+
+.pal {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.par {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.tac {
+    text-align: center;
+}
+
+.tal {
+    text-align: left;
+}
+
+.tar {
+    text-align: right;
+}
+
+.colorRed {
+    color: red;
+}
+
+.colorBlack {
+    color: black;
+}
+
+.fw700 {
+    font-weight: 700;
+}
+
+
+/* 定位各个子组件 */
+
+.positionContent {
+    position: absolute;
+    top: 60px;
+    width: 89.5%;
+    left: 160px;
+    padding: 19px 0 19px 20px;
+    background: #f7f8fa;
+}
+li {
+    list-style: none;
+}
+
+.resetPasss table tr td input {
+  width: 200px;
+  height: 26px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  border: solid 1px #e0e0e0;
+}
+
+.newEmp table tr td {
+  display: inline-block;
+}
+
+.newRole table tr td:nth-child(1), .resetPass table tr td:nth-child(1) {
+  width: 80px;
+  font-size: 14px;
+}
+
+.newEmp table tr td:nth-child(1) {
+  width: 60px;
+  font-size: 14px;
+}
+
+.newEmp table tr td:nth-child(3) {
+  width: 40px;
+  font-size: 14px;
+}
+
+.newEmp table tr td:nth-child(2) {
+  width: 150px;
+}
+
+.newEmp table tr td input, .newEmp table tr td select {
+  width: 120px;
+  height: 26px;
+  padding: 0 5px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  border: solid 1px #e0e0e0;
+}
+
+.newRole .roleThat {
+  width: 426px;
+  height: 101px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  border: solid 1px #e0e0e0;
+}
+
+.newRole .character {
+  width: 200px;
+  height: 26px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  border: solid 1px #e0e0e0;
+}
+
+.newDepart, .delDepart, .newRole, .delRole, .newEmp, .resetPass, .delStaff {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  overflow: auto;
+  z-index: 1000;
+}
+
+.newDeparts .cancels, .delDeparts .cancels, .newRoles .cancels, .delRoles .cancels, .newEmps .cancels, .resetPasss .cancels, .delStaffs .cancels {
+  position: absolute;
+  right: 100px;
+  bottom: 30px;
+}
+
+.newDeparts .sures, .delDeparts .sures, .newRoles .sures, .delRoles .sures, .newEmps .sures, .resetPasss .sures, .delStaffs .sures {
+  /* background-color: #267bf7;
+      color: white; */
+  right: 20px;
+  bottom: 30px;
+  position: absolute;
+}
+
+.newDeparts .butt, .delDeparts .butt, .newRoles .butt, .delRoles .butt, .newEmps .butt, .resetPasss .butt, .delStaffs .butt {
+  /* text-align: center;
+      line-height: 28px;
+      cursor: pointer;
+      width: 60px;
+      height: 28px;
+      border-radius: 4px;
+      border: solid 1px rgba(206, 206, 206, 0.7); */
+}
+
+.newDeparts table, .newRoles table, .newEmps table, .resetPasss table {
+  margin-top: 20px;
+  padding-top: 20px;
+  width: 100%;
+  border-top: 2px solid #e0e0e0;
+}
+
+.newEmps table tr {
+  display: flex;
+}
+
+.newDeparts table tr, .newRoles table tr, .newEmps table tr, .resetPasss table tr {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.newDeparts table tr input, .newDeparts table tr select {
+  width: 120px;
+  margin-left: 9px;
+  height: 26px;
+  padding: 0 5px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  border: solid 1px #e0e0e0;
+}
+
+.close {
+  position: absolute;
+  right: 17px;
+  top: 17px;
+  cursor: pointer;
+}
+
+.newDeparts h5, .delDeparts h5 {
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #111111;
+}
+
+.newDeparts, .delDeparts, .newRoles, .delRoles, .newEmps, .resetPasss, .delStaffs {
+  padding: 20px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.newEmps {
+  width: 460px;
+  height: 375px;
+  margin-left: -206px;
+  margin-top: -192px;
+}
+
+.delRoles {
+  margin-left: -132px;
+  margin-top: -92px;
+  width: 264px;
+  height: 184px;
+}
+
+.newRoles {
+  width: 560px;
+  height: 400px;
+  margin-left: -280px;
+  margin-top: -200px;
+}
+
+.delStaffs {
+  width: 297px;
+  height: 184px;
+  margin-left: -148px;
+  margin-top: -92px;
+}
+
+.resetPasss {
+  margin-left: -149px;
+  margin-top: -115px;
+  width: 298px;
+  height: 260px;
+}
+
+.newDeparts {
+  width: 256px;
+  height: 310px;
+  margin-left: -114px;
+  margin-top: -143px;
+}
+
+.delDeparts {
+  width: 264px;
+  height: 184px;
+  margin-left: -132px;
+  margin-top: -92px;
+}
+
+.delDeparts p, .delRoles p, .delStaffs p {
+  margin-top: 20px;
+  border-top: 1px solid #e0e0e0;
+  font-size: 16px;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.newDeparts table tr td:nth-child(1) {
+  font-size: 14px;
+}
+
+.delDeparts p span, .delRoles p span, .delStaffs p span {
+  color: #267bf7;
+}
+
+.actives {
+  background-color: #e9f2fe;
+  color: #267bf7 !important;
+}
+
+li {
+  list-style: none;
+}
+
+.tabss {
+  float: left;
+  width: 159px;
+  /*border-right: 1px solid #ccc;*/
+}
+
+.tabss ul li {
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  cursor: pointer;
+  color: #8b9eba;
+}
+
+.agencyInfor {
+  padding: 19px 20px;
+  background: #f7f8fa;
+  position: absolute;
+  top: 60px;
+  left: 160px;
+  width: 89.5%;
+}
+
+.agencyInfors {
+  /*border:1px solid #dddddd;*/
+  width: 100%;
+  /*height: 851px;*/
+  overflow: hidden;
+  background-color: #ffffff;
+  /*padding: 20px;*/
+  position: relative;
+  margin-top: 19px;
+}
+
+h3 {
+  font-size: 14px;
+  color: #267bf7;
+}
+
+/*通用*/
+.manageDepart, .staffManage {
+  min-width: 1100px;
+  width: 89%;
+  min-height: 830px;
+  /*height: 850px;*/
+  /*position: absolute;*/
+  /*left: 160px;*/
+  float: left;
+  border-left: 1px solid #eff2f5;
+}
+
+.manage_T, .staf_T {
+  padding: 20px;
+  font-size: 14px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.StaffNum {
+  padding-left: 6px;
+  color: #999999;
+  width: 200px;
+  height: 28px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  border: solid 1px rgba(206, 206, 206, 0.7);
+  margin-right: 10px;
+}
+
+.newAdd {
+  display: inline-block;
+  float: right;
+  color: white;
+  background-color: #24bdaf;
+}
+
+.block {
+  text-align: right;
+  margin: 20px 0;
+}
+
+.ipts {
+  font-size: 14px;
+  line-height: 32px;
+  display: inline-block;
+  width: 80px;
+  height: 32px;
+  border-radius: 4px;
+  text-align: center;
+  border: solid 1px rgba(206, 206, 206, 0.7);
+  cursor: pointer;
+}
+
+.selects {
+  margin-right: 20px;
+  color: #999999;
+  width: 110px;
+  height: 28px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  border: solid 1px rgba(206, 206, 206, 0.7);
+}
+
+.searchs {
+  color: white;
+  background-color: #267bf7;
+  margin-right: 20px;
+}
+
+.clears {
+  background-color: #ffffff;
+}
+
+.newDepart, .delDepart {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  overflow: auto;
+  z-index: 1000;
+}
+
+/*系统管理 样式表*/
+.block {
+  text-align: right;
+  margin-top: 20px;
+}
+
+.newAdd_R {
+  display: inline-block;
+  float: right;
+  color: white;
+  background-color: #24bdaf;
+}
+
+.CharaName {
+  padding-left: 6px;
+  color: #999999;
+  width: 320px;
+  height: 28px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  border: solid 1px rgba(206, 206, 206, 0.7);
+  margin-right: 10px;
+}
+
+.ipts {
+  font-size: 14px;
+  line-height: 28px;
+  display: inline-block;
+  width: 80px;
+  height: 28px;
+  border-radius: 4px;
+  text-align: center;
+  border: solid 1px rgba(206, 206, 206, 0.7);
+  cursor: pointer;
+}
+
+.selects {
+  margin-right: 20px;
+  color: #999999;
+  width: 110px;
+  height: 28px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  border: solid 1px rgba(206, 206, 206, 0.7);
+}
+
+.searchs_R {
+  color: white;
+  background-color: #267bf7;
+  margin-right: 20px;
+}
+
+.clears_R {
+  background-color: #ffffff;
+}
+
+.roleManage {
+  width: 89%;
+  min-width: 1100px;
+  min-height: 830px;
+  /*position: absolute;*/
+  /*left: 160px;*/
+  float: left;
+  border-left: 1px solid #eff2f5;
+}
+
+.manage_R {
+  padding: 20px;
+  font-size: 14px;
+  border-bottom: 1px solid #f1f1f1;
+}

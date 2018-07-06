@@ -1,0 +1,489 @@
+[33mcommit 3e1dba23b5ea5ce7beb1637c0dfa3ce51bf6d7e7[m[33m ([m[1;36mHEAD -> [m[1;32mdevelop_whw[m[33m)[m
+Author: wuhaiwei <dream_w@yeah.net>
+Date:   Wed Jul 4 14:12:18 2018 +0800
+
+    reset
+
+[33mcommit edc9172a7a2445121d178508e6772c06719855c1[m
+Author: wuhaiwei <dream_w@yeah.net>
+Date:   Wed Jul 4 14:01:55 2018 +0800
+
+    test
+
+[33mcommit b15202842a4d88572297346913d4346b19ead582[m[33m ([m[1;31morigin/develop[m[33m)[m
+Merge: bb223b5 8f20d06
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Wed Jul 4 11:24:43 2018 +0800
+
+    Merge branch 'develop_whw' of http://192.168.8.249/spt-sdd/AicareCloud/AiCareUI_Saas into develop_xiaowenming
+
+[33mcommit bb223b5a990ba1ed0249494a89ce01cb3874fc71[m
+Merge: d02b8eb e8ddd4f
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Wed Jul 4 11:24:08 2018 +0800
+
+    Merge branch 'develop_luo' of http://192.168.8.249/spt-sdd/AicareCloud/AiCareUI_Saas into develop_xiaowenming
+
+[33mcommit d02b8eb1551eaab3168fd4ec2f2c2d09bff7b550[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Wed Jul 4 11:23:50 2018 +0800
+
+    fix 公共弹窗导致的报错 和 bug
+
+[33mcommit e8ddd4f0c9c6a5ea0ca9eb34a0b4ee58f65a3ec2[m
+Author: LuoBin <luobin@spt-tek.com>
+Date:   Wed Jul 4 10:50:50 2018 +0800
+
+    患者详情页面：健康干预、健康随访、健康提醒弹窗的回调
+
+[33mcommit 8f20d06a6cae8aed6e189f06242dc0c8dbf3962f[m
+Author: wuhaiwei <dream_w@yeah.net>
+Date:   Wed Jul 4 10:45:32 2018 +0800
+
+    modify top
+
+[33mcommit d85f8185436497b7891be4068fc5db57a4ea2917[m[33m ([m[1;31morigin/develop_xiaowenming[m[33m, [m[1;31morigin/develop_luo[m[33m, [m[1;32mdevelop[m[33m)[m
+Merge: c2e08eb 7dddcb0
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Tue Jul 3 18:30:52 2018 +0800
+
+    Merge branch 'develop' of http://192.168.8.249/spt-sdd/AicareCloud/AiCareUI_Saas into develop_xiaowenming
+
+[33mcommit c2e08ebe749da8579e117b423243a5ad321e1218[m
+Merge: 928371b 5910f5c
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Tue Jul 3 18:30:13 2018 +0800
+
+    Merge branch 'develop_luo' of http://192.168.8.249/spt-sdd/AicareCloud/AiCareUI_Saas into develop_xiaowenming
+
+[33mcommit 5910f5ca040c3686eac26f5d09e96d2f770599b6[m
+Author: LuoBin <luobin@spt-tek.com>
+Date:   Tue Jul 3 17:53:07 2018 +0800
+
+    公共弹窗组件添加同一个父class
+
+[33mcommit cf8f86d3ddb8a10961225f407c831375762abc17[m
+Merge: af3ebcd 420cfc2
+Author: LuoBin <luobin@spt-tek.com>
+Date:   Tue Jul 3 17:30:00 2018 +0800
+
+    Merge branch 'develop_xiaowenming' into develop_luo
+
+[33mcommit af3ebcd26d2abf28d55a0350b746dd8ffc2674dc[m
+Author: LuoBin <luobin@spt-tek.com>
+Date:   Tue Jul 3 17:28:36 2018 +0800
+
+     变更代码
+
+[33mcommit 928371b1178d3c4d5326dba320dc4298696685f5[m
+Merge: 420cfc2 045a405
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Tue Jul 3 17:22:16 2018 +0800
+
+    Merge branch 'develop_luo' of http://192.168.8.249/spt-sdd/AicareCloud/AiCareUI_Saas into develop_xiaowenming
+
+[33mcommit 045a40519bf3d2aba44880fd7e0aa7237623d759[m
+Author: LuoBin <luobin@spt-tek.com>
+Date:   Tue Jul 3 17:21:18 2018 +0800
+
+    update
+
+[33mcommit 420cfc29e2829c3b6e9e7c916399d5eef8bd27b7[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Tue Jul 3 17:10:59 2018 +0800
+
+    清理患者管理 , 血糖偏高偏低页面
+
+[33mcommit 7622c3a421ee4b914d7f2aa019201d1aa10ce7d5[m
+Merge: 35e7c28 321000c
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Tue Jul 3 15:09:38 2018 +0800
+
+    Merge branch 'develop_luo' of http://192.168.8.249/spt-sdd/AicareCloud/AiCareUI_Saas into develop_xiaowenming
+    
+    # Conflicts:
+    #       src/App.vue
+    #       src/components/patient/patientManage.vue
+    #       src/main.js
+
+[33mcommit 35e7c287642f6c45f3d9fe65820a50612f20d9f0[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Tue Jul 3 14:33:57 2018 +0800
+
+    提出批量提醒 , 批量随访 ,批量干预
+
+[33mcommit 321000c24f6136b9446f93e4b8ff67759023af68[m
+Author: LuoBin <luobin@spt-tek.com>
+Date:   Tue Jul 3 14:32:03 2018 +0800
+
+    弹窗
+
+[33mcommit 82200b39624bf08a67a58644a2fb3b6d76ff9201[m
+Author: LuoBin <luobin@spt-tek.com>
+Date:   Mon Jul 2 09:46:48 2018 +0800
+
+    Revert "添加top.vue 用户信息非空判断、common.vue 路由监听时的菜单非空判断"
+    
+    This reverts commit 9b2f74082ad74f8a59788d0cfbab6deadf502706.
+
+[33mcommit 7dddcb03ff6a693ec73cf5e72540cea7b274d078[m
+Author: LuoBin <luobin@spt-tek.com>
+Date:   Mon Jul 2 09:46:29 2018 +0800
+
+    Revert "添加top.vue 用户信息非空判断、common.vue 路由监听时的菜单非空判断"
+    
+    This reverts commit 9b2f74082ad74f8a59788d0cfbab6deadf502706.
+
+[33mcommit 9b2f74082ad74f8a59788d0cfbab6deadf502706[m
+Author: LuoBin <luobin@spt-tek.com>
+Date:   Mon Jul 2 09:40:32 2018 +0800
+
+    添加top.vue 用户信息非空判断、common.vue 路由监听时的菜单非空判断
+
+[33mcommit 91d4196b4353527dc844498f0762d7f6a4b8f2e0[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Sat Jun 30 16:17:16 2018 +0800
+
+    fix 患者页面新建随访报错
+
+[33mcommit 45e62f0fe97fbc77390692f7b7ce5c3e055afca8[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Sat Jun 30 15:28:33 2018 +0800
+
+    该变页面结构 , 解决系统模块报错
+
+[33mcommit a45c8e1d3164d44f60e85aa9485029c8b3a2ec8a[m
+Merge: 63012db aa322e8
+Author: LuoBin <luobin@spt-tek.com>
+Date:   Sat Jun 30 10:39:48 2018 +0800
+
+    Merge branch 'develop_luo' into develop
+
+[33mcommit aa322e8a2b6d6316777fa724c66c0ec1fa91e54a[m
+Author: LuoBin <luobin@spt-tek.com>
+Date:   Sat Jun 30 10:37:15 2018 +0800
+
+    update
+
+[33mcommit b5c065d188b68850867aef70eb8a030dc340ab8b[m
+Author: LuoBin <luobin@spt-tek.com>
+Date:   Fri Jun 29 09:19:34 2018 +0800
+
+    提取公共function
+
+[33mcommit 63012dbf8eb814a211a8a9d35cb7735853857d72[m[33m ([m[1;31morigin/release[m[33m)[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Fri Jun 29 00:48:32 2018 +0800
+
+    角色管理固有角色不能编辑删除
+
+[33mcommit 2c80a6591b3f8a5a2cf21d87547e7cfe176139c1[m
+Author: LuoBin <luobin@spt-tek.com>
+Date:   Thu Jun 28 17:39:59 2018 +0800
+
+    update
+
+[33mcommit 5c6a0d8fd182bfdfe41e05c8652aa16c4808c7d8[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Thu Jun 21 00:30:27 2018 +0800
+
+    切换测试环境
+
+[33mcommit 5a4b9793b71fe7fab8baf72ef05403cc9e3ef31a[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Thu Jun 21 00:24:52 2018 +0800
+
+    修改现网环境端口
+
+[33mcommit ba3d24ab3285c25d03d970313311edfab9a397a6[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Wed Jun 20 19:15:21 2018 +0800
+
+    fix 患者详情页面点击右上角异常数据不更新患者详情
+
+[33mcommit d0a0e28458665e1d3bc814dc3d8ea362e6a5e7fb[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Wed Jun 20 13:42:41 2018 +0800
+
+    fix 数据页面异常血糖弹窗设置swicth和输入框不一致
+
+[33mcommit 3bb656e7af56aa3386b51bd3c47107fbc52d5da4[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Wed Jun 20 10:16:17 2018 +0800
+
+    更改异常血糖弹窗显示时间
+
+[33mcommit 2146fda6e9f5e1b20e8dccee754a1357dbb4fa28[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Wed Jun 20 09:15:07 2018 +0800
+
+    点击预警页面干预 提醒刷新预警数
+
+[33mcommit 3aaa7d6ba2eda9dff3c296e5b041dbff7492270d[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Tue Jun 19 19:07:25 2018 +0800
+
+    fix 右上角点击预警数据弹窗列表跳转详情页 , 标记已读 , 血糖预警设置switch和输入框状态不一致 , 新增子机构密码可输入空格 , 返回登录页关闭预警弹窗
+
+[33mcommit 59384bb2c685bde99d2de3ac430ebd6d7cf96dd0[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Tue Jun 19 14:28:24 2018 +0800
+
+    更改已读未读文本颜色 , 不再使用背景改变 ,  fix 添加一个异常血糖后 , 统计数目错误
+
+[33mcommit 1694e519b36a9deac674705f73009ca47feed0bf[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Tue Jun 19 10:42:18 2018 +0800
+
+    预警提醒小弹窗点击进入血糖预警列表页面 , 点击提醒未读变为已读
+
+[33mcommit 7ad0cb82eff497eb1d5b0fb3a0161adf3e5a243e[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Fri Jun 15 13:45:44 2018 +0800
+
+    add  createUserId
+
+[33mcommit 4fe444c55f89e60ad4e6bca908a4e91a928f4afa[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Fri Jun 15 11:52:54 2018 +0800
+
+    预警页面与功能初步实现
+
+[33mcommit 9d795836b24f8bea7633963cf9583dd6bbc602b6[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Mon Jun 11 15:39:13 2018 +0800
+
+    websocket 实例代码
+
+[33mcommit 57676f48bf0b3cf65b0c0fa3e523a500ed7726cb[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Thu Jun 7 21:05:36 2018 +0800
+
+    偏高偏低页面添加随访批量随访 , 首页查看随访明细
+
+[33mcommit 367d3aaa88b8c19e70d8249b39144a9c87cd1b7b[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Thu Jun 7 20:18:31 2018 +0800
+
+    fix bugs
+
+[33mcommit 72ee7a39693755deb2f85258cc89101252085267[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Thu Jun 7 17:32:12 2018 +0800
+
+    fix 患者树结构没数据不显示 "暂时没有数据"
+
+[33mcommit 6fdaa2d78cdd4c7f449594a73a427113ff403908[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Thu Jun 7 16:42:59 2018 +0800
+
+    fix 患者页面添加按钮被覆盖
+
+[33mcommit 42297d6a199592fb9197edb533ca290845c27e50[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Thu Jun 7 16:30:33 2018 +0800
+
+    fix 主页添加患者全部都显示
+
+[33mcommit 7a2055c458df36f23b0df74425f29566b74f4509[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Thu Jun 7 16:21:48 2018 +0800
+
+    旋转 , 放大 综合起来 , 今日随访不再是只显示已执行 , 要全部显示 , 报告图片样式调整
+
+[33mcommit 71c717352606cb18c4f7057613f0195e637c5444[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Thu Jun 7 11:07:36 2018 +0800
+
+    去除多余文件
+
+[33mcommit 8500e80347d903635b6d1ef87f9c00042c86ddeb[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Thu Jun 7 11:01:07 2018 +0800
+
+    解决冲突
+
+[33mcommit 319714425f0d14f7d2520f55b0e321ee8a56f338[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Thu Jun 7 10:45:48 2018 +0800
+
+    解决冲突
+
+[33mcommit b21358d22ef942fd3651a47031cfe8955b173dbf[m
+Merge: 5ecafea 6255e62
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Thu Jun 7 10:36:20 2018 +0800
+
+    Merge branch 'develop' of http://192.168.8.249/spt-sdd/AicareCloud/AiCareUI_Saas into develop_xiaowenming
+    
+    # Conflicts:
+    #       src/components/common/top.vue
+    #       src/router/index.js
+
+[33mcommit 5ecafea7f3481b48ce2be600454e323d9aab4d0f[m
+Merge: 0f30689 b6bfbd9
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Thu Jun 7 10:31:56 2018 +0800
+
+    Merge branch 'release-hotfix-session' of http://192.168.8.249/spt-sdd/AicareCloud/AiCareUI_Saas into develop_xiaowenming
+    
+    # Conflicts:
+    #       src/components/patient/patientManage.vue
+
+[33mcommit 0f306891fcbb13cba6955b499f9fa2eba045e9b9[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Thu Jun 7 10:28:34 2018 +0800
+
+    隐藏报告还原位置
+
+[33mcommit 13b17084561b571366bd23bec9eca6640bd63041[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Thu Jun 7 09:46:09 2018 +0800
+
+    图片报告旋转 , 缩小 , 放大
+
+[33mcommit 3a04a6252454287eb931958c1d37c5e2e097f090[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Wed Jun 6 20:48:01 2018 +0800
+
+    修改密码表单验证 , 展示患者报告 , 7天未测量 , 修改密码验证规则
+
+[33mcommit b6bfbd939d866f865697884ba66497baca26237b[m[33m ([m[1;31morigin/release-hotfix-session[m[33m)[m
+Merge: c36218d db8c6a8
+Author: LuoBin <luobin@spt-tek.com>
+Date:   Mon Jun 4 17:38:01 2018 +0800
+
+    Merge branch 'hotfix_ganyu' of http://192.168.8.249/spt-sdd/AicareCloud/AiCareUI_Saas into release-hotfix-session
+
+[33mcommit de174861eafb5109e7317305f68862aa73aa3016[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Mon Jun 4 11:45:22 2018 +0800
+
+    患者单个随访
+
+[33mcommit c36218de5bc92a2065e496d97eba3185b7766e42[m
+Author: LuoBin <luobin@spt-tek.com>
+Date:   Mon Jun 4 11:42:45 2018 +0800
+
+    退出清理机构列表session、患者管理页面：子机构与科室为0的判断
+
+[33mcommit 6255e622aeccc6b1ae845b700bcc0f1a2f72d64e[m
+Author: LuoBin <luobin@spt-tek.com>
+Date:   Mon Jun 4 11:38:47 2018 +0800
+
+    退出清理机构列表session、患者管理页面：子机构与科室为0的判断
+
+[33mcommit 7897d8b19275c87e41a957ae6b7c9554ac073296[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Sat Jun 2 17:07:56 2018 +0800
+
+    修改密码 , 增加7天未测量统计 , 更改新增患者位置和样式 , 去除编辑报告类型
+
+[33mcommit 6c9670a3be69cdd49378767699dd3d209b72e85a[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Sat Jun 2 11:36:10 2018 +0800
+
+    提出头部和侧边栏
+
+[33mcommit 701fc49c3d4533b7de148207e5808138ba28195c[m
+Merge: b823bb7 db8c6a8
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Fri Jun 1 15:01:38 2018 +0800
+
+    Merge branch 'hotfix_ganyu' into develop_xiaowenming
+
+[33mcommit db8c6a8cb76a7668738fc5df562e0b3ec412cd17[m[33m ([m[1;31morigin/hotfix_ganyu[m[33m)[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Fri Jun 1 00:01:04 2018 +0800
+
+    批量干预
+
+[33mcommit b823bb72cd34552a92d3d7ccf564b4823a3bf88e[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Thu May 31 23:44:38 2018 +0800
+
+    增加修改密码 , 退出列表
+
+[33mcommit fd59188e03b6bd126352301ccf6f1e98b1b5e792[m[33m ([m[1;31morigin/develop_david[m[33m)[m
+Author: haodawei <haodawei@spt-tek.com>
+Date:   Wed May 30 09:42:43 2018 +0800
+
+    新增了一个患者页面，编辑患者和添加患者都可以共用
+
+[33mcommit 76116c2a7bd0fa6fae52c22b055df4b93598b251[m
+Author: xiaowenming <xiaowenming@spt-tek.com>
+Date:   Fri May 25 18:02:10 2018 +0800
+
+    fix批量提醒确定报错
+
+[33mcommit 4df8bfe04e83aa6143f463056620882256696c71[m
+Author: haodawei <haodawei@spt-tek.com>
+Date:   Tue May 22 14:49:00 2018 +0800
+
+    处理些小细节
+
+[33mcommit f8ec8cb9ea18e2776557c163897dc5ae414e9e8e[m
+Author: haodawei <haodawei@spt-tek.com>
+Date:   Fri May 18 14:00:56 2018 +0800
+
+    解决依赖organizationId userId这两个参数而获取不到，导致的所有可能引发的问题。原因：挂载全局变量的对象有误，因为window变量
+
+[33mcommit be101aae10e408e488edf24a38cdd7a02849dcb9[m
+Author: LuoBin <luobin@spt-tek.com>
+Date:   Tue May 15 23:19:13 2018 +0800
+
+    添加血糖--日期控件调整
+
+[33mcommit 287c93f83c021b0669e3776c0a35e2741aed9bb8[m
+Author: haodawei <haodawei@spt-tek.com>
+Date:   Tue May 15 23:03:34 2018 +0800
+
+    处理小细节
+
+[33mcommit c639afd802dae5d1505c7230fcce29ca3619026b[m
+Author: LuoBin <luobin@spt-tek.com>
+Date:   Tue May 15 22:32:29 2018 +0800
+
+    日期控件调整
+
+[33mcommit afa1c41a9424b92ac4d781b9a872cf7f4e6ee108[m
+Author: LuoBin <luobin@spt-tek.com>
+Date:   Tue May 15 21:53:52 2018 +0800
+
+    获取患者页机构数据
+
+[33mcommit f99a0abcdb1d87b92aa25d77416dda218bc10fca[m
+Author: haodawei <haodawei@spt-tek.com>
+Date:   Tue May 15 21:37:45 2018 +0800
+
+    小细节处理
+
+[33mcommit f49093ec0f89db453dcd6d22c54a2f0194a2da6a[m
+Author: LuoBin <luobin@spt-tek.com>
+Date:   Tue May 15 21:00:49 2018 +0800
+
+    修改患者页显示机构列表的条件
+
+[33mcommit 73cf0f74fbfdd1c4967d90c6f3d1a372c2743bd2[m
+Author: LuoBin <luobin@spt-tek.com>
+Date:   Tue May 15 18:50:20 2018 +0800
+
+    新增血糖弹窗宽度调整
+
+[33mcommit 3f953b3342689aa2b9718a017ca7fe0974cf2270[m
+Author: LuoBin <luobin@spt-tek.com>
+Date:   Tue May 15 15:10:06 2018 +0800
+
+    #646 系统—首次进入基础字典默认所进入的干预类型页面无数据显示
+
+[33mcommit 943c336b175ce215edb43d2db923c4e4ddda968d[m
+Author: haodawei <haodawei@spt-tek.com>
+Date:   Tue May 15 15:07:41 2018 +0800
+
+    处理一些错误提醒的小细节
+
+[33mcommit 8f271af0ed33aeac6fee462db95506360e674368[m
+Author: haodawei <haodawei@spt-tek.com>
+Date:   Tue May 15 13:35:40 2018 +0800
+
+    关闭#641

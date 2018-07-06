@@ -1,0 +1,291 @@
+.commonDialog .el-tag + .el-tag {
+    margin-left: 10px;
+}
+.commonDialog .button-new-tag {
+    margin-left: 10px;
+    height: 32px;
+    line-height: 30px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.commonDialog .input-new-tag {
+    width: 90px;
+    margin-left: 10px;
+    vertical-align: bottom;
+}
+.commonDialog .edit {
+    color: #267bf7;
+    cursor: pointer;
+}
+.commonDialog .patName {
+    width: 743px;
+    height: 55px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    border: solid 1px #e0e0e0;
+}
+.commonDialog .reminding {
+    width: 742px;
+    height: 150px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    border: solid 1px #e0e0e0;
+}
+
+.commonDialog .healthInter ul:nth-of-type(1),
+.commonDialog .newRemind ul:nth-of-type(1) {
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+.commonDialog .healthInter ul,
+.commonDialog .newRemind ul {
+    margin-top: 20px;
+    width: 100%;
+    height: 20px;
+    display: block;
+}
+.commonDialog .healthInter ul li,
+.commonDialog .newRemind ul li {
+    width: 24%;
+    display: inline-block;
+    font-size: 12px;
+    color: #111111;
+}
+.commonDialog .healthInter ul li span,
+.commonDialog .newRemind ul li span {
+    color: #666666;
+}
+
+.commonDialog .templateName {
+    width: 195px;
+    height: 26px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    /*border: solid 1px #e0e0e0;*/
+}
+.commonDialog .butt {
+    cursor: pointer;
+    box-sizing: border-box;
+    line-height: 28px;
+    text-align: center;
+    font-size: 14px;
+    width: 60px;
+    height: 28px;
+    position: absolute;
+    border-radius: 4px;
+}
+.commonDialog .cancels {
+    color: #111111;
+    background-color: #ffffff;
+    border: solid 1px rgba(206, 206, 206, 0.7);
+    right: 100px;
+    bottom: 30px;
+}
+.commonDialog .sures {
+    color: #ffffff;
+    background-color: #267bf7;
+    right: 20px;
+    bottom: 30px;
+}
+.commonDialog .setTimess {
+    width: 128px;
+    height: 26px;
+    margin-left: 10px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    border: solid 1px rgba(224, 224, 224, 0.7);
+}
+.commonDialog .set {
+    margin-left: 20px;
+}
+.commonDialog .mid {
+    vertical-align: middle;
+}
+.commonDialog .interCont {
+    width: 742px;
+    height: 150px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    border: solid 1px #e0e0e0;
+}
+.commonDialog .radios,
+.commonDialog .radios_h {
+    margin-left: 20px;
+}
+.commonDialog .batchInter table,
+.commonDialog .batchRemind table {
+    border-top: 1px solid #e0e0e0;
+    padding: 20px 0;
+    margin-top: 20px;
+    font-size: 12px;
+}
+.commonDialog .healthInter table,
+.commonDialog .newRemind table,
+.commonDialog .batchRemind table {
+    padding: 20px 0;
+    margin-top: 20px;
+    font-size: 12px;
+}
+.commonDialog .patientName {
+    width: 743px;
+    height: 61px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    border: solid 1px #e0e0e0;
+}
+.commonDialog .batchInter table tr,
+.commonDialog .healthInter table tr,
+.commonDialog .newRemind table tr,
+.commonDialog .batchRemind table tr {
+    display: block;
+    margin-bottom: 20px;
+}
+.commonDialog .newRemind table tr td input:active,
+.commonDialog .batchRemind table tr td input:active {
+    color: white;
+    background-color: #267bf7;
+}
+.commonDialog .newRemind table tr td p:nth-child(1),
+.commonDialog .batchRemind table tr td p:nth-child(1) {
+    margin: 0 15px 0 0;
+}
+.commonDialog .newRemind table tr td p,
+.commonDialog .batchRemind table tr td p {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    width: 361px;
+    height: 33px;
+    background-color: #ffffff;
+}
+.commonDialog .newRemind table tr td img,
+.commonDialog .batchRemind table tr td img {
+    position: absolute;
+    right: 8px;
+    top: 10px;
+}
+.commonDialog .newRemind table tr td input,
+.commonDialog .batchRemind table tr td input {
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    text-align: center;
+    border: solid 1px #e0e0e0;
+}
+.commonDialog .batchInter table tr td:nth-child(1),
+.commonDialog .healthInter table tr td:nth-child(1),
+.commonDialog .newRemind table tr td:nth-child(1),
+.commonDialog .batchRemind table tr td:nth-child(1) {
+    width: 48px;
+    padding-right: 11px;
+    color: #111111;
+}
+.commonDialog .packageName,
+.commonDialog .packageName_h {
+    width: 200px;
+    height: 26px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    border: solid 1px #e0e0e0;
+}
+.commonDialog .batchInter h5,
+.commonDialog .healthInter h5 {
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #111111;
+}
+.commonDialog .close {
+    position: absolute;
+    right: 17px;
+    top: 17px;
+    cursor: pointer;
+}
+.commonDialog .batchInters,
+.commonDialog .healthInters,
+.commonDialog .newReminds,
+.commonDialog .batchReminds,
+.commonDialog .pushNotifications {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    overflow: auto;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.commonDialog .newRemind .el-radio,
+.commonDialog .batchRemind .el-radio {
+    color: #606266;
+    font-weight: 500;
+    line-height: 1;
+    cursor: pointer;
+    white-space: nowrap;
+    outline: 0;
+    margin: 0 5px 20px 5px;
+}
+.commonDialog .batchInter,
+.commonDialog .healthInter,
+.commonDialog .newRemind,
+.commonDialog .batchRemind {
+    padding: 17px;
+    position: fixed;
+    /* top: 50%;
+    left:50%; */
+    /* transform:translate(-50%,-55%); */
+    width: 840px;
+    /*height: 548px;*/
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+
+input {
+    cursor: pointer;
+    outline: none;
+}
+select {
+    cursor: pointer;
+    outline: none;
+}
+
+
+.commonDialog .el-radio + .el-radio {
+    margin-left: 0 !important;
+}
+
+.commonDialog .followPlans, 
+.commonDialog .CanFollows {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    overflow: auto;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.commonDialog .followPlan, 
+.commonDialog .CanFollow {
+    padding: 17px;
+    position: fixed;
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+
+.commonDialog .followPlan {
+    width: 30%;
+    min-width: 840px;
+}
+
+.commonDialog .CanFollow {
+    width: 698px;
+}
+.commonDialog .planTime.el-form-item,
+.commonDialog .planer.el-form-item{
+    width: 240px;
+}
