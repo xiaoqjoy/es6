@@ -66,7 +66,7 @@ git pull origin master
 
 然后我们把dev分支的代码合并到master上
 
-git merge dev  （在主分支上面merge dev分支）
+git merge dev  （在主分支上面合并dev分支）
 
 然后查看状态
 
@@ -81,3 +81,17 @@ nothing to commit, working tree clean
 执行下面命令即可
 
 git push origin master   （在主分支上面push）   （注意：这里不需要add和commit）
+
+
+Aborting commit due to empty commit message.
+由于空提交消息中止提交
+
+
+
+新建仓库地址命令
+
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/xiaoqjoy/PHP.git
+git push -u origin master
