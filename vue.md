@@ -163,6 +163,30 @@ sugarWarningTips.vue
 	</div>
 </template>
 
+Vue自定义指令 directives
+
+<p v-clickTest:foo.a.b="message">222222222222222222222222222</p>
+
+directives: {
+  clickTest: {
+	bind(el,binding,vnode,oldvnode){
+	  el.addEventListener('click',() => {    //注意这里可以自定义事件
+		console.log(binding)
+		console.log(vnode)
+		console.log(oldvnode)
+	  })
+	  var s = JSON.stringify
+	  el.innerHTML =
+		'name: '       + s(binding.name) + '<br>' +
+		'value: '      + s(binding.value) + '<br>' +
+		'expression: ' + s(binding.expression) + '<br>' +
+		'argument: '   + s(binding.arg) + '<br>' +
+		'modifiers: '  + s(binding.modifiers) + '<br>' +
+		'vnode keys: ' + Object.keys(vnode).join(', ')
+	}
+  }
+},
+
 ```
 
 
