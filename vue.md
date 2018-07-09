@@ -144,9 +144,26 @@ activated: function () {
 }
 ```
 
+####  slot 插槽内容分发
 
+理解： 一般用在组件里面，组件里面的组件
 
+```javascript
+<sugarWarningTips ref="sugarWarningTips">
+	<p slot="tipContent">您的患者<span>{{patientName}}</span>测量血糖异常, <a @click="toSugarWarning">点击查看</a></p>
+</sugarWarningTips>
 
+sugarWarningTips.vue
+<template>
+	<div class="warningTips" v-show="tipsShow">
+		<div class="closeIcon tac" @click="closeTip">X</div>
+		<div class="tipContent">
+			<slot name="tipContent"></slot>
+		</div>
+	</div>
+</template>
+
+```
 
 
 
