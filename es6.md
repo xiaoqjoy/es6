@@ -739,4 +739,57 @@ https://www.cnblogs.com/yangshifu/p/7377102.html
 用Object.keys()获取对象属性名的集合    
 
 
+#### 	js 数组 map方法
+
+```javascript
+
+var data = [1, 2, 3, 4];
+
+var arrayOfSquares = data.map(function(item) {
+  return item * item;
+});
+
+arrayOfSquares    // [1, 4, 9, 16]    返回的是一个数组
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
