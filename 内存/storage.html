@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>php</title>
+</head>
+<body>
+
+<!--<img src="https://a518.static-file.com/video/b9d7d9df57c3d1fa359689f55cd1fd13/5b4ee663/mp4/v12/180717/753de21ae2a5fd42d6b374afd4aa2442.jpg">-->
+
+<!--<script type="text/javascript" src="http://ip.chinaz.com/getip.aspx"></script>
+
+<video width="300" autoplay="autoplay" controls="controls">
+    <source src="mm.mp4" type="video/mp4"/>
+    Your browser does not support HTML5 video.
+</video>-->
+
+<!--<video width="300" autoplay="autoplay" controls="controls">
+    <source src="http://666.maomixia666.com:888/new/zw/2018-07/19/rSecAct.mp4" type="video/mp4"/>
+    Your browser does not support HTML5 video.
+</video>-->
+<div class="div1">11111111111</div>
+
+<script>
+    /*window.onload=function(){     //Test内存没有释放掉
+
+        function Test(Dom)
+        {
+            this.Dom=Dom;
+            this.str='';
+            var self = this;
+            this.Dom.addEventListener('click', function () {
+                self.str='123';
+                console.log(self.str)
+            }, false);
+        }
+
+        var div1=document.getElementsByClassName('div1')[0];
+        console.log(div1)
+        var myTest=new Test(div1);
+
+    }*/
+
+
+    window.onload=function() {
+
+        function Test(Dom) {
+            this.Dom = Dom;
+            this.str = '';
+            var self = this;
+            this.A = function () {
+                this.str = '123';
+                console.log(123)
+            }
+            this.Dom.addEventListener('click', self.A, false);
+        }
+
+        Test.prototype.destroy = function () {
+            var self=this;
+            this.dom.removeEventListener('click',self.A, false);
+        }
+        var div1=document.getElementsByClassName('div1')[0];
+        var myTest=new Test(div1);
+    }
+
+</script>
+
+
+
+</body>
+</html>

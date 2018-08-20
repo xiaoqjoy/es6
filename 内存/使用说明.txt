@@ -1,0 +1,3 @@
+Chrome F12   Memory    heap snapshot 可以查看内存的引用情况  直接输入对象名即可查看引用情况
+
+
