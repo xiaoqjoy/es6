@@ -144,6 +144,9 @@ activated: function () {
 }
 ```
 
+
+
+
 ####  slot 插槽内容分发
 
 理解： 一般用在组件里面，组件里面的组件
@@ -162,6 +165,9 @@ sugarWarningTips.vue
 		</div>
 	</div>
 </template>
+
+
+
 
 Vue自定义指令 directives
 
