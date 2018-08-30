@@ -10,7 +10,7 @@ Vue 最好去掉ESLint 不然代码里老是有红线报错
 
 父组件可以使用 props 把数据传给子组件。
 
-子组件可以使用 $emit 触发父组件的自定义事件。       emit  映射父组件的事件/ this.$parent  
+子组件可以使用 $emit 触发父组件的自定义事件。       emit  映射父组件的事件/ this.$parent      
 
 
 
@@ -209,7 +209,51 @@ provider/inject
 
 //只要在父组件中调用了，那么在这个父组件生效的生命周期内，所有的子组件都可以调用inject来注入父组件中的值。
 
+
+mixins的使用
+
+//mixins就是定义一部分公共的方法或者计算属性,然后混入到各个组件中使用,方便管理与统一修改
+
+
+websocket
+
+readyState属性返回实例对象的当前状态，共有四种
+
+CONNECTING：值为0，表示正在连接
+OPEN：值为1，表示连接成功，可以通信了
+CLOSING：值为2，表示连接正在关闭
+CLOSED：值为3，表示连接已经关闭，或者打开连接失败
+
+webSocket.bufferedAmount
+
+//实例对象的bufferedAmount属性，表示还有多少字节的二进制数据没有发送出去。它可以用来判断发送是否结束。
+
+http://www.ruanyifeng.com/blog/2017/05/websocket.html
+
+
+.sync 修饰符所提供的功能。当一个子组件改变了一个 prop 的值时，这个变化也会同步到父组件中所绑定，就是说我们可以直接在我们需要传的prop后面加上 .sync
+
+
+把控件的visible属性设置为false代表次控件不可见
+
+
+
+Vue构建项目命令
+
+$ npm install -g vue-cli
+$ vue init webpack my-project
+$ cd my-project
+$ npm install
+$ npm run dev
+
+
+npm卸载包
+npm uninstall xxx
+
+
 ```
+
+
 
 
 

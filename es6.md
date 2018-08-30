@@ -752,6 +752,14 @@ var arrayOfSquares = data.map(function(item) {
 arrayOfSquares    // [1, 4, 9, 16]    返回的是一个数组
 
 
+
+setTimeout(() => { alert(1) },2000)
+
+== 
+
+
+setTimeout('alert(11)',2000)
+
 ```
 
 
