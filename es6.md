@@ -760,6 +760,31 @@ setTimeout(() => { alert(1) },2000)
 
 setTimeout('alert(11)',2000)
 
+
+
+
+Vue
+
+<slot name="down"></slot>  <!--具名插槽  数据由父组件提供-->
+
+<div slot="down">
+	<span>88888888888888888</span>
+</div>
+	  
+	  
+<slot :data="data"></slot>  <!--作用域插槽  数据由子组件提供-->
+
+<template slot-scope="user">
+	<span v-for="item in user.data" class="user">{{ item }}</span>
+</template>	  
+	  
+	  
+this.$refs.input.value = '2222'    //this.$refs.input  减少获取dom节点的消耗
+
+this.$parent.$refs.father.innerHTML;    //引用父组件 需用 $	  
+
+this.$children[0].$refs.child.innerHTML;     //引用子组件的写法
+	  
 ```
 
 
