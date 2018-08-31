@@ -1,0 +1,43 @@
+select count(*) from test    查询test表中共有多少条数据
+
+
+
+delete from test where id=2;   删除test表中，id为2的数据
+
+
+
+create database test;     创建一个test的数据库
+
+
+插入    insert into table1(field1,field2) values(value1,value2)
+
+
+max()函数：获取最大值
+
+写法 select max(字段) from test;
+
+ 
+
+min()函数：获取最小值
+
+写法 select min(字段) from test;
+
+
+查询test表里面前三条记录
+
+select * from test limit 3;
+
+
+删除表
+
+drop table test
+
+
+
+SELECT * FROM `spt_customer_auth` where auth_id='02b7f13dccd043f4b9f52a0c322e5476'
+
+查询语句  可查询分页的数据
+
+
+
+
