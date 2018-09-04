@@ -761,8 +761,6 @@ setTimeout(() => { alert(1) },2000)
 setTimeout('alert(11)',2000)
 
 
-
-
 Vue
 
 <slot name="down"></slot>  <!--具名插槽  数据由父组件提供-->
@@ -788,6 +786,48 @@ this.$children[0].$refs.child.innerHTML;     //引用子组件的写法
 //在通信中，无论是子组件向父组件传值还是父组件向子组件传值，他们都有一个共同点就是有中间介质，
 //子向父的介质是自定义事件，父向子的介质是props中的属性。抓准这两点对于父子通信就好理解了
 	  
+	  
+console.time(2);     //打桩   计算js的运行时间  比较哪种写法时间少
+	  
+console.timeEnd(2);
+
+
+forEach 用法(一般只用于数组)
+
+var arr = [1,4,5,7,23,45,'sad',234,657]
+
+arr.forEach(function(v) {
+	console.log(v);
+});
+
+arr.forEach(v=>{
+    console.log(v);
+});
+
+
+map 用法 (映射)   callback需要return值，如果没有，数组所有项都会被映射成 undefined
+
+var newArr = arr.map(function(item){
+	return item + item
+})
+
+console.log(newArr)  // [2, 8, 10, 14, 46, 90, "sadsad", 468, 1314]
+	  
+	  
+在实际使用的时候，我们可以利用map方法方便获得对象数组中的特定属性值们
+
+var users = [
+  {name: "张含韵", "email": "zhang@email.com"},
+  {name: "江一燕",   "email": "jiang@email.com"},
+  {name: "李小璐",  "email": "li@email.com"}
+];
+
+var emails = users.map(function(user){
+	return user.email
+})	  
+
+console.log(emails)   // ["zhang@email.com", "jiang@email.com", "li@email.com"]
+
 ```
 
 
