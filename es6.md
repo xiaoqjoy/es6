@@ -828,12 +828,45 @@ var emails = users.map(function(user){
 
 console.log(emails)   // ["zhang@email.com", "jiang@email.com", "li@email.com"]
 
+
 ```
 
+performance  性能
 
 
 
+布局的传统解决方案，基于盒状模型，依赖 display属性 + position属性 + float属性 + Flex布局
 
+Flex是Flexible Box的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。
+
+eg:      //理解：一般用于垂直布局上，会比较好，是设置在盒子上的，作用于子元素上
+display: flex;
+justify-content: center;
+flex-direction: column;
+flex: 1;
+
+flex-direction: row | row-reverse | column | column-reverse;
+
+row（默认值）：主轴为水平方向，起点在左端
+row-reverse：主轴为水平方向，起点在右端
+column：主轴为垂直方向，起点在上沿
+column-reverse：主轴为垂直方向，起点在下沿
+
+flex-wrap: nowrap | wrap | wrap-reverse;
+nowrap（默认）：不换行
+wrap：换行，第一行在上方
+wrap-reverse：换行，第一行在下方
+
+justify-content: flex-start | flex-end | center | space-between | space-around;
+
+flex-start（默认值）：左对齐
+flex-end：右对齐
+center： 居中
+space-between：两端对齐，项目之间的间隔都相等
+space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍
+
+
+pxcook    前端UI编码神器
 
 
 
