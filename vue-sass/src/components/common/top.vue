@@ -10,26 +10,29 @@
                   <span class="nikeName" :class="{existDept:isShowDept}" >{{name}}</span>
                   <span v-if="isShowDept" class="deptName">{{departmentName}}</span>
               </span>
-              <span class="userMain-right"></span>
+              <span class="bgImg userMain-right"></span>
               <el-dropdown-menu class="userSet" slot="dropdown">
-                <el-dropdown-item @click.native="showChangePwd"><img class="userSetItemIcon" src="../../../images/leftTop/home_menu_icon_home_normal.png" alt="">修改密码</el-dropdown-item>
-                <el-dropdown-item @click.native="goLogin"><img class="userSetItemIcon" src="../../../images/leftTop/home_menu_icon_home_normal.png" alt="">退出</el-dropdown-item>
+                <el-dropdown-item @click.native="resetPass"><span class="bgImg userSetItemIcon" ></span>修改密码</el-dropdown-item>
+                <el-dropdown-item @click.native="goLogin"><span class="bgImg loginOut" ></span>退出</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </div>
       </div>
-      <img src="../../../images/leftTop/top_but_pic_normal.png" alt="" class="logo"/>
+      <div class="bgImg topHead"><!--头像--></div>
       <div class="floatRight sugarWarning pr">
         <span @click="showWarningInfoList">血糖预警</span>
-        <span class="userMain-right"></span>
+        <span class="bgImg userMain-right"></span>
         <span class="sugarWarningSum tac" v-show="!!unreadSum">{{unreadSum * 1 > 0 ? (unreadSum * 1 > 99 ? '99+' : unreadSum) :''}}</span>
       </div>
-      <img src="../../../images/leftTop/top_but_message_normal.png" alt="" class="inform floatRight"/>
-      <!-- <img class="goOut" v-if="isShow" @click="goLogin" src="../../../images/leftTop/top_pic_down_bg .png"/> -->
+      <div class="bgImg bellIcon"><!--铃铛--></div>
+
+      <!-- 修改密码弹窗 -->
+      <changePassDialog source='userChangePassword' :userId="userId" :isOldPwd='isOldPwd' ref='changePassDialog'></changePassDialog>
   </div>
 </template>
 
 <script>
+  import changePassDialog from './commonDialog/changePassDialog';
   export default {
     name: 'top',
     data() {
@@ -38,20 +41,13 @@
         departmentName:'',
         isShow: false,
         isShowDept:true, // 是否显示科室名称
-        dialogFormVisible: false, // 是否显示修改密码弹窗
-        form: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
-        formLabelWidth: '120px',
-        unreadSum:''
+        unreadSum:'', //预警数量
+        isOldPwd: true, //修改密码弹窗是否显示旧密码栏
+        userId: '',
       }
+    },
+    components: {
+      changePassDialog
     },
     methods: {
       goOut(event) {
@@ -72,8 +68,8 @@
         sessionStorage.setItem("user", "");
         sessionStorage.setItem("refreshToken", "");
         sessionStorage.setItem("orgList", "");
+        sessionStorage.setItem("meunList", "");
         this.isShow = false;
-        console.log(this.$parent)
         this.$router.push({
           path: '/',
         })
@@ -83,14 +79,14 @@
           let user = JSON.parse(sessionStorage.getItem('user'));
           this.name = user.nickname;
           this.departmentName = user.departmentName;
-          this.isShowDept = user.existDepartment
           if (!this.unreadSum) {
             this.getUnreadSum();
           }
         }
       },
-      showChangePwd () {
-        this.$parent.dialogFormVisible = true;
+      resetPass() {
+        this.userId = JSON.parse(sessionStorage.getItem('user')).userId;
+        this.$refs.changePassDialog.isShowChangePassDialog = true;
       },
       showWarningInfoList () {
         this.$parent.$parent.showWarningInfoList();
@@ -105,15 +101,6 @@
     },
     created: function () {
       this.reloadTop();
-    },
-    watch: {
-      /*'$route'(to,from){
-        var path = to.path;
-        console.log(path);
-        if(path == '/homePage'){
-          this.reloadTop();
-        }
-      }*/
     }
   }
 </script>
@@ -126,13 +113,12 @@
   }
   .userMain-right{
       position: absolute;
-      right: -20px;
+      right: -22px;
       top: 28px;
       height: 5px;
       width: 8px;
       margin-right: 10px;
-      background: url("../../../images/leftTop/top_name_down_but.png") no-repeat;
-      background-size: cover;
+      background-position: -66px -27px;
   }
   .userSet {
     width: 114px;
@@ -141,12 +127,19 @@
     color: #8b9eba;
     padding-left: 10px;
   }
-  .userSet .userSetItemIcon{
+  .userSet .userSetItemIcon,
+  .userSet .loginOut{
     display: inline-block;
     width: 14px;
     height: 14px;
     margin-right: 6px;
     margin-bottom: -2px;
+  }
+  .userSet .userSetItemIcon {
+    background-position: -136px 0;
+  }
+  .userSet .loginOut{
+    background-position: -136px -14px;
   }
   .leftClickArea{
     cursor: pointer;
@@ -168,10 +161,10 @@
     font-size: 14px;
   }
   .existDept {
-      margin-top: 15px;
+    margin-top: 12px;
   }
   .deptName {
-      display: block;
+    display: block;
     color: #8b9eba;
     font-size: 14px;
   }
@@ -194,12 +187,29 @@
     box-shadow: 0px 2px 2px 0px rgba(129, 156, 173, 0.1);
   }
 
+  .bellIcon {
+    background-position: -710px 0;
+    cursor: pointer;
+    width: 21px;
+    height: 21px;
+    float: right;
+    margin-top: 20px;
+    margin-right: 10px;    
+  }
   .inform {
     cursor: pointer;
     margin-top: 20px;
     margin-right: 10px;
   }
-
+  .topHead {
+    background-position: -659px 0;
+    width: 39px;
+    height: 39px;
+    cursor: pointer;
+    float: right;
+    margin-top: 11px;
+    margin-right: 10px;
+  }
   .logo {
     /*position: absolute;*/
     /*top: 11px;*/

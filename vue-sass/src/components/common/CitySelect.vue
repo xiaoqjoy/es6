@@ -119,5 +119,4 @@
   .city-select select {
     outline: 0
   }
-
 </style>

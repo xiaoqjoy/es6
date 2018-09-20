@@ -1,6 +1,6 @@
 <template>
   <div style="width:100%;height: 3.5rem;">
-    <div :class="params.class" style="width:100%;height:100%;"></div>
+    <div :class="params.className" style="width:100%;height:100%;"></div>
   </div>
 </template>
 <style>
@@ -23,7 +23,7 @@
           name: '标题',
           data: {},
           style: {},
-          class: 'chart',
+          className: 'chart',
           type: '',
           list: [],
           list1: [],
@@ -45,7 +45,7 @@
     methods: {
       initCharts: function () {
         this.title = this.params.name;
-        chartOption[this.params.class](this.params.data, document.getElementsByClassName(this.params.class)[0], this);
+        chartOption[this.params.className](this.params.data, document.getElementsByClassName(this.params.className)[0], this);
       }
     },
     components: {}

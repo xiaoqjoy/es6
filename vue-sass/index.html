@@ -2,84 +2,110 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="shortcut icon" href="/static/favicon.ico">
-    <title>掌护健康云</title>
-    <!--<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">-->
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="shortcut icon" href="/static/favicon.ico">
+  <title>掌护健康云</title>
+  <!--<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">-->
+  <script type="text/javascript">
+    (function () {
 
-        html,
-        body {
-            height: 100%;
-            width: 100%;
-            background: #f7f8fa;
+      /*
+      //取得浏览器的userAgent字符串
+      var userAgent = navigator.userAgent;
+      //判断浏览器版本是否低于11的IE浏览器
+      var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1;
+      if (isIE) {
+        var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+        reIE.test(userAgent);
+        var IEVersion = parseFloat(RegExp["$1"]);
+        if(IEVersion <= 10 ) {
+          alert('IE浏览器过低，请使用IE11或使用其他浏览器！');
+          stopLoading(); //页面停止加载
         }
+      }
+      */
 
-        .alls {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            overflow: auto;
-        }
+      var broswer = getBroswer(); //获取浏览器名称与版本
+      var name = broswer.broswer;
+      var version = broswer.version.split('.')[0];
+      //console.log("broswer:"+name+" version:"+version)
+      if (name == 'IE' && version < 10) { //ie9不支持 websocket
+        alert('IE浏览器过低，请使用IE11或使用其他浏览器！');
+        stopLoading(); //页面停止加载
+      }
 
-        @media screen and (min-width:600px) and (max-width:900px) {
-            /* .followUpss {
-                width: 900px !important;
-            } */
-        }
+    })();
 
-        @media screen and (max-width:1500px) {
-            .followUpss,
-            .allMain,
-            /*.manage,*/
-            .agencyInfors,
-            .basedDiction,
-            .temManage,
-            .homePage {
-                width: 1300px !important;
-            }
-            .nav {
-                width: 130px !important;
-            }
-            .treeNode {
-                left: 132px!important;
-            }
-            .agencyInfor,
-            /*.manage,*/
-            .followUps,
-            .allMain,
-            .homePage,
-            .basedDiction,
-            .temManage,
-            .container-root {
-                left: 130px !important;
-            }
-        }
+    //获取浏览器名称与版本
+    function getBroswer() {
+      var Sys = {};
+      var ua = navigator.userAgent.toLowerCase();
+      var s;
+      (s = ua.match(/edge\/([\d.]+)/)) ? Sys.edge = s[1]:
+        (s = ua.match(/rv:([\d.]+)\) like gecko/)) ? Sys.ie = s[1] :
+        (s = ua.match(/msie ([\d.]+)/)) ? Sys.ie = s[1] :
+        (s = ua.match(/firefox\/([\d.]+)/)) ? Sys.firefox = s[1] :
+        (s = ua.match(/chrome\/([\d.]+)/)) ? Sys.chrome = s[1] :
+        (s = ua.match(/opera.([\d.]+)/)) ? Sys.opera = s[1] :
+        (s = ua.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;
 
-        @media screen and (max-width:1735px) {
-            .tabss {
-                width: 130px !important;
-            }
-            .searc_med {
-                width: 166px !important;
-            }
-            .datetime_med {
-                width: 148px !important;
-            }
-        }
-    </style>
+      if (Sys.edge) return {
+        broswer: "Edge",
+        version: Sys.edge
+      };
+      if (Sys.ie) return {
+        broswer: "IE",
+        version: Sys.ie
+      };
+      if (Sys.firefox) return {
+        broswer: "Firefox",
+        version: Sys.firefox
+      };
+      if (Sys.chrome) return {
+        broswer: "Chrome",
+        version: Sys.chrome
+      };
+      if (Sys.opera) return {
+        broswer: "Opera",
+        version: Sys.opera
+      };
+      if (Sys.safari) return {
+        broswer: "Safari",
+        version: Sys.safari
+      };
+
+      return {
+        broswer: "",
+        version: "0"
+      };
+    }
+
+    //页面停止加载
+    function stopLoading() {
+
+      var xmlhttp;
+      if (window.XMLHttpRequest) {
+        // code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+      } else {
+        // code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      xmlhttp.abort(); //停止ajax请求
+
+      //停止继续加载页面，相当于点击stop按钮。
+      if (!!(window.attachEvent && !window.opera)) {
+        document.execCommand("stop"); // code for IE
+      } else {
+        window.stop(); //stops window loading, code for  Firefox, Chrome, Opera, Safari
+      }
+    }
+  </script>
 </head>
 
 <body>
-    <div id="app"></div>
-
-
+  <div id="app"></div>
 </body>
-
 
 </html>

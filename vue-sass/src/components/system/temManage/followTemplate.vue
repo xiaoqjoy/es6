@@ -3,68 +3,39 @@
     <div class="manage_T">
       <el-input placeholder="模板名称" v-model="followUpTypeName" size="small" class="searchWidth"></el-input>
       <el-select v-model="followUpTypeContent" placeholder="适用类型" size="small" class="searchWidth">
-        <el-option
-          v-for="item in diabetesType"
-          :key="item.itemKey"
-          :label="item.itemValue"
-          :value="item.itemKey">
+        <el-option v-for="item in diabetesTypeArr" :key="item.itemKey" :label="item.itemValue" :value="item.itemKey">
           {{item.itemValue}}
         </el-option>
       </el-select>
       <div class="search" @click="searchFollowTemp()">搜索</div>
       <div class="clear" @click="clearFollowTemp()">清空</div>
-      <div class="newAdd ipts" @click="newAdd()">新增模板</div>
+      <div class="newAdd" @click="newAdd()">新增模板</div>
     </div>
-    <!--表格-->
-    <el-table
-      ref="multipleTable"
-      :data="followUpTempList.slice((currentPage4-1)*pagesize,currentPage4*pagesize)"
-      tooltip-effect="dark"
-      style="width: 100%"
-      @selection-change="handleSelectionChange">
-      <el-table-column
-        fixed
-        label="模板名称"
-        align="center">
-        <template slot-scope="scope">{{ scope.row.name }}</template>
-      </el-table-column>
-      <el-table-column
-        prop="diabetesTypeReview"
-        label="适用患者类型"
-        align="center">
-      </el-table-column>
-      <el-table-column
-        prop="createUserName"
-        label="创建人"
-        align="center">
-      </el-table-column>
-      <el-table-column
-        prop="createTime"
-        label="创建时间"
-        align="center">
-      </el-table-column>
-      <el-table-column
-        label="操作"
-        align="center"
-        show-overflow-tooltip>
-        <template slot-scope="scope">
-          <el-button @click="searchs(scope.row)" type="text" size="small">查看</el-button>
-          <el-button @click="handleClick(scope.row)" type="text" size="small">编辑</el-button>
-          <el-button @click="intermeddle(scope.row)" type="text" size="small">删除</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
+    <div class="list_box">
+      <!--表格-->
+      <el-table ref="multipleTable" :data="followUpTempList.slice((currentPage4-1)*pagesize,currentPage4*pagesize)" tooltip-effect="dark"  @selection-change="handleSelectionChange">
+        <el-table-column fixed label="模板名称" align="center">
+          <template slot-scope="scope">{{ scope.row.name }}</template>
+        </el-table-column>
+        <el-table-column prop="diabetesTypeReview" label="适用患者类型" align="center">
+        </el-table-column>
+        <el-table-column prop="createUserName" label="创建人" align="center">
+        </el-table-column>
+        <el-table-column prop="createTime" label="创建时间" align="center">
+        </el-table-column>
+        <el-table-column label="操作" align="center" show-overflow-tooltip>
+          <template slot-scope="scope">
+            <el-button @click="searchs(scope.row)" type="text" size="small">查看</el-button>
+            <el-button @click="handleClick(scope.row)" type="text" size="small">编辑</el-button>
+            <el-button @click="intermeddle(scope.row)" type="text" size="small">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
+
     <!--分页-->
     <div class="block">
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="currentPage4"
-        :page-sizes="[10, 15, 20]"
-        :page-size="pagesize"
-        background
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="followUpTempList.length">
+      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage4" :page-sizes="[10, 15, 20]" :page-size="pagesize" background layout="total, sizes, prev, pager, next, jumper" :total="followUpTempList.length">
       </el-pagination>
     </div>
 
@@ -82,12 +53,12 @@
         pagesize: 15,
         followUpTypeContent: '',
         followUpTypeName: '',
-        diabetesType: [], // 适用类型(糖尿病类型)
+        diabetesTypeArr: [], // 适用类型(糖尿病类型)
       }
     },
     created: function () {
       this.followUpTemplateList()
-      funBus.getDiabetesType(this); //获取适用类型(糖尿病类型)
+      funBus.getDictionarysByTypeCode(this, 'diabetes_type'); //糖尿病类型列表
     },
     methods: {
       //搜索随访模板
@@ -138,20 +109,20 @@
       },
       //查看模板
       searchs(row) {
-        this.$emit("searchss", "true", row);
+        this.$emit("searchss", row);
       },
       //新增模板
       newAdd() {
-        this.$emit("newFolTemplate", "true", "新增");
+        this.$emit("newFolTemplate", "新增");
       },
       //编辑模板
       handleClick(row) {
-        this.$emit("newFolTemplate", "true", "编辑", row);
+        this.$emit("newFolTemplate", "编辑", row);
       },
       //健康干预
       //删除模板
       intermeddle(row) {
-        this.$emit("delFolTem", "true", row);
+        this.$emit("delFolTem", row);
       },
       handleSizeChange(val) {
         this.pagesize = val;
@@ -159,27 +130,11 @@
       handleCurrentChange(val) {
         this.currentPage4 = val;
       },
-
       //表格
       handleSelectionChange(val) {
-        // console.log(val)
         this.multipleSelection = val;
       },
-      //清空
-      clear() {
-//	 		console.log($(".name").val())
-        $(".name").val("");
-        $(".styles").val("全部类型");
-        $(".sex").val("全部性别");
-        $(".age").val("");
-        $(".ages").val("");
-        $(".time_1").val("");
-        $(".time_2").val("");
-        $(".time_3").val("");
-        $(".time_4").val("");
-      }
+
     }
   }
 </script>
-<style>
-</style>

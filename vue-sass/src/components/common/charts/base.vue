@@ -7,11 +7,66 @@
         <li @click="changeMonth(index)" :class="index==monthIndex?'active':''" v-for="(item,index) in params.list">{{item}}</li>
       </ul>
       <!--echart图-->
-      <div v-show="!params.nodata" :class="params.class" style="width: 100%; height: 100%;margin: 10px auto;"></div>
+      <div v-show="!params.nodata" :class="params.className" style="width: 100%; height: 100%;margin: 10px auto;"></div>
       <div v-show="params.nodata" class="no-data-tip">数据暂未更新，请您稍后查询</div>
     </div>
   </div>
 </template>
+
+<script>
+  import echarts from 'echarts'
+  import chartOption from '../../../assets/js/chart'
+  export default{
+    data(){
+      return{
+        title:'',
+        test:'9999',
+        monthIndex:0
+      }
+    },
+    props:{
+      params:{
+        default:{
+          name:'标题',
+          data:{},
+          style:{},
+          nodata:false,
+          className:'chart',
+          type:'',
+          list:[],
+          list1:[],
+          random:0
+        }
+      }
+    },
+    watch:{
+      params:{
+        handler:function(val,oldval){
+          this.initCharts();
+        },
+        deep:true
+      }
+    },
+    created(){
+    },
+    mounted(){
+      this.initCharts();
+    },
+    methods:{
+      initCharts:function(){
+        this.title = this.params.name;
+        let vm=this;
+        chartOption[vm.params.className](vm.params.data,document.getElementsByClassName(vm.params.className)[0],vm);
+      },
+      changeMonth:function(index){
+        this.monthIndex = index;
+        this.$parent.initChart(index);
+      },
+    },
+    components:{
+    }
+  }
+</script>
 <style>
   /*导航*/
   #month-list li{
@@ -34,9 +89,6 @@
     text-align: center;
     color: #333;
     cursor: pointer;
-  }
-  .active{
-    color: #93d6f6!important;
   }
   .base-color{
     height: 15px;
@@ -66,57 +118,3 @@
     text-align: center;
   }
 </style>
-<script>
-  import echarts from 'echarts'
-  import chartOption from '../../../assets/js/chart'
-  export default{
-    data(){
-      return{
-        title:'',
-        test:'9999',
-        monthIndex:0
-      }
-    },
-    props:{
-      params:{
-        default:{
-          name:'标题',
-          data:{},
-          style:{},
-          nodata:false,
-          class:'chart',
-          type:'',
-          list:[],
-          list1:[],
-          random:0
-        }
-      }
-    },
-    watch:{
-      params:{
-        handler:function(val,oldval){
-          this.initCharts();
-        },
-        deep:true
-      }
-    },
-    created(){
-    },
-    mounted(){
-      this.initCharts();
-    },
-    methods:{
-      initCharts:function(){
-        this.title = this.params.name;
-        let vm=this;
-        chartOption[vm.params.class](vm.params.data,document.getElementsByClassName(vm.params.class)[0],vm);
-      },
-      changeMonth:function(index){
-        this.monthIndex = index;
-        this.$parent.initChart(index);
-      },
-    },
-    components:{
-    }
-  }
-</script>

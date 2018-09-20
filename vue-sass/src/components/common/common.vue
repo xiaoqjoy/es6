@@ -1,12 +1,11 @@
 <template>
   <div class="nav">
     <dl>
-      <dt><img src="../../../images/leftTop/logo.png"/></dt>
-      <!--<li v-for="(it,index) in arrs" v-bind:class="{actives:'/basedDiction/'+it.typeCode == $route.path}" @click="myTabss(index,it)">{{it.typeName}}</li>-->
-      <!--<dd v-for="(it,index) in datas" @click='hover(it,index)' v-bind:class="{activess:'/'+it.typeCode == $route.path}"><img v-bind:src="it.imgSrc"/>{{it.mes}}</dd>-->
-      <!--<dd v-for="(it,index) in datas" @click='hover(it,index)' v-bind:class="{activess:index == myIndex}"><img v-bind:src="it.imgSrc"/>{{it.mes}}</dd>-->
-      <dd v-for="(it,index) in datas" @click='hover(it,index)' :class="[{activess:index == myIndex},it.icon]">
-        <span :class="{special:index == myIndex}"></span>{{it.name}}
+      <dt>
+        <div class="bgImg logo"></div>
+      </dt>
+      <dd v-for="(it,index) in datas" @click='hover(it,index)' :class="[{active:index == myIndex},it.icon]">
+        <span class="bgImg menubg" :class="{special:index == myIndex}"></span>{{it.name}}
       </dd>
     </dl>
   </div>
@@ -17,14 +16,7 @@
     name: 'commons',
     data() {
       return {
-        datas: [
-          // {imgSrc:"../../../images/leftTop/home_menu_icon_home_press.png",mes:"首页",typeCode:"homePage"},
-          // {imgSrc:"../../../images/leftTop/home_menu_icon_patient_normal.png",mes:"患者",typeCode:"patientManage"},
-          // {imgSrc:"../../../images/leftTop/home_menu_icon_talk_normal.png",mes:"随访",typeCode:"followup"},
-          // // {imgSrc:"../../../images/leftTop/home_menu_icon_ask_normal.png",mes:"互动",typeCode:"interactive"},
-          // // {imgSrc:"../../../images/leftTop/home_menu_icon_search_normal.png",mes:"查询",typeCode:"query"},
-          // {imgSrc:"../../../images/leftTop/home_menu_icon_sys_normal.png",mes:"系统",typeCode:"agencyInfor/agenInfor"}
-        ],
+        datas: [],
         myIndex: 0
       }
     },
@@ -33,7 +25,7 @@
     },
     methods: {
       reloadNav(){
-        if (JSON.parse(sessionStorage.getItem("meunList"))) {
+        if (!!sessionStorage.getItem("meunList")) {
           this.datas = JSON.parse(sessionStorage.getItem("meunList"));
           this.changeLeftNav();
         }
@@ -52,7 +44,7 @@
           } else if (this.$route.path.split('/')[1] == 'sugarWarningPage') {
               this.myIndex= null;
           } else {
-              this.myIndex = this.datas.length-1;
+              this.myIndex = this.datas.length - 1;
           }
         }
       }
@@ -71,6 +63,15 @@
   .nav {
     dl {
       dt {
+        height: 60px;
+        padding-top: 15px;
+        box-sizing: border-box;
+        .logo {
+          background-position: -535px 0;
+          width: 115px;
+          height: 30px;
+          margin: 0 auto;
+        }
         span {
           vertical-align: middle;
         }
@@ -80,59 +81,57 @@
           display: inline-block;
           vertical-align: middle;
           width: 24px;
-          height: 22px;
+          height: 25px;
           margin: -3px 12px 0 -16px;
           background-repeat: no-repeat;
         }
       }
-     .homePage1{
-        span {
-          background-image: url("../../../images/leftTop/home_menu_icon_home_normal.png");
+      .homePage1{
+        span.menubg {
+          background-position: 0 -48px;
+        }
+        span.special {
+          background-position: -24px -48px;
         }
       }
       .patientManage1 {
-        span {
-          background-image: url("../../../images/leftTop/home_menu_icon_patient_normal.png");
+        span.menubg {
+          background-position: 0 -72px;
+        }
+        span.special {
+          background-position: -24px -72px;
         }
       }
       .followup1 {
-        span {
-          background-image: url("../../../images/leftTop/home_menu_icon_talk_normal.png");
+        span.menubg {
+          background-position: 0 -144px;
+        }
+        span.special {
+          background-position: -24px -144px;
         }
       }
-     .information1{
-        span {
-          background-image: url("../../../images/leftTop/home_menu_icon_data.png");
+      .information1{
+        span.menubg {
+          background-position: 0 -24px;
+        }
+        span.special {
+          background-position: -24px -24px;
         }
       }
       .agencyInfo1 {
-        span {
-          background-image: url("../../../images/leftTop/home_menu_icon_sys_normal.png");
+        span.menubg {
+          background-position: 0 -120px;
+        }
+        span.special {
+          background-position: -24px -120px;
         }
       }
-      .homePage1{
-        span.special {
-          background-image: url("../../../images/leftTop/home_menu_icon_home_press.png");
+      .total1 {
+        span.menubg {
+          background-position: 0 -168px;
         }
-      }
-      .patientManage1  {
         span.special {
-          background-image: url("../../../images/leftTop/home_menu_icon_patient_press.png");
-        }
-      }
-      .followup1 {
-        span.special {
-          background-image: url("../../../images/leftTop/home_menu_icon_talk_press.png");
-        }
-      }
-      .information1 {
-        span.special {
-          background-image: url("../../../images/leftTop/home_menu_icon_data---hover.png");
-        }
-      }
-      .agencyInfo1 {
-        span.special {
-          background-image: url("../../../images/leftTop/home_menu_icon_sys_press.png");
+          background-position: -24px -168px;
         }
       }
     }
@@ -145,7 +144,7 @@
     left: 0;
     top: 0;
     height: 100%;
-    width: 160px;
+    width: 130px;
     box-shadow: 3px 0px 3px 0px rgba(129, 156, 173, 0.1);
   }
 
@@ -161,20 +160,5 @@
     text-align: center;
     color: #8b9eba;
   }
-
-  .activess {
-    background-color: rgba(38, 123, 247, 0.1) !important;
-    color: #267bf7 !important;
-  }
-
-  /*.nav dl dt img,.nav dl dd img{
-        vertical-align: middle;
-    }
-
-    .nav dl dd img{
-        width: 24px;
-        height:22px;
-        margin:-3px 12px 0 -16px;
-    }*/
 
 </style>

@@ -1,33 +1,37 @@
 <template>
   <div id="app">
-    <keep-alive>
       <router-view v-if="isRouterAlive"></router-view>
-    </keep-alive>
-    <baseModel v-if="showBaseModel" ref="baseModel"></baseModel>
-    <!-- <sugarWarning ref="sugarWarningDialog"></sugarWarning> -->
-    <!-- 异常血糖设置弹窗 -->
-    <sugarWarningSet v-if="showBaseModel" ref="sugarWarningSetDialog"></sugarWarningSet>
-    <!-- 右下角血糖提示弹窗 -->
-    <sugarWarningTips v-if="showBaseModel" ref="sugarWarningTips">
-      <p slot="tipContent">您的患者<span>{{patientName}}</span>测量血糖异常, <a @click="toSugarWarning">点击查看</a></p>
-    </sugarWarningTips>
-    <!-- 右上角血糖预警弹窗 -->
-    <sugarWarningInfoList v-if="showBaseModel" ref="showWarningInfoList"></sugarWarningInfoList>
-    <!-- 批量随访弹窗 -->
-    <batchFollowUp v-if="showBaseModel" ref="batchFollowUp"></batchFollowUp>
-    <!-- 批量干预弹窗 -->
-    <batchInter v-if="showBaseModel" ref="batchInter"></batchInter>
-    <!-- 批量提醒弹窗 -->
-    <batchRemind v-if="showBaseModel" ref="batchRemind"></batchRemind>
-
-    <!--新增干预-->
-    <interventionDialog v-if="showBaseModel" ref='interventionDialog'></interventionDialog>
-
-    <!--推送提醒-->
-    <remindDialog v-if="showBaseModel" ref='remindDialog'></remindDialog>
-
-    <!--随访-->
-    <followUpDialog v-if="showBaseModel" ref='followUpDialog'></followUpDialog>
+    <!--公共弹窗-->
+    <div v-if="showBaseModel">
+      <baseModel ref="baseModel"></baseModel>
+      <!-- <sugarWarning ref="sugarWarningDialog"></sugarWarning> -->
+      <!-- 异常血糖设置弹窗 -->
+      <sugarWarningSet ref="sugarWarningSetDialog"></sugarWarningSet>
+      <!-- 右下角血糖提示弹窗 -->
+      <sugarWarningTips ref="sugarWarningTips">
+        <p slot="tipContent">您的患者<span>{{patientName}}</span>测量血糖异常, <a @click="toSugarWarning">点击查看</a></p>
+      </sugarWarningTips>
+      <!-- 右上角血糖预警弹窗 -->
+      <sugarWarningInfoList ref="showWarningInfoList"></sugarWarningInfoList>
+      <!-- 批量随访弹窗 -->
+      <batchFollowUp ref="batchFollowUp"></batchFollowUp>
+      <!-- 批量干预弹窗 -->
+      <batchInter ref="batchInter"></batchInter>
+      <!-- 批量提醒弹窗 -->
+      <batchRemind ref="batchRemind"></batchRemind>
+      <!--新增干预弹窗-->
+      <interventionDialog ref='interventionDialog'></interventionDialog>
+      <!--推送提醒弹窗-->
+      <remindDialog ref='remindDialog'></remindDialog>
+      <!--随访弹窗-->
+      <followUpDialog ref='followUpDialog'></followUpDialog>
+      <!--查看随访明细弹窗-->
+      <followUpDetailDialog ref='followUpDetailDialog'></followUpDetailDialog>
+      <!--查看干预明细弹窗-->
+      <interventionDetailDialog ref='interventionDetailDialog'></interventionDetailDialog>
+      <!--执行随访弹窗-->
+      <followUpExecDialog ref='followUpExecDialog'></followUpExecDialog>
+    </div>
 
   </div>
 </template>
@@ -41,10 +45,12 @@
   import batchFollowUp from './components/common/commonDialog/batchFollowUp'
   import batchInter from './components/common/commonDialog/batchInter'
   import batchRemind from './components/common/commonDialog/batchRemind'
-
   import interventionDialog from './components/common/commonDialog/interventionDialog'
   import remindDialog from './components/common/commonDialog/remindDialog'
   import followUpDialog from './components/common/commonDialog/followUpDialog'
+  import followUpDetailDialog from './components/common/commonDialog/followUpDetailDialog'
+  import interventionDetailDialog from './components/common/commonDialog/interventionDetailDialog'
+  import followUpExecDialog from './components/common/commonDialog/followUpExecDialog'
 
   export default {
     name: 'app',
@@ -57,7 +63,7 @@
       return {
         isRouterAlive: true,
         patientName:'',
-        showBaseModel: false
+        showBaseModel: false // 是否启用公共弹窗
       }
     },
     components: {
@@ -69,9 +75,12 @@
       batchFollowUp,
       batchInter,
       batchRemind,
-      interventionDialog, // 添加干预
-      remindDialog, // 推送提醒
-      followUpDialog // 随访
+      interventionDialog, // 新增干预
+      remindDialog, // 新增推送提醒
+      followUpDialog, // 新增随访
+      followUpDetailDialog, // 查看随访明细
+      interventionDetailDialog, // 查看干预明细
+      followUpExecDialog, // 执行随访
     },
     methods: {
       reload(){
@@ -126,7 +135,7 @@
       }
     },
     created () {
-      if (!!JSON.parse(sessionStorage.getItem("meunList"))) {
+      if (!!sessionStorage.getItem("meunList")) {
         this.showBaseModel = true;
       }
     }

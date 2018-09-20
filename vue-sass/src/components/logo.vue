@@ -2,23 +2,23 @@
   <div class="my_logs">
     <div class="logss">
       <div class="logoss">
-        <img src="../../images/log/login_logo.png"/>
+        <div class="bgImg loginLogo"></div>
       </div>
       <div class="accountNum">
         <h4>账号登录</h4>
-        <input type="text" v-model="phone" placeholder="请输入手机号码" class="account" @keyup.enter="$refs.pw.focus()"/>
-        <input type="password" v-model="Pw" @keydown="show($event)" @keyup.enter="logSuccess" ref='pw' placeholder="请输入密码" class="pass"/>
+        <input type="text" v-model="phone" placeholder="请输入手机号码" class="account" @keyup.enter="$refs.pw.focus()" />
+        <input type="password" v-model="Pw" @keydown="show($event)" @keyup.enter="logSuccess" ref='pw' placeholder="请输入密码" class="pass" />
         <!-- <input type="checkbox" v-model="checked" name="" id="" value="" class="check"/><span>记住账号</span> -->
         <el-checkbox v-model="checked" class="check">记住账号</el-checkbox>
         <span class="tips">{{Tips}}</span>
-        <div class="buttons" @click="logSuccess">登录</div>
+        <!--<div class="buttons" @click="logSuccess">登录</div>-->
+        <el-button type="primary" size="medium" :loading="logining" class="buttons" @click="logSuccess">{{logining?'登录中':'登录'}}</el-button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  // import {mywebsocket} from '../api/methods'
   export default {
     name: 'logo',
     data() {
@@ -27,7 +27,8 @@
         Tips: '',
         phone: '',
         Pw: '',
-        checked: true
+        checked: true,
+        logining: false, //登录时等待状态
       }
     },
     //页面加载调用获取cookie值
@@ -73,7 +74,8 @@
         vm.Tips = '';
         if (vm.phone == '') {
           vm.Tips = '请输入用户名'
-        } else if (!/^1[345678]\d{9}$/.test(vm.phone)) {
+          //} else if (!/^1[345678]\d{9}$/.test(vm.phone)) {
+        } else if (!/^1\d{10}$/.test(vm.phone)) {
           vm.Tips = '请输入正确的手机号'
         } else if (vm.Pw == '') {
           vm.Tips = '请输入密码'
@@ -87,6 +89,9 @@
             vm.clearCookie();
             vm.checked = false
           }
+
+          vm.logining = true; //设置成登录时等待状态
+
           let data = {
             identityType: 'phone',
             credential: vm.phone,
@@ -94,25 +99,31 @@
           }
           vm.$api.login(data).then(res => {
             if (res.data.code == 0) {
+              // 判断当前登陆用户的功能(菜单)权限
               if (res.data.data.resources.length != 0) {
-                var AllUrl = res.data.data.resources[0].url
+                var AllUrl = res.data.data.resources[0].url; // 获取功能权限的第一项的页面url;
                 vm.$router.push(AllUrl);
+                sessionStorage.setItem("user", JSON.stringify(res.data.data.user));
+                sessionStorage.setItem("token", res.data.data.token);
+                sessionStorage.setItem("refreshToken", res.data.data.refreshToken);
+
+                sessionStorage.setItem("meunList", JSON.stringify(res.data.data.resources))
+                this.$parent.showBaseModel = true;
+              } else {
+                vm.$message.error('无菜单权限，请联系管理员！')
+                console.log('菜单权限resources长度为0')
+                vm.logining = false;
               }
-              sessionStorage.setItem("user", JSON.stringify(res.data.data.user));
-              sessionStorage.setItem("token", res.data.data.token)
-              sessionStorage.setItem("refreshToken", res.data.data.refreshToken)
-              sessionStorage.setItem("meunList", JSON.stringify(res.data.data.resources))
-              this.$parent.showBaseModel = true;
-              // let Top = this.$parent.$refs.baseModel.$refs.top;
-              // Top.name = res.data.data.user.nickname;
-              // Top.departmentName = res.data.data.user.departmentName;
-              // Top.isShowDept = res.data.data.user.existDepartment
+
             } else {
-              vm.Tips = res.data.errMsg
+              vm.Tips = res.data.errMsg;
+              vm.logining = false;
             }
+          }).catch(err=>{
+            vm.logining = false;
+            console.log(err);
           })
         }
-        // this.$router.push('/homePage');
       }
     }
   }
@@ -122,7 +133,7 @@
 <style scoped>
   .buttons {
     color: white;
-    line-height: 40px;
+    /*line-height: 40px;*/
     text-align: center;
     cursor: pointer;
     margin-top: 54px;
@@ -131,7 +142,6 @@
     background-color: #267bf7;
     border-radius: 4px;
   }
-
   .check {
     cursor: pointer;
     width: 16px;
@@ -139,16 +149,13 @@
     margin-top: 12px;
     vertical-align: middle;
   }
-
   .accountNum span {
     color: #41454b;
     font-size: 14px;
     display: inline-block;
     margin-top: 12px;
     vertical-align: middle;
-
   }
-
   .accountNum .tips {
     display: block;
     color: #ff6372;
@@ -158,7 +165,6 @@
     width: 300px;
     text-align: center;
   }
-
   .account {
     outline: none;
     margin-top: 30px;
@@ -170,7 +176,6 @@
     padding-left: 11px;
     box-sizing: border-box;
   }
-
   .pass {
     padding-left: 11px;
     box-sizing: border-box;
@@ -182,39 +187,25 @@
     border-radius: 4px;
     border: solid 1px rgba(206, 206, 206, 0.7);
   }
-
   .accountNum h4 {
     font-size: 16px;
   }
-
   .accountNum {
     padding: 50px 51px;
   }
-
   .my_logs {
     width: 100%;
     height: 100%;
     position: fixed;
-    min-width: 1300px;
+    /*min-width: 1300px;*/
     z-index: 100;
-    background-image: url(../../images/log/log_background.jpg);
+    background-image: url(../assets/images/log_background.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     -webkit-background-size: cover;
     -o-background-size: cover;
     background-position: center 0;
   }
-
-  .logoss {
-    width: 100%;
-    height: 60px;
-    border-bottom: 1px solid #e5e5e5;
-  }
-
-  .logoss img {
-    margin: 12px 0 0 8px;
-  }
-
   .logss {
     position: absolute;
     top: 50%;
@@ -223,5 +214,17 @@
     width: 400px;
     height: 450px;
     background-color: #ffffff;
+  }
+  .logoss {
+    width: 100%;
+    height: 60px;
+    border-bottom: 1px solid #e5e5e5;
+    box-sizing: border-box;
+    padding: 12px 0 0 8px;
+  }
+  .loginLogo {
+    background-position: -375px 0;
+    width: 150px;
+    height: 35px;
   }
 </style>

@@ -1,13 +1,13 @@
 <template>
-    <div class="warningTips" v-show="tipsShow">
-        <div class="closeIcon tac" @click="closeTip">X</div>
-        <div class="tipContent">
-            <slot name="tipContent"></slot>
-        </div>
+  <div class="warningTips" v-show="tipsShow">
+    <div class="closeIcon tac" @click="closeTip">X</div>
+    <div class="tipContent">
+      <slot name="tipContent"></slot>
     </div>
+  </div>
 </template>
 <style scoped lang="less">
-.warningTips {
+  .warningTips {
     width: 220px;
     height: 110px;
     position: fixed;
@@ -19,34 +19,35 @@
     padding: 40px 20px 0;
     box-sizing: border-box;
     z-index: 2010;
-}
-.closeIcon {
+  }
+  .closeIcon {
     width: 20px;
     height: 20px;
     position: absolute;
-    right:10px;
+    right: 10px;
     top: 10px;
     line-height: 20px;
     border: 1px solid #fff;
     border-radius: 50%;
-}
-.tipContent a{
     cursor: pointer;
-    border-bottom: 1px solid #fff; 
-}
+  }
+  .tipContent a {
+    cursor: pointer;
+    border-bottom: 1px solid #fff;
+  }
 </style>
 <script>
-export default {
+  export default {
     name: 'sugarWarningTips',
-    data () {
-        return {
-            tipsShow:false
-        }
+    data() {
+      return {
+        tipsShow: false
+      }
     },
     methods: {
-        closeTip () {
-            this.tipsShow = false;
-        }
+      closeTip() {
+        this.tipsShow = false;
+      }
     }
-}
+  }
 </script>

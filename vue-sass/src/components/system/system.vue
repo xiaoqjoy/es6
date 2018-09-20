@@ -1,7 +1,7 @@
 <template>
   <div class="sysTab">
     <ul>
-      <li v-for="(it,index) in tabs" @click="myTabs(index)" v-bind:class="{active:actives == index}">{{it}}</li>
+      <li v-for="(it,index) in tabs" @click="myTabs(index)" v-bind:class="{actives:actives == index}">{{it}}</li>
     </ul>
   </div>
 </template>
@@ -13,7 +13,7 @@
       return {
         actives: (this.$route.path.substring(0, this.$route.path.lastIndexOf("\/")) == '/agencyInfor') ? 0 : (this.$route.path.substring(0, this.$route.path.lastIndexOf("\/")) == '/basedDiction') ? 1 : (this.$route.path.substring(0, this.$route.path.lastIndexOf("\/")) == '/temManage') ? 2 : 3,
         // tabs:['机构信息','基础字典','模板管理','系统设置']
-        tabs: ['机构信息', '基础字典', '模板管理','参数范围']
+        tabs: ['机构信息', '基础字典', '模板管理', '参数范围']
       }
     },
     methods: {
@@ -37,33 +37,3 @@
 
   }
 </script>
-
-<style>
-  .sysTab li {
-    float: left;
-    list-style: none;
-  }
-
-  .sysTab {
-    width: 400px;
-    height: 60px;
-    position: fixed;
-    left: 160px;
-    top: 0;
-    z-index: 120;
-  }
-
-  .sysTab ul li {
-    line-height: 60px;
-    text-align: center;
-    cursor: pointer;
-    width: 90px;
-    height: 60px;
-  }
-
-  .active {
-    background-color: #e9f2fe;
-    color: #267bf7;
-    border-bottom: 2px solid #267bf7;;
-  }
-</style>
