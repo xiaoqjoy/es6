@@ -834,10 +834,13 @@ console.log(emails)   // ["zhang@email.com", "jiang@email.com", "li@email.com"]
 performance  性能
 
 
-
+https://blog.csdn.net/a895865025/article/details/60877425   使用display:flex 弹性布局
+ 
 布局的传统解决方案，基于盒状模型，依赖 display属性 + position属性 + float属性 + Flex布局
 
 Flex是Flexible Box的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。
+
+  设为Flex布局以后，子元素的float、clear和vertical-align属性将失效。
 
 eg:      //理解：一般用于垂直布局上，会比较好，是设置在盒子上的，作用于子元素上
 display: flex;
@@ -864,6 +867,15 @@ flex-end：右对齐
 center： 居中
 space-between：两端对齐，项目之间的间隔都相等
 space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍
+
+flex容器内有两条轴，主轴（main axis 水平【从左到右】）和侧轴（cross asix 垂直【从上到下】），每条轴都有起点和终点。
+
+
+
+而需要伸缩布局的父元素叫：伸缩容器
+
+伸缩布局的元素叫：伸缩项
+
 
 
 pxcook    前端UI编码神器
