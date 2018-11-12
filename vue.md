@@ -13,8 +13,6 @@ Vue 最好去掉ESLint 不然代码里老是有红线报错
 子组件可以使用 $emit 触发父组件的自定义事件。       emit  映射父组件的事件/ this.$parent      
 
 
-
-
 watch 可以随时监听路由变化   
 
 ```javascript
@@ -145,8 +143,6 @@ activated: function () {
 ```
 
 
-
-
 ####  slot 插槽内容分发
 
 理解： 一般用在组件里面，组件里面的组件
@@ -155,6 +151,7 @@ activated: function () {
 <sugarWarningTips ref="sugarWarningTips">
 	<p slot="tipContent">您的患者<span>{{patientName}}</span>测量血糖异常, <a @click="toSugarWarning">点击查看</a></p>
 </sugarWarningTips>
+
 
 sugarWarningTips.vue
 <template>
@@ -251,12 +248,15 @@ npm卸载包
 npm uninstall xxx
 
 
-
-
-
-
 ```
 
+
+{
+  path: '/test',
+  redirect: '/'
+}
+
+//路由重定向  可用于URL地址输入错误
 
 
 
