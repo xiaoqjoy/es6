@@ -357,7 +357,7 @@ function Person() {
 
   setInterval(function growUp() {
     // 在非严格模式, growUp()函数定义 `this`作为全局对象, 
-    // 与在 Person()构造函数中定义的 `this`并不相同.
+    // 与在 Person()构造函数中定义的 `this`并不相同
     console.log(this)    //window
     this.age++;
   }, 1000);
@@ -373,7 +373,7 @@ function Person() {
   that.age = 0;
 
   setInterval(function growUp() {
-    //  回调引用的是`that`变量, 其值是预期的对象. 
+    //  回调引用的是`that`变量, 其值是预期的对象
     console.log(that)      //person   引入了that才行
     that.age++;
   }, 1000);
@@ -433,8 +433,15 @@ var arr = () => a[0];
 arr(); // 1
 
 
+var a = b => 4;
+
+a()    //  4     
+
+理解： 一定要有一个中间键(形参)，不然会语法报错
+
+
 function foo(n) {
-  var f = () => arguments[0] + n; // 隐式绑定 foo 函数的 arguments 对象. 
+  var f = () => arguments[0] + n; // 隐式绑定 foo 函数的 arguments 对象
                                   //arguments[0] 是 n
   return f();
 }
@@ -618,7 +625,7 @@ setTimeout(function () {
   generator.next()
 }, 2000);
 
-理解: 函数f如果是普通函数，在为变量generator赋值时就会执行。
+理解: 函数f如果是普通函数，在为变量generator赋值时就会执行
     但是，函数f是一个 Generator 函数，就变成只有调用next方法时，函数f才会执行
 ```
 
@@ -745,11 +752,11 @@ https://www.cnblogs.com/yangshifu/p/7377102.html
 
 var data = [1, 2, 3, 4];
 
-var arrayOfSquares = data.map(function(item) {
+var array = data.map(function(item) {
   return item * item;
 });
 
-arrayOfSquares    // [1, 4, 9, 16]    返回的是一个数组
+array    // [1, 4, 9, 16]    返回的是一个数组
 
 
 
