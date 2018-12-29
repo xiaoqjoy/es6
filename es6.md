@@ -850,6 +850,8 @@ Flex是Flexible Box的缩写，意为”弹性布局”，用来为盒状模型�
   设为Flex布局以后，子元素的float、clear和vertical-align属性将失效。
 
 eg:      //理解：一般用于垂直布局上，会比较好，是设置在盒子上的，作用于子元素上
+
+
 display: flex;
 justify-content: center;
 flex-direction: column;
@@ -898,7 +900,12 @@ pxcook    前端UI编码神器
 	  
 	  forEach 理论上这个方法是没有返回值的，仅仅是遍历数组中的每一项，不对原来数组修改；但是可以自己通过数组的索引来修改原来的数组
 
+	  
+	  
+	  
+Flexbox 可以在不同屏幕尺寸上提供一致的布局结构。
 
+一般来说，使用flexDirection、alignItems和 justifyContent三个样式属性就已经能满足大多数布局需求。
 
 
 

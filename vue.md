@@ -164,8 +164,6 @@ sugarWarningTips.vue
 </template>
 
 
-
-
 Vue自定义指令 directives
 
 <p v-clickTest:foo.a.b="message">222222222222222222222222222</p>
@@ -189,6 +187,14 @@ directives: {
 	}
   }
 },
+
+.then 的用法
+
+最主要的,是解决了异步方法立刻返回的问题? 这个特性带来的后遗症? ,? ?假设? 我要等异步处理完了,再去执行一段代码(后续代码)? ?,怎么做？定义一个全局flag,? 异步处理完成更新flag,
+
+然后把? 后续代码放到setInterval里面,? 执行完 后续代码还得关闭interval? ,多麻烦.? ? 使用then()就简单明了了
+
+举个栗子:ajax调用后,不论成功还是失败,? ?都有一段代码必须执行? , 并且? 这段代码和返回结果处理之后的数据有关? ,? 最简单的是把 代码放到success和fail里面,? 代码重复?
 
 
 
@@ -232,6 +238,10 @@ http://www.ruanyifeng.com/blog/2017/05/websocket.html
 
 
 把控件的visible属性设置为false代表次控件不可见
+
+
+
+
 
 
 
