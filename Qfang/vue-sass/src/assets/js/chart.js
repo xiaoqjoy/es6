@@ -10,7 +10,7 @@ var axisLabel = {
   textStyle: {
     color: '#5bc5c5'
   },
-};//折线图xy轴颜色颜色
+};//折线图xy轴颜色
 var methods = {
   min: function (array) {
     for (var i = 0; i < array.length - 1; i++) {

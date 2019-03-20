@@ -55,7 +55,7 @@
     methods:{
       initCharts:function(){
         this.title = this.params.name;
-        let vm=this;
+        let vm = this;
         chartOption[vm.params.className](vm.params.data,document.getElementsByClassName(vm.params.className)[0],vm);
       },
       changeMonth:function(index){

@@ -18,7 +18,7 @@ function f1(){
     return f2;
 }
 var result = f1();
-result();      
+result();
 ```
 
 闭包作用：函数f1外部读取函数f1内部变量
@@ -40,7 +40,7 @@ nAdd();
 result();     //1000
 ```
 
-    
+
 函数f1中的局部变量n一直保存在内存中，并没有在f1调用后被自动清除
 
 f1是f2的父函数，而f2被赋给了一个全局变量，这导致f2始终在内存中，
@@ -52,7 +52,7 @@ f1是f2的父函数，而f2被赋给了一个全局变量，这导致f2始终在
 其次，nAdd的值是一个匿名函数（anonymous function），
 而这个匿名函数本身也是一个闭包，
 所以nAdd相当于是一个setter，可以在函数外部对函数内部的局部变量进行操作。
-    
+
 ***
 
 #### 订阅模式-实现公共js库
@@ -113,7 +113,7 @@ script标签打开defer或async属性，脚本就会异步加载。
 defer要等到整个页面在内存中正常渲染结束（DOM 结构完全生成，以及其他脚本执行完成，
 才会执行
 
-async一旦下载完，渲染引擎就会中断渲染，执行这个脚本以后，再继续渲染  
+async一旦下载完，渲染引擎就会中断渲染，执行这个脚本以后，再继续渲染
 
 defer是“渲染完再执行”，async是“下载完就执行”   ES6模块 异步加载
 
@@ -142,7 +142,7 @@ a = 2;     //Assignment to constant variable
 const a = 3;    //Identifier 'a' has already been declared
 
 let b = 1;
-b   // 1 
+b   // 1
 b = 2;  //  2
 let b = 3;    //Identifier 'a' has already been declared
 
@@ -150,7 +150,7 @@ let b = 3;    //Identifier 'a' has already been declared
 const声明的变量不能改变值，这意味着，const一旦声明变量，就必须立即初始化，
 不能留到以后赋值
 
-###### 本质  
+###### 本质
 const实际上保证的，并不是变量的值不得改动，而是变量指向的那个内存地址不得改动。对于
 复合类型的数据（主要是对象和数组），变量指向的内存地址，保存的只是一个指针，const只能
 保证这个指针是固定的，至于他指向的数据结构是不是可变的，就完全不能控制了。因此将一个对象
@@ -301,7 +301,7 @@ JavaScript 允许采用\uxxxx形式表示一个字符，其中xxxx表示字符�
 "\u{20BB7}"
 // "𠮷"
 ```
-理解： 转码就是这么来的 
+理解： 转码就是这么来的
 
 
 ### promise ###
@@ -337,7 +337,7 @@ f(5,7)    //15
 
 这句会报错：
 
-var func = () => { foo: 1 };               
+var func = () => { foo: 1 };
 func()    //  undefined
 
 //因为花括号（{} ）里面的代码被解析为一系列语句
@@ -345,7 +345,7 @@ func()    //  undefined
 -----
 var func = () => ({foo: 1});
 
-func()    // {foo: 1}    
+func()    // {foo: 1}
 ---------------------------------------
 
 
@@ -356,7 +356,7 @@ function Person() {
   this.age = 0;
 
   setInterval(function growUp() {
-    // 在非严格模式, growUp()函数定义 `this`作为全局对象, 
+    // 在非严格模式, growUp()函数定义 `this`作为全局对象,
     // 与在 Person()构造函数中定义的 `this`并不相同
     console.log(this)    //window
     this.age++;
@@ -388,7 +388,7 @@ function Person(){
   this.age = 0;
 
   setInterval(() => {
-    console.log(this)  
+    console.log(this)
     this.age++; //Person  |this| 正确地指向person 对象
   }, 1000);
 }
@@ -402,7 +402,7 @@ var p = new Person();
 
 var adder = {
   base : 1,
-    
+
   add : function(a) {
     var f = v => v + this.base;
     return f(a);
@@ -413,13 +413,13 @@ var adder = {
     var b = {
       base : 2
     };
-            
+
     return f.call(b, a);
   }
 };
 
 console.log(adder.add(1));         // 输出 2
-console.log(adder.addThruCall(1)); // 仍然输出 2（而不是3 ）
+console.log(adder.addThruCall(1)); // 仍然输出 2（而不是3）
 
 
 注意点：箭头函数没有自己的this指针，通过 call() 或 apply() 方法调用一个函数时，
@@ -435,7 +435,7 @@ arr(); // 1
 
 var a = b => 4;
 
-a()    //  4     
+a()    //  4
 
 理解： 一定要有一个中间键(形参)，不然会语法报错
 
@@ -509,10 +509,10 @@ dedupe([1, 1, 2, 3]) // [1, 2, 3]
 
 #### 操作方法（用于操作数据）和遍历方法（用于遍历成员） ####
 
-add(value)：添加某个值，返回 Set 结构本身。     
-delete(value)：删除某个值，返回一个布尔值，表示删除是否成功。       
-has(value)：返回一个布尔值，表示该值是否为Set的成员。       
-clear()：清除所有成员，没有返回值。  
+add(value)：添加某个值，返回 Set 结构本身。
+delete(value)：删除某个值，返回一个布尔值，表示删除是否成功。
+has(value)：返回一个布尔值，表示该值是否为Set的成员。
+clear()：清除所有成员，没有返回值。
 
 ### 对象的扩展 ###
 
@@ -577,8 +577,8 @@ const Person = {
 
 ### Generator 函数 ###
 （英语中，generator 这个词是“生成器”的意思）
-特征：      
-    一是，function关键字与函数名之间有一个星号；    
+特征：
+    一是，function关键字与函数名之间有一个星号；
     二是，函数体内部使用yield表达式，定义不同的内部状态（yield在英语里的意思就是“产出”）
 
 ```javascript
@@ -603,12 +603,12 @@ hw.next()
 // { value: undefined, done: true }
 
 ```
-理解：   类似于 switch case 语句，直接用一个函数解决了  
+理解：   类似于 switch case 语句，直接用一个函数解决了
 
 调用 Generator 函数，返回一个遍历器对象
 
-value属性表示当前的内部状态的值           
-是yield表达式后面那个表达式的值      
+value属性表示当前的内部状态的值
+是yield表达式后面那个表达式的值
 done属性是一个布尔值，表示是否遍历结束
 
 
@@ -633,18 +633,18 @@ setTimeout(function () {
 
 常见的HTTP状态码：
 
-200 - 请求成功      
-301 - 资源（网页等）被永久转移到其它URL     
-404 - 请求的资源（网页等）不存在        
-500 - 内部服务器错误        
+200 - 请求成功
+301 - 资源（网页等）被永久转移到其它URL
+404 - 请求的资源（网页等）不存在
+500 - 内部服务器错误
 
 HTTP状态码分类：
 
-1**    信息，服务器收到请求，需要请求者继续执行操作     
-2**	   成功，操作被成功接收并处理       
-3**	   重定向，需要进一步的操作以完成请求       
-4**	   客户端错误，请求包含语法错误或无法完成请求       
-5**	   服务器错误，服务器在处理请求的过程中发生了错误       
+1**    信息，服务器收到请求，需要请求者继续执行操作
+2**	   成功，操作被成功接收并处理
+3**	   重定向，需要进一步的操作以完成请求
+4**	   客户端错误，请求包含语法错误或无法完成请求
+5**	   服务器错误，服务器在处理请求的过程中发生了错误
 
 Remote Address   远程地址
 
@@ -660,38 +660,38 @@ get方式会缓存页面，需要通过随机数或时间戳解决缓存问题�
 
 安全性
 
-POST的安全性比GET的高     
-这里的安全是指真正的安全，而不同于上面GET提到的安全方法中的安全，       
-上面提到的安全仅仅是不修改服务器的数据。比如，在进行登录操作，通过GET请求，     
-用户名和密码都会暴露再URL上，因为登录页面有可能被浏览器缓存以及其他人查看浏览器     
-的历史记录的原因，此时的用户名和密码就很容易被他人拿到了。除此之外，        
+POST的安全性比GET的高
+这里的安全是指真正的安全，而不同于上面GET提到的安全方法中的安全，
+上面提到的安全仅仅是不修改服务器的数据。比如，在进行登录操作，通过GET请求，
+用户名和密码都会暴露再URL上，因为登录页面有可能被浏览器缓存以及其他人查看浏览器
+的历史记录的原因，此时的用户名和密码就很容易被他人拿到了。除此之外，
 GET请求提交的数据还可能会造成Cross-site request frogery攻击
 
 GET的执行效率要比POST高
 
 get是从服务器上获取数据，post是向服务器传送数据
 
-对于get方式，服务器端用Request.QueryString获取变量的值，        
+对于get方式，服务器端用Request.QueryString获取变量的值，
 
 对于post方式，服务器端用Request.Form获取提交的数据
 
 #### vue2.0之axios使用  ####
 
-在浏览器中发送 XMLHttpRequests 请求     
-在 node.js 中发送 http请求      
-支持 Promise API        
-拦截请求和响应          
-转换请求和响应数据      
-自动转换 JSON 数据      
-客户端支持保护安全免受 XSRF 攻击      
-理解： 就是 ajax 请求 
+在浏览器中发送 XMLHttpRequests 请求
+在 node.js 中发送 http请求
+支持 Promise API
+拦截请求和响应
+转换请求和响应数据
+自动转换 JSON 数据
+客户端支持保护安全免受 XSRF 攻击
+理解： 就是 ajax 请求
 
 #####  CSRF防御  cross-site request forgery（跨站点请求伪造）
 
-通过 referer、token 或者 验证码 来检测用户提交  （图片验证码）    
-尽量不要在页面的链接中暴露用户隐私信息          
-对于用户修改删除等操作最好都使用post 操作           
-避免全站通用的cookie，严格设置cookie的域    
+通过 referer、token 或者 验证码 来检测用户提交  （图片验证码）
+尽量不要在页面的链接中暴露用户隐私信息
+对于用户修改删除等操作最好都使用post 操作
+避免全站通用的cookie，严格设置cookie的域
 
 ###  Vue 的 ref 用法
 
@@ -712,7 +712,7 @@ console.log(document.getElementById('input1'))//<input type="text" id="input1">
 这两种方法获得的都是Dom节点，而$refs相对document.getElementById的方法，会减少获取dom节点的消耗。
 
 
-$refs  this.$refs.comp._data.comp(读取子组件数据)  ref  
+$refs  this.$refs.comp._data.comp(读取子组件数据)  ref
 
 子组件的引用
 
@@ -740,10 +740,10 @@ https://www.cnblogs.com/yangshifu/p/7377102.html
 
 #####  javascript原生遍历方法的建议用法：
 
-用for循环遍历数组       
-用for-in遍历对象        
-用for-of遍历类数组对象（ES6）       
-用Object.keys()获取对象属性名的集合    
+用for循环遍历数组
+用for-in遍历对象
+用for-of遍历类数组对象（ES6）
+用Object.keys()获取对象属性名的集合
 
 
 #### 	js 数组 map方法
@@ -758,11 +758,14 @@ var array = data.map(function(item) {
 
 array    // [1, 4, 9, 16]    返回的是一个数组
 
+array.forEach(function(i){       //遍历数组，forEach方法要传一个回调函数
+  console.log(i)
+})
 
 
 setTimeout(() => { alert(1) },2000)
 
-== 
+==
 
 
 setTimeout('alert(11)',2000)
@@ -775,27 +778,27 @@ Vue
 <div slot="down">
 	<span>88888888888888888</span>
 </div>
-	  
-	  
+
+
 <slot :data="data"></slot>  <!--作用域插槽  数据由子组件提供-->
 
 <template slot-scope="user">
 	<span v-for="item in user.data" class="user">{{ item }}</span>
-</template>	  
-	  
-	  
+</template>
+
+
 this.$refs.input.value = '2222'    //this.$refs.input  减少获取dom节点的消耗
 
-this.$parent.$refs.father.innerHTML;    //引用父组件 需用 $	  
+this.$parent.$refs.father.innerHTML;    //引用父组件 需用 $
 
 this.$children[0].$refs.child.innerHTML;     //引用子组件的写法
 
 //在通信中，无论是子组件向父组件传值还是父组件向子组件传值，他们都有一个共同点就是有中间介质，
 //子向父的介质是自定义事件，父向子的介质是props中的属性。抓准这两点对于父子通信就好理解了
-	  
-	  
+
+
 console.time(2);     //打桩   计算js的运行时间  比较哪种写法时间少
-	  
+
 console.timeEnd(2);
 
 
@@ -819,8 +822,8 @@ var newArr = arr.map(function(item){
 })
 
 console.log(newArr)  // [2, 8, 10, 14, 46, 90, "sadsad", 468, 1314]
-	  
-	  
+
+
 //在实际使用的时候，我们可以利用map方法方便获得对象数组中的特定属性值们
 
 var users = [
@@ -831,7 +834,7 @@ var users = [
 
 var emails = users.map(function(user){
 	return user.email
-})	  
+})
 
 console.log(emails)   // ["zhang@email.com", "jiang@email.com", "li@email.com"]
 
@@ -842,7 +845,7 @@ performance  性能
 
 
 https://blog.csdn.net/a895865025/article/details/60877425   使用display:flex 弹性布局
- 
+
 布局的传统解决方案，基于盒状模型，依赖 display属性 + position属性 + float属性 + Flex布局
 
 Flex是Flexible Box的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。
@@ -897,22 +900,101 @@ pxcook    前端UI编码神器
 不同：map
       根据遍历执行的匿名函数，对于原数组中的每个值产生一个对应的值，并返回一个新的数组，
       存在一个映射关系，并且不会改变原数组，不会对空数组进行检测
-	  
+
 	  forEach 理论上这个方法是没有返回值的，仅仅是遍历数组中的每一项，不对原来数组修改；但是可以自己通过数组的索引来修改原来的数组
 
-	  
-	  
-	  
+
+
+
 Flexbox 可以在不同屏幕尺寸上提供一致的布局结构。
 
 一般来说，使用flexDirection、alignItems和 justifyContent三个样式属性就已经能满足大多数布局需求。
 
 
 
+function print(ready) {
+	return new Promise ((resolve, reject)=>{
+		if(ready){
+			resolve("Hello World!");
+		}else{
+			reject("Good bye!");
+		}
+	})
+}
+
+print(true).then(message=>{
+	alert(message);
+},error=>{
+	alert(error);
+}
+);
+
+
+箭头函数
+
+var single = a => a
+single('hello, world') // 'hello, world'
 
 
 
+Vue 扇形图组件
+https://github.com/MLuminary/subentry/tree/master/mini-circleProgress
 
+
+
+display: flex;   设置在容器上的       //flex  弯曲
+
+
+
+主轴：    (横向的)
+
+flex-direction
+
+row（默认值）：主轴为水平方向，起点在左端
+row-reverse：主轴为水平方向，起点在右端
+column：主轴为垂直方向，起点在上沿
+column-reverse：主轴为垂直方向，起点在下沿
+
+flex-wrap     //wrap  缠绕
+
+nowrap（默认）：不换行
+wrap：换行，第一行在上方
+wrap-reverse：换行，第一行在下方
+
+(flex-flow)
+
+justify-content              //justify  证明
+
+flex-start（默认值）：左对齐   //  if(flex-direction: column){上对齐}
+flex-end：右对齐               //  if(flex-direction: column){下对齐}
+center： 居中                  //  if(flex-direction: column){居中对齐}
+space-between：两端对齐，项目之间的间隔都相等
+space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍
+
+
+交叉轴：
+
+align-items   //把item项目内元素由块级元素转为行内元素，并且指定浮动方向
+
+flex-start：交叉轴的起点对齐
+flex-end：交叉轴的终点对齐
+center：交叉轴的中点对齐
+baseline: 项目的第一行文字的基线对齐
+stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度
+
+
+align-content   属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用
+
+flex-start：与交叉轴的起点对齐
+flex-end：与交叉轴的终点对齐
+center：与交叉轴的中点对齐
+space-between：与交叉轴两端对齐，轴线之间的间隔平均分布
+space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍
+stretch（默认值）：轴线占满整个交叉轴
+
+
+
+行内元素 span b     块级元素 p div ul li
 
 
 
