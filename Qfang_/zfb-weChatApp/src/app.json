@@ -1,0 +1,64 @@
+{
+  "pages": [
+    "pages/index/main",
+    "pages/contract/main",
+    "pages/user/main",
+    "pages/nameProve/main",
+    "pages/onlineInput/main",
+    "pages/onlineEntrust/main",
+    "pages/userCenter/main",
+    "pages/loginSelect/main",
+    "pages/changeCity/main",
+    "pages/houseList/main",
+    "pages/houseDetails/main",
+    "pages/aroundMap/main",
+    "pages/billList/main",
+    "pages/search/main",
+    "pages/loginPhone/main",
+    "pages/lock/main",
+    "pages/editCode/main",
+    "pages/manager/main"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "tabBar": {
+    "color": "#999",
+    "selectedColor": "#252525",
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "list": [{
+      "pagePath": "pages/index/main",
+      "text": "首页",
+      "iconPath": "./static/img/home@2x.png",
+      "selectedIconPath": "./static/img/home-select@2x.png"
+    }, {
+      "pagePath": "pages/onlineEntrust/main",
+      "text": "在线委托",
+      "iconPath": "./static/img/online@2x.png",
+      "selectedIconPath": "./static/img/online-select@2x.png"
+    }, {
+      "pagePath": "pages/userCenter/main",
+      "text": "我的",
+      "iconPath": "./static/img/user@2x.png",
+      "selectedIconPath": "./static/img/user-select@2x.png"
+    }]
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "usingComponents": {
+    "van-button": "../static/vant/button/index",
+    "van-loading": "../static/vant/loading/index",
+    "van-dialog": "../static/vant/dialog/index",
+    "van-toast": "../static/vant/toast/index",
+    "van-icon": "./static/vant/icon/index",
+    "van-tab": "./static/vant/tab/index",
+    "van-tabs": "./static/vant/tabs/index"
+  }
+}

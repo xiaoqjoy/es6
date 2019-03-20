@@ -1,0 +1,70 @@
+/* 改变主题色变量 */
+$--color-primary: #008842;
+/* dange颜色 */
+$--color-dange: #d66666;
+/* info 颜色*/
+// $--color-info: #4b83af;
+
+$--color-success: #008842;
+/* input 边框颜色 */
+$--border-color-base: #a6a6a6;
+// mini input框高度
+$--input-mini-height: 30px;
+/* 文字基本颜色 */
+$--color-text-regular: #333;
+/*  input placeholder 文字颜色*/
+$--color-text-placeholder: #999;
+
+$--input-disabled-border:#a6a6a6;
+/* 默认圆角 */
+$--border-radius-base: 3px;
+/* */
+
+/* button样式 */
+$--button-medium-padding-vertical: 12px;
+$--button-medium-padding-horizontal: 30px;
+
+$--button-small-border-radius: 3px;
+$--button-small-padding-vertical: 10px;
+$--button-small-padding-horizontal: 25px;
+
+$--button-mini-border-radius: 3px;
+$--button-mini-padding-vertical: 8px !default;
+$--button-mini-padding-horizontal: 20px !default;
+
+// $--button-primary-border: #42905b !default;
+
+$--button-danger-border: #c55454 !default;
+$--button-danger-fill: #d66666 !default;
+
+$--button-text-color: #4b83af !default;
+$--button-text-border: #4b83af !default;
+$--button-text-fill: #4b83af !default;
+
+$--button-info-border: #4b83af !default;
+$--button-info-fill: #4b83af !default;
+
+// $--button-text-color: #4b83af !default;
+
+// el-button--text
+$--button-hover-tint-percent: 20% !default;
+$--button-active-shade-percent: 10% !default;
+
+// $--select-dropdown-max-height: 200px !default;
+
+/* Dialog*/
+$--dialog-title-font-size: 14px;
+/* */
+$--popover-padding: 0 !default;
+$--popover-padding-large: 0 !default;
+/* */
+$--pagination-fill: #fafafa;
+$--pagination-button-disabled-fill:#fafafa;
+/* */
+// $--collapse-header-height: 38px !default;
+// $--collapse-header-height: 36px !default;
+/* */
+/* 改变 icon 字体路径变量，必需 */
+$--font-path: '../node_modules/element-ui/lib/theme-chalk/fonts';
+
+@import "../node_modules/element-ui/packages/theme-chalk/src/index";

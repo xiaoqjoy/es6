@@ -1,0 +1,61 @@
+{
+  "name": "xinfang",
+  "version": "0.0.1",
+  "author": "qfang.com",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest",
+    "_comment": "/* 生成压缩包文件 */",
+    "bundle-ios": "react-native bundle --platform ios --dev false --entry-file index.ios.js --bundle-output ./ios/RNBundle/xinfang.jsbundle --assets-dest ./ios/RNBundle ",
+    "bundle-android": "react-native bundle --platform android --dev false --entry-file index.android.js --bundle-output ./android/app/src/main/assets/xinfang.android.bundle --sourcemap-output ./android/app/src/main/assets/xinfang.android.map --assets-dest ./android/app/src/main/res/ ",
+    "bundle": "npm run bundle-ios && npm run bundle-android",
+    "build-ios": "npm run bundle-ios&& build/build-ios.sh",
+    "build-android": "npm run bundle-android && build/build-android.sh",
+    "build": "npm run build-ios && npm run build-android && npm run clean",
+    "clean": "rm -rf android/ ios/ && git checkout -- android ios",
+    "zip-android": "zip -r bundle/android.bundle.zip android/app/src/main/assets/ android/app/src/main/res/",
+    "zip-ios": "zip -r bundle/ios.bundle.zip ios/RNBundle",
+    "install-apk": "adb install -r ../QfangJoin/build/bakApk/QfangJoin-release-fix.apk",
+    "patch-ios": "build/patch-ios.sh",
+    "patch-android": "build/patch-android.sh",
+    "patch": "npm run patch-ios && npm run patch-android"
+  },
+  "dependencies": {
+    "axios": "^0.16.2",
+    "babel-plugin-syntax-decorators": "^6.13.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-remove-console": "^6.8.4",
+    "mobx": "^4.2.1",
+    "mobx-react": "^5.1.2",
+    "prop-types": "^15.6.2",
+    "react": "16.0.0-alpha.12",
+    "react-native": "^0.48.3",
+    "react-native-contacts": "^1.0.2",
+    "react-native-datepicker": "^1.6.0",
+    "react-native-image-placeholder": "^1.0.7",
+    "react-native-image-zoom-viewer": "^2.0.20",
+    "react-native-scrollable-tab-view": "^0.6.6",
+    "react-native-storage": "^0.2.2",
+    "react-native-swiper": "^1.5.4",
+    "react-native-tab-view": "0.0.67",
+    "react-native-ultimate-listview": "3.1.6",
+    "react-navigation": "^2.9.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.6",
+    "babel-jest": "21.0.2",
+    "babel-preset-react-native": "4.0.0",
+    "eslint": "^4.18.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0",
+    "jest": "21.1.0",
+    "react-test-renderer": "16.0.0-alpha.12"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
