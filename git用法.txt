@@ -95,3 +95,12 @@ git add README.md
 git commit -m "first commit"
 git remote add origin https://github.com/xiaoqjoy/PHP.git
 git push -u origin master
+
+
+CRLF 是 carriage return line feed 的缩写；中文意思是 回车换行。
+
+
+LF 是 line feed 的缩写，中文意思是换行。
+
+
+replace(/\./g,"-")   匹配.要加\  
