@@ -1002,14 +1002,58 @@ min-height: 100vh;    可视区域
 
 
 
+//无限滚动加载数据
+
+var lazyImg = document.querySelectorAll('img');//获取所有懒加载的img标签
+var lazyLen = lazyImg.length;//获取所有懒加载的img的长度
+var lazyNum = 0; //存储图片加载到的位置，避免每次都从第一张图片开始遍历
+    window.onscroll = function () {
+      var scrollT = document.documentElement.scrollTop || document.body.scrollTop; //滚动条的垂直偏移
+      var scrollH = document.documentElement.scrollHeight || document.body.scrollHeight; //元素的整体高度
+      var clientH = document.documentElement.clientHeight || document.body.clientHeight; //元素的可见高度
+      if (scrollT == scrollH - clientH) {
+          console.log("到底部了");
+      }
+    else if (scrollT < scrollH - clientH) {
+        console.log("到顶了")
+    }
+    for (var i = lazyNum; i < lazyLen; i++) {
+        if (lazyImg[i].offsetTop < clientH + scrollT) {//触发加载
+            if (lazyImg[i].getAttribute('src') == '') {
+                lazyImg[i].src = lazyImg[i].getAttribute('lazy_src');
+            }
+            lazyNum = i + 1;
+        }
+    }
+}
 
 
 
 
+//获取当前时间
+function getNowFormatDate(){
+  var date = new Date();
+  var seperator1 = "-";
+  var year = date.getFullYear();
+  var month = date.getMonth() + 1;
+  var strDate = date.getDate();
+  if (month >= 1 && month <= 9) {
+      month = "0" + month;
+  }
+  if (strDate >= 0 && strDate <= 9) {
+      strDate = "0" + strDate;
+  }
+  var currentdate = year + seperator1 + month + seperator1 + strDate;
+  return currentdate;
+}
 
+table的使用方法
 
-
-
+<table border="1" cellspacing="0" cellpadding="0" width="100%">
+  <tr>
+	<td>产品代码:</td>
+	<td colspan="5">ASD55565</td>
+  </tr>
 
 
 
