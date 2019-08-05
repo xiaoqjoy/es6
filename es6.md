@@ -901,7 +901,8 @@ pxcook    前端UI编码神器
       根据遍历执行的匿名函数，对于原数组中的每个值产生一个对应的值，并返回一个新的数组，
       存在一个映射关系，并且不会改变原数组，不会对空数组进行检测
 
-	  forEach 理论上这个方法是没有返回值的，仅仅是遍历数组中的每一项，不对原来数组修改；但是可以自己通过数组的索引来修改原来的数组
+	  forEach 理论上这个方法是没有返回值的，仅仅是遍历数组中的每一项，不对原来数组修改；
+	  但是可以自己通过数组的索引来修改原来的数组
 
 
 
@@ -1051,13 +1052,51 @@ table的使用方法
 
 <table border="1" cellspacing="0" cellpadding="0" width="100%">
   <tr>
-	<td>产品代码:</td>
-	<td colspan="5">ASD55565</td>
+	<td></td>
+	<td colspan="5"></td>
   </tr>
+<table>
+
+//千分符的使用方法
+template.helper('format',function(par){
+  return par.toString().replace(/\d+/, function (n) { // 先提取整数部分
+    return n.replace(/(\d)(?=(\d{3})+$)/g, function ($1) { // 对整数部分添加分隔符
+       return $1 + ","
+    })
+  })
+})
 
 
+autofocus="autofocus"   input自动锁定光标
 
 
+//单行文本的溢出显示省略号
+overflow: hidden;
+text-overflow:ellipsis;
+white-space: nowrap;
 
+
+//多行文本溢出显示省略号
+display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 3;
+overflow: hidden;
+
+js只保留整数，向上取整，四舍五入，向下取整等函数
+
+1.丢弃小数部分,保留整数部分
+parseInt(5/2)
+
+2.向上取整,有小数就整数部分加1
+
+Math.ceil(5/2)
+
+3,四舍五入
+
+Math.round(5/2)
+
+4,向下取整
+
+Math.floor(5/2)
 
 
