@@ -1,6 +1,8 @@
 <template>
   <div @click.stop class="el-select">
-    <el-input readonly :size="size" :placeholder="placeholder" @mouseenter.native="inputHovering = true" @mouseleave.native="inputHovering = false" v-model="inputValue" @focus="handleFocus" :validateEvent="false" ref="reference">
+    <el-input readonly :size="size" :placeholder="placeholder" @mouseenter.native="inputHovering = true"
+     @mouseleave.native="inputHovering = false" v-model="inputValue" @focus="handleFocus"
+      :validateEvent="false" ref="reference">
       <i slot="suffix" class="el-input__icon el-icon-circle-close" @click="handleClear" v-if="inputHovering&&inputValue">
       </i>
       <i slot="suffix" v-else class="el-select__caret el-input__icon el-icon-arrow-up" :class="{'is-reverse':visible}" @click="handleClickIcon"></i>
@@ -8,7 +10,9 @@
     <transition name="el-zoom-in-top">
       <div v-show="visible" class="el-select-dropdown el-popper" :style="pickerStyle" x-placement="bottom-start">
         <div class="tree-div">
-          <el-tree :props="props" ref="tree" :node-key="nodeKey" :load="loadNode" lazy accordion @node-click="handleNodeClick" header-align="center" :expand-on-click-node="false" check-on-click-node highlight-current>
+          <el-tree :props="props" ref="tree" :node-key="nodeKey" :load="loadNode" lazy accordion
+           @node-click="handleNodeClick" header-align="center"  
+          :expand-on-click-node="false" check-on-click-node highlight-current>
           </el-tree>
         </div>
         <div class="popper__arrow" style="left: 35px;"></div>
