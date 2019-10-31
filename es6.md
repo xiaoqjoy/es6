@@ -1100,3 +1100,13 @@ Math.round(5/2)
 Math.floor(5/2)
 
 
+
+
+ipconfig /flushdns
+
+刷新DNS
+
+
+
+
+

@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+   <head>
+      <meta charset="UTF-8" />
+      <title>A date range picker for Bootstrap</title>
+      <link href="bootstrap.min.css" rel="stylesheet">
+      <link href="font-awesome.min.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" media="all" href="daterangepicker-bs3.css" />
+      <script type="text/javascript" src="jquery-1.8.3.min.js"></script>
+      <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="moment.js"></script>
+      <script type="text/javascript" src="daterangepicker.js"></script>
+   </head>
+   <body>
+   
+   <input type="text" style="width: 400px" name="reservation" id="reservationtime" class="form-control" value="10/31/2019 1:00 PM - 10/31/2019 1:30 PM"  class="span4"/>
+
+
+
+   <script type="text/javascript">
+   $(document).ready(function() {
+	  $('#reservationtime').daterangepicker({
+		timePicker: true,
+		timePickerIncrement: 30,
+		format: 'MM/DD/YYYY h:mm A'
+	  }, function(start, end, label) {
+		console.log(start.toISOString(), end.toISOString(), label);
+	  });
+   });
+   </script>
+
+
+
+   </body>
+</html>
