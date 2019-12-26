@@ -1107,6 +1107,15 @@ ipconfig /flushdns
 刷新DNS
 
 
+所以if判断要加上 条件值 的非空
 
+judgeAddr: function(value){
+	if(value && value.indexOf("http") == -1){
+		return window.img + value 
+	}
+	return value
+}
+
+此处value = null 直接就报错了,因为 null 值 没有indexOf 方法
 
 
