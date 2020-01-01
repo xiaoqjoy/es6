@@ -14,10 +14,6 @@ function initInterceptors() {
   // 确保重新初始化拦截器之前，生成全新的promise对象
   const source = axios.CancelToken.source();
 
-
-
-
-
   // 重新初始化拦截器之前，先移除旧的拦截器
   if (myRequester !== null && myResponser !== null) {
     axios.interceptors.request.eject(myRequester);
