@@ -15,7 +15,7 @@ export default new Vuex.Store({
     // 顶部标签栏
     visitedTags: [{
       path: '/Home',
-      name: '首页'
+      name: '首页' 
     }],
     // 缓存标签栏
     cachedTags: [],

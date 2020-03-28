@@ -1119,3 +1119,70 @@ judgeAddr: function(value){
 此处value = null 直接就报错了,因为 null 值 没有indexOf 方法
 
 
+
+------------------------------------------------------
+改变函数内部的this指向的三种方法(本来是指向window的)
+
+
+call()方法可以调用函数，还可以改变函数内的this指向，它的主要作用是可以实现继承
+
+var o = {
+   name: 'kkkk'
+}
+function fun(a,b){
+   console.log(this);
+   console.log(this.name)
+   console.log(a+b)
+}
+fun.call(o,1,3)
+
+
+
+fun.apply(thisArg,[argsArray])（传递的值必须包含在数组里）
+apply()方法可以调用函数，还可以改变函数内的this指向，但它的参数必须是数组
+
+var arr = [1, 33, 22, 44, 12];
+var max = Math.max.apply(Math, arr);
+var min = Math.min.apply(Math, arr);
+console.log(max, min);
+
+
+bind()方法不会调用函数，但是可以改变函数内部this指向
+
+var o = {
+    name: 'Andy'
+}
+
+function fun(a, b) {
+    console.log(this);
+    console.log(a + b);
+}
+var f = fun.bind(o, 1, 2);    //这里不能调用函数，所以需要一个变量来实现调用
+f();
+
+
+3、call、apply、bind总结
+相同点：都可以改变函数内部的this指向
+
+区别：
+
+1.call和apply会调用函数，并且改变函数内部的this指向
+
+2.call和apply传递的参数不一样，apply必须以数组形式
+
+3.bind不会调用函数，但是会改变函数内部的this指向
+
+主要应用场景：
+
+1.call主要用作继承
+
+2.apply经常跟数组有关，比如借助数学对象实现数组中的最大最小值
+
+3.bind可用于改变定时器内部的this指向
+
+--------------------------------------------------------------
+
+
+
+
+
