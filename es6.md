@@ -1183,6 +1183,175 @@ f();
 --------------------------------------------------------------
 
 
+event queue   事件队列          Event Loop  事件循环
+
+
+宏任务(task)和微任务（Microtasks）都是异步任务
+
+macro-task		micro-task
+
+
+同步任务按照上下顺序执行，同步任务执行完成后先执行微任务，再执行宏任务
+
+
+console.log('代码执行开始');						//同步任务
+setTimeout(function(){
+	console.log('定时器开始')						//异步任务-宏任务
+});
+
+new Promise(function(resolve){
+	console.log('马上执行for循环');                	//同步任务
+	for(var i = 0; i < 10000; i++){
+		i == 99 && resolve();
+	}
+}).then(function(){
+	console.log('执行then函数')						//异步任务-微任务
+});
+
+console.log('代码执行结束');						//同步任务
+ 
+ 
+代码执行开始
+马上执行for循环
+代码执行结束
+执行then函数
+定时器开始
+
+
+------------------------------------------------------------------------
+
+
+async  异步      await  等待		Generator 	生成		resolved	解决		then	然后
+
+reject	拒绝
+
+
+
+async和await的概念
+
+1）async 函数是 Generator 函数的语法糖，使用 关键字 async 来表示，在函数内部使用 await 来表示异步
+2）ES7 提出的async 函数，终于让 JavaScript 对于异步操作有了终极解决方案
+3）async 作为一个关键字放到函数的前面，用于表示函数是一个异步函数，该函数的执行不会阻塞后面代码的执行
+4）await是等待，只能放到async函数里面，在后面放一个返回promise对象的表达式
+5）async和await是为了解决大量复杂不易读的Promise异步的问题
+
+
+
+async function async1 () {
+    console.log('async1 start');
+    await async2();
+    console.log('async1 end');
+}
+ 
+async function async2 () {
+    console.log('async2');
+}
+ 
+console.log('script start');
+ 
+setTimeout(function () {
+    console.log('setTimeout');
+}, 0);
+ 
+async1();
+ 
+new Promise(function (resolve) {
+    console.log('promise1');
+    resolve();
+}).then(function () {
+    console.log('promise2');
+});
+ 
+console.log('script end');
+
+
+
+//输出顺序：
+// script start 
+// async1 start 
+// async2 
+// promise1 
+// script end 
+// async1 end
+// promise2
+// setTimeout
+
+
+---------------------------------------------------------
+
+
+keep-alive属性及生命周期
+
+1.activated：页面第一次进入的时候，钩子触发的顺序是created->mounted->activated
+2.deactivated ：页面退出的时候会触发deactivated，当再次前进或者后退的时候只触发activated
+
+
+
+----------------------------------------------------
+
+
+
+箭头函数   arrow function
+
+let fun = () => {
+	console.log('lalalala');
+	console.log(this)                       //window
+}
+
+
+箭头函数的 this 永远指向其上下文的 this ，任何方法都改变不了其指向，如 call() , bind() , apply()
+普通函数的this指向调用它的那个对象
+
+
+
+-----------------------------------------------------
+
+
+vue里ref ($refs)用法
+
+
+ref 需要在dom渲染完成后才会有，在使用的时候确保dom已经渲染完成。比如在生命周期 mounted(){} 钩子中调用，或者在 this.$nextTick(()=>{}) 中调用
+
+
+
+nextTick	下一步
+
+
+//改变数据
+vm.message = 'changed'
+
+//想要立即使用更新后的DOM。这样不行，因为设置message后DOM还没有更新
+console.log(vm.$el.textContent) // 并不会得到'changed'
+
+//这样可以，nextTick里面的代码会在DOM更新后执行
+Vue.nextTick(function(){
+    console.log(vm.$el.textContent) //可以得到'changed'						//通过 Vue.nextTick 获取到改变后的 DOM
+})
+
+
+所有的DOM更新都是异步更新
+
+renderWatcher  	渲染器
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
