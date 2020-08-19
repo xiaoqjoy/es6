@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <style>
+        html,body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+		.div1{background:#000080;border:1px solid red;/*解决代码*/width:98%;overflow:hidden}
+		.div2{background:#800080;border:1px solid red;height:100px;margin-top:10px;width:98%}
+		.left{float:left;width:20%;height:200px;background:#DDD;}
+		.right{float:left;width:30%;height:200px;background:red;}
+    </style>
+</head>
+<body>
+    <div class="div1 clearfloat">
+		<div class="left">Left</div>
+		<div class="right">Right</div>
+	</div>
+	<div class="div2">
+		div2
+	</div>
+</body>
+</html>

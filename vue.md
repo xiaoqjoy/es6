@@ -13,6 +13,10 @@ Vue 最好去掉ESLint 不然代码里老是有红线报错
 子组件可以使用 $emit 触发父组件的自定义事件。       emit  映射父组件的事件/ this.$parent      
 
 
+
+props 是单向绑定的：当父组件的属性变化时，将传导给子组件，但是不会反过来。这是为了防止子组件修改父组件的状态。所以不应该在子组件中修改 props 中的值，Vue 警告。
+
+
 watch 可以随时监听路由变化   
 
 ```javascript
@@ -267,6 +271,96 @@ npm uninstall xxx
 }
 
 //路由重定向  可用于URL地址输入错误
+
+
+-------------------------------------------------
+
+vue.js双向绑定的实现原理
+
+Vue内部通过Object.defineProperty方法属性拦截的方式，把data对象里每个数据的读写转化成getter/setter，当数据变化时通知视图更新
+
+
+---------------------------------------------------
+
+
+vue 中使用防抖和节流
+
+
+防抖和节流是我们在开发过程中常用优化性能的方式
+
+
+在公共方法中（如 public.js 中），加入函数防抖和节流方法
+
+
+// 防抖
+export function _debounce(fn, delay) {
+
+    var delay = delay || 200;
+    var timer;
+    return function () {
+        var th = this;
+        var args = arguments;
+        if (timer) {
+            clearTimeout(timer);
+        }
+        timer = setTimeout(function () {
+            timer = null;
+            fn.apply(th, args);
+        }, delay);
+    };
+}
+// 节流
+export function _throttle(fn, interval) {
+    var last;
+    var timer;
+    var interval = interval || 200;
+    return function () {
+        var th = this;
+        var args = arguments;
+        var now = +new Date();
+        if (last && now - last < interval) {
+            clearTimeout(timer);
+            timer = setTimeout(function () {
+                last = now;
+                fn.apply(th, args);
+            }, interval);
+        } else {
+            last = now;
+            fn.apply(th, args);
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

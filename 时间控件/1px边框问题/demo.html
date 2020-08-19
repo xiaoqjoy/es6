@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <style>
+        html,body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+		h1 {
+		  position: relative;
+		}
+
+		h1:after {
+		  content: '';
+		  display: block;
+		  width: 100%;
+		  height: 1px;
+		  position: absolute;
+		  left: 0;
+		  bottom: 0;
+		  background: red;
+		  transform: scaleY(1);
+		  transform-origin: 0 0;
+		}
+
+		@media screen and (min-device-pixel-ratio: 2),  (-webkit-min-device-pixel-ratio: 2) {
+		  h1:after {
+			transform: scaleY(0.5);
+		  }
+		}
+
+    </style>
+</head>
+<body>
+<h1></h1>
+</body>
+</html>
