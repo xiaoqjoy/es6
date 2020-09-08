@@ -1122,6 +1122,8 @@ judgeAddr: function(value){
 
 
 ------------------------------------------------------
+
+
 改变函数内部的this指向的三种方法(本来是指向window的)
 
 
@@ -1137,7 +1139,7 @@ function fun(a,b){
 }
 fun.call(o,1,3)
 
-
+-----------
 
 fun.apply(thisArg,[argsArray])（传递的值必须包含在数组里）
 apply()方法可以调用函数，还可以改变函数内的this指向，但它的参数必须是数组
@@ -1146,6 +1148,36 @@ var arr = [1, 33, 22, 44, 12];
 var max = Math.max.apply(Math, arr);
 var min = Math.min.apply(Math, arr);
 console.log(max, min);
+
+
+
+
+/*定义一个人类*/
+function Person(name,age)
+{
+	this.name=name;
+	this.age=age;
+}
+/*定义一个学生类*/
+function Student(name,age,grade)
+{
+	Person.apply(this,arguments);
+	
+	console.log(arguments);    //参数对象
+    console.log(this);			//Student这个实例对象
+		
+	this.grade=grade;
+}
+//创建一个学生类
+var student=new Student("zhangsan",21,"一年级");
+//测试
+alert("name:"+student.name+"\n"+"age:"+student.age+"\n"+"grade:"+student.grade);
+
+//大家可以看到测试结果name:zhangsan age:21  grade:一年级
+//学生类里面我没有给name和age属性赋值啊,为什么又存在这两个属性的值呢,这个就是apply的神奇之处
+	
+
+------------
 
 
 bind()方法不会调用函数，但是可以改变函数内部this指向
@@ -1449,6 +1481,10 @@ js栈内存和堆内存的区别
 
 
 js中import和require的区别
+
+
+--------------------------------------------------
+
 
 
 
