@@ -3,25 +3,27 @@
 
 
 {
-    //配置eslint
-    "files.autoSave":"off",
+    "eslint.options": {
+        "extensions": [".js", ".vue"]
+    },
     "eslint.validate": [
         "javascript",
         "javascriptreact",
-        "vue"
+        "vue-html",
+        {
+            "language": "vue",
+            "autoFix": true
+        },
+        {
+            "language": "html",
+            "autoFix": true
+        }
     ],
-     "eslint.options": {
-        "plugins": ["html"]
-     },
-    //为了符合eslint的两个空格间隔原则
-    "editor.tabSize": 2,
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
-    },
-    "eslint.codeAction.showDocumentation": {
-        "enable": true
-    },
-    "eslint.codeAction.disableRuleComment": {
-        "enable": false
-    },
+    "eslint.run": "onSave",
+    "eslint.autoFixOnSave": true,
 }
+
+
+
+
+每次保存文件的时候就可以根据 .eslintrc.js 配置规则来检查代码和做一些简单的修复
