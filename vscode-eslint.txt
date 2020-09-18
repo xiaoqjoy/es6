@@ -1,0 +1,27 @@
+打开vscode=>文件=>首选项=>设置=>扩展=>JSON文件
+
+
+
+{
+    //配置eslint
+    "files.autoSave":"off",
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "vue"
+    ],
+     "eslint.options": {
+        "plugins": ["html"]
+     },
+    //为了符合eslint的两个空格间隔原则
+    "editor.tabSize": 2,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "eslint.codeAction.showDocumentation": {
+        "enable": true
+    },
+    "eslint.codeAction.disableRuleComment": {
+        "enable": false
+    },
+}
