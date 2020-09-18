@@ -27,3 +27,17 @@
 
 
 每次保存文件的时候就可以根据 .eslintrc.js 配置规则来检查代码和做一些简单的修复
+
+
+
+
+
+
+Chinese (Simplified) Language Pack for Visual Studio Code  汉化
+
+ESLint
+
+GitLens — Git supercharged   git提交历史记录
+
+
+ 
