@@ -309,6 +309,8 @@ export function _debounce(fn, delay) {
         }, delay);
     };
 }
+
+
 // 节流
 export function _throttle(fn, interval) {
     var last;
@@ -331,18 +333,31 @@ export function _throttle(fn, interval) {
     }
 }
 
+----------------------------------------------------------------
 
 
 
+ts  (TypeScript) 是一种给 JavaScript 添加特性的语言扩展, 需要编译安装(npm install -g typescript)，新增的功能:
 
 
+类型批注和编译时类型检查
+类型推断
+类型擦除
+接口
+枚举
+Mixin
+泛型编程
+名字空间
+元组
+Await
 
 
+TypeScript 教程
+
+https://www.runoob.com/typescript/ts-tutorial.html
 
 
-
-
-
+-----------------------------------------------------------------
 
 
 
