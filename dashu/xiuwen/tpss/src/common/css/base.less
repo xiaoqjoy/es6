@@ -1,0 +1,60 @@
+
+@theme: #538BF1;
+@green: #05838E;
+@gray: #e5e5e5; //灰色边框
+
+@blue: #283650;   /*主色*/
+@blue-light: #538BF1;
+@blue-hover: #FAFCFF;
+@yellow: #EEB352; /*与主色搭配使用*/
+@green: #05838E;  /*小面积使用，用于辅助性图标或按钮*/
+@red: #F55F5F;   /*警示性的文字或图标提示*/
+@nav-blue: #283650; /*导航条背景*/
+@font-dark: #333;  /*主体文字颜色*/
+@font-gray: #999; /*次要文字颜色*/
+@font-light: #bbb; /*辅助性文字*/
+@line-color: #E5E5E5; /*用于分割线*/
+@bg-gray: #F5F5F5; /*背景色*/
+@bg-light: #F9FAFB; /*背景色*/
+@white: #fff;
+@border-line: #E9E9E9; /*边框颜色*/
+
+//白色背景圆角边框阴影（参数为垂直内边距：padVer，水平内边距：padHor）
+.boxShadow(@padVer: 0,@padHor: 30px){
+  background: #ffffff;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  padding: @padVer @padHor;
+}
+
+//单边边框（参数为哪个边：direction，边框颜色：color）
+.border(@direction,@color){
+  border-@{direction}: 1px solid @color;
+}
+
+//固定高度，垂直滚动（参数为高度：height）
+.scroll(@height){
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: @height;
+}
+
+//小标题样式，使用伪元素，前面为蓝色（参数为字体大小/字体高度：size，上面距离：marginTop）
+.selectorBefore(@size,@marginTop: 0){
+  color: #333;
+  font-size: @size;
+  position: relative;
+  padding-left: 6px;
+  &:before {
+    position: absolute;
+    content: "";
+    width: 2px;
+    height: @size;
+    background-color: @theme;
+    left: 0;
+    margin-top: @marginTop;
+  }
+}
+
+
+

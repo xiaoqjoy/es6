@@ -1,0 +1,183 @@
+<style lang="less" rel="stylesheet/less" scoped>
+.drop_loan {
+  .dialog-mask {
+    z-index: 1001;
+  }
+  .dialog-box {
+    width: 340px;
+    height: 170px;
+    .title_type {
+      text-align: center;
+      background: #fff;
+      font-size: 18px;
+      letter-spacing: 1.3px;
+      padding-left: 20px;
+      font-weight: bold;
+      box-shadow: 0 2px 6px 0 #d0d0d0;
+    }
+    .mgtop {
+      margin-top: 20px;
+    }
+    .el-form-item {
+      width: 28%;
+      margin-right: 40px;
+    }
+    .el-form-item .el-select {
+      width: 245px;
+    }
+    .dialog-box__middle {
+      height: 495px;
+      .middle {
+        .el-select {
+          display: block;
+        }
+        .el-textarea__inner {
+          background: #d0d0d0;
+        }
+      }
+    }
+    .dialog-box__middle-1200 {
+      height: 442px;
+      overflow-y: auto;
+      margin: 0 20px;
+      padding: 25px 30px;
+      box-shadow: 0 2px 6px 0 #d0d0d0;
+      .dialog-box__middle-top {
+        padding: 20px 0;
+        border-bottom: 1px solid #d0d0d0;
+        .title {
+          font-size: 16px;
+          .icon__gan {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+    .dialog-box__middle-form {
+      overflow-y: auto;
+      padding: 0 20px;
+      .form__block {
+        padding: 20px 30px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 6px 0 #d0d0d0;
+        .dialog-box__middle-top {
+          padding-bottom: 20px;
+          border-bottom: 1px solid #e9e9e9;
+          .title {
+            font-size: 16px;
+            .icon__gan {
+              margin-right: 10px;
+            }
+          }
+        }
+      }
+    }
+    .form__button {
+      background: #f8f8f8;
+      border: 1px solid #dddddd;
+      width: 100px;
+      height: 40px;
+      display: inline-block;
+      position: absolute;
+      bottom: 30px;
+      .el-button {
+        width: 100px;
+        height: 40px;
+      }
+    }
+    .no {
+      left: 60px;
+    }
+    .yes {
+      right: 60px;
+    }
+    .title_type {
+      padding-top: 20px;
+      height: 170px;
+      width: 308px;
+      font-size: 14px;
+      color: #333333;
+      letter-spacing: 1.07px;
+      text-align: center;
+      .hint {
+        font-size: 14px;
+        color:rgba(238, 179, 83);
+        letter-spacing: 1.07px;
+        text-align: center;
+        line-height: 20px;
+        font-weight: bold;
+      }
+    }
+    .dialog-box__top {
+      line-height: 18px;
+      height: 170px;
+      background: #fff;
+    }
+  }
+}
+</style>
+<template>
+  <div class="drop_loan">
+    <div class="dialog-mask"></div>
+    <div class="dialog-box">
+      <div class="dialog-box__top">
+        <div class="title_type">是否授予「<span class="hint">{{warranty.username}}</span>」「<span class="hint">{{warranty.modelName}}</span>」的权限？”</div>
+        <span
+          class="el-icon-close button button__close"
+          @click="close"
+        ></span>
+      </div>
+      <div class="form__button no">
+        <el-button
+          type="primary"
+          @click="close"
+        >否</el-button>
+      </div>
+      <div class="form__button yes">
+        <el-button
+          type="primary"
+          @click="save"
+        >是</el-button>
+      </div>
+    </div>
+  </div>
+</template>
+<script type="text/ecmascript-6">
+import "@common/css/dialog";
+import { configApi } from "../../../js/server.js"; // 接口
+export default {
+  props: ["warranty", "refer"],
+  data() {
+    return {};
+  },
+  methods: {
+    close() {
+      this.$emit("clsoe_windowused");
+      // this.refer();
+    },
+    save() {
+      console.log(this.warranty);
+      // this.fn();
+      // this.refer();
+      // this.$emit("clsoe_windowused");
+      let url = configApi.modelUser_save;
+      let sapersonnelve = {
+        userId: this.warranty.userId,
+        modelIds: this.warranty.modelIds
+      };
+      console.log(sapersonnelve);
+      // 新增保存接口;
+      this.$MyFetch
+        .post(url, sapersonnelve)
+        .then((data = {}) => {
+          this.confirmFn("保存成功", "success");
+          this.$emit("clsoe_windowused2");
+          this.refer(1, this.warranty.userId);
+        })
+        .catch(err => {
+          this.$error(err.message);
+        });
+    }
+  }
+};
+</script>
