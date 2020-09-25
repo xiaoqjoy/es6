@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+		<link rel="stylesheet" href="/files/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/files/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/files/css/reset.css">
+		<link rel="stylesheet" href="/files/css/animate.css">
+		<link rel="stylesheet" href="/files/css/share.min.css">
+		<link rel="stylesheet" href="/files/css/styles.css">
+		<title th:text="${title}" ></title>
+		<meta name='keywords' th:attr="content=${keywords}"/>
+		<meta name='description' th:attr="content=${keywords}"/>
+		<link rel="icon" type="image/x-icon" href="./files/images/dashu.ico" />
+	</head>
+
+	<body class="block-gray">
+		<div class="hover"></div>
+		<header>
+			<!-- header -->
+			<iframe src="/header.html?type=4" id="headerIframe" frameborder="0" scrolling="no" width="100%" height="102px"></iframe>
+			<!-- end header -->
+		</header>
+
+		<div class="report-detail main">
+
+			<div class="containers">
+
+				<div class="crumbs-wrapper">
+					<!-- <div class="crumbs">
+						<span>新闻中心</span> <i>></i> <span class="curmbs-active"></span>
+					</div> -->
+					<div class="infor-control clearfix">
+						<div class="title"></div>
+					</div>
+				</div>
+
+				<div class="detail-box">
+					<div class="content">
+						<h1 class="title" style="font-size:24px;" th:text="${title}"></h1>
+						<div class="time">
+						<span th:if="${#strings.isEmpty(author)}"><span th:utext="${publishDate}"></span></span>
+						<span th:if="${author} != null"><span th:utext="${author}"></span><span> &nbsp;&nbsp;|&nbsp;&nbsp; </span><span th:utext="${publishDate}"></span></span>
+
+						</div>
+
+						<hr>
+
+						<div class="text" th:utext="${baseContent}">
+
+						</div>
+					</div>
+
+					<div class="share">
+						<div id="share-2"></div>
+					</div>
+
+					<div class="clearfix"></div>
+				</div>
+
+			</div>
+
+		</div>
+		<footer>
+			<iframe src="/footer.html" id="footerIframe" frameborder="0" scrolling="no" width="100%" height="308px"></iframe>
+		</footer>
+
+		<div class="gototop js-top">
+			<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+		</div>
+
+		<script src="/files/js/jquery-1.9.1.min.js"></script>
+		<script src="/files/js/bootstrap.min.js"></script>
+		<script src="/files/js/jquery.waypoints.min.js"></script>
+		<script src="/files/js/jquery.share.min.js"></script>
+		<script src="/files/js/common.js"></script>
+		<script src="/dsWebsite/files/layer/layer.js"></script>
+		<script>
+
+			$(function() {
+
+				$('#share-2').share({
+					sites: ['qzone', 'weibo', 'wechat']
+				});
+
+				let par = window.location.pathname.split('/')[1];     //获取url参数  report/newsletter
+
+				if(par == 'report'){
+					$(".infor-control .title").text("媒体报道");
+				}else if(par == 'newsletter'){
+					$(".infor-control .title").text("公司动态");
+				}
+				// var id = GetQueryString('id');
+				// var flag = GetQueryString('flag');
+				// if(flag == 'report'){
+				// 	//$('.crumbs .curmbs-active').text('媒体报道');
+				// 	$(".infor-control .title").text("媒体报道");
+				// }else{
+				// 	//$('.crumbs .curmbs-active').text('公司动态');
+				// 	$(".infor-control .title").text("公司动态");
+				// }
+
+			});
+
+			// function GetQueryString(name) {
+			// 	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+			// 	var r = window.location.search.substr(1).match(reg);
+			// 	if(r != null) return(r[2]);
+			// 	return null;
+			// }
+		</script>
+	</body>
+
+</html>

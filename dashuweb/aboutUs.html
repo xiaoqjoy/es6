@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="files/css/bootstrap.min.css">
+    <link rel="stylesheet" href="files/css/font-awesome.min.css">
+    <link rel="stylesheet" href="files/css/reset.css">
+    <link rel="stylesheet" href="files/css/animate.css">
+    <link rel="stylesheet" href="files/css/styles.css">
+    <link rel="stylesheet" href="files/css/idangerous.swiper.css">
+    <title>【公司介绍】小微金融贷款_普惠金融贷款 - 大数金融_中国领先的信贷科技解决方案提供商</title>
+    <meta name="keywords" content="小微金融贷款，普惠金融贷款，小微贷款科技"/>
+    <meta name="description" content="大数金融，创立于2014年7月，全称深圳前海大数金融服务有限公司，中国领先的信贷科技解决方案提供商，践行普惠金融，帮助超过15万草根及小微业主获得正规金融机构价格合理的贷款。"/>
+    <link rel="icon" type="image/x-icon" href="./files/images/dashu.ico" />
+</head>
+<body>
+
+<header>
+    <!-- header -->
+    <iframe wmode="opaque" src="header.html?type=1" id="headerIframe" frameborder="0" scrolling="no" width="100%"  height="102px"></iframe>
+    <!-- end header -->
+</header>
+
+<div class="about-us main">
+
+	<!-- banner -->
+	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+		<!-- Indicators -->
+		<ol class="carousel-indicators"></ol>
+		<!-- Wrapper for slides -->
+		<div class="carousel-inner" role="listbox" style="height: 500px;"></div>
+		<!-- Controls -->
+		<!--<a class="left carousel-control my-carousel" href="#carousel-example-generic" role="button" data-slide="prev">
+			<span class="icon-prev" aria-hidden="true"></span>
+		</a>
+		<a class="right carousel-control my-carousel" href="#carousel-example-generic" role="button" data-slide="next">
+			<span class="icon-next" aria-hidden="true"></span>
+		</a>-->
+	</div>
+	<!-- end banner -->
+
+    <!-- 公司概况 -->
+    <div class="introduce relative" id="introduce">
+        <img id="introduceImg" src="" class="block-img animate-box item-animate" alt="大数金融，创立于2014年7月，全称深圳前海大数金融服务有限公司，国内领先的信贷科技（Credit-tech）解决方案提供商，大金额无担保小微贷款技术的引领者，国家高新技术企业。大数金融通过向银行输出数字小微信贷技术，赋予银行业迭代升级的信贷能力，践行普惠金融。公司成立以来，已在北、上、深、广等近30个城市开设分公司，与渤海银行、北京银行、廊坊银行、西安银行等近50家银行机构建立合作关系，帮助超过15万名小微业主、个体工商户获得正规金融机构发放的大金额且价格合理的纯信用贷款。"  data-animate-effect="fadeInLeft" />
+    </div>
+    <!-- end 公司概况 -->
+
+    <!-- 投资机构 -->
+    <div class="brother relative" id="brother">
+        <img id="brotherImg" src="" class="block-img animate-box item-animate" alt="投资机构"  data-animate-effect="fadeInLeft" />
+    </div>
+    <!-- end 投资机构 -->
+
+    <!-- 发展历程 -->
+    <div class="history relative" id="history">
+        <img id="historyImg" src="" class="block-img animate-box item-animate" alt="发展历程" data-animate-effect="fadeInLeft">
+    </div>
+    <!-- end 发展历程 -->
+
+    <!-- 奖项展示区 -->
+    <div class="award relative" id="award">
+        <h5 class="title">大数金融凭借在数字风控技术、小微信贷领域所获成绩，<br>斩获多项行业大奖和国际权威认证</h5>
+        <div class="swiper-container award-container">
+            <a class="arrow-left" href="#"></a>
+            <a class="arrow-right" href="#"></a>
+            <div class="swiper-wrapper">
+                <!-- <div class="swiper-slide"></div> -->
+            </div>
+            <div class="pagination"></div>
+        </div>
+    </div>
+    <!-- end 奖项展示区 -->
+
+</div>
+<footer>
+    <iframe src="footer.html" id="footerIframe" frameborder="0" scrolling="no" width="100%" height="308px" ></iframe>
+</footer>
+
+
+<div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+</div>
+
+<script src="files/js/jquery-1.9.1.min.js"></script>
+<script src="files/js/idangerous.swiper.min.js"></script>
+<script src="files/js/bootstrap.min.js"></script>
+<script src="files/js/jquery.waypoints.min.js"></script>
+<script src="dsWebsite/files/layer/layer.js"></script>
+<script src="files/js/common.js"></script>
+<script>
+
+    $(function () {
+        getBanner("about.banner");	//获取banner轮播图片
+        getDataIntroduce();	//获取公司概况
+        getDataBrother();	//获取投资机构
+        getDataHistory();	//获取发展历程
+        getDataAward();	//获取奖项展示区
+    });
+
+    function getDataIntroduce() {	//获取公司概况
+        ajaxRequest({
+            type: "about.introduce",
+            page: "0",
+            size: "1"
+        },function(jsonResult){
+            if(jsonResult.data.length > 0) {
+                $("#introduceImg").attr("src", ipConfig + jsonResult.data[0].imageSrc);
+            }
+        })
+    }
+
+    function getDataBrother() {	//获取投资机构
+        ajaxRequest({
+            type: "about.brother",
+            page: "0",
+            size: "1"
+        },function(jsonResult){
+            if(jsonResult.data.length > 0) {
+                $("#brotherImg").attr("src", ipConfig + jsonResult.data[0].imageSrc);
+            }
+        })
+    }
+
+    function getDataHistory() {	//获取发展历程
+        ajaxRequest({
+            type: "about.history",
+            page: "0",
+            size: "1"
+        },function(jsonResult){
+            if(jsonResult.data.length > 0) {
+                $("#historyImg").attr("src", ipConfig + jsonResult.data[0].imageSrc);
+            }
+        })
+    }
+
+    function getDataAward() {	//获取奖项展示区
+        ajaxRequest({
+            type: "about.awards",
+            page: "0",
+            size: "100"
+        },function(jsonResult){
+            if(jsonResult.data.length > 0) {
+                console.log(jsonResult.data);
+                let val = jsonResult.data;
+                var html = "";
+                for (var i = 0; i<val.length; i++) {
+                    html += '<div class="swiper-slide"><div class="swiper-box"><div class="content-wrap"><img src="'+val[i].imageSrc+'" alt=""><div class="content-text"><p>'+ val[i].baseContent +'</p><p>'+val[i].textDesc+'</p></div></div></div></div>'
+                }
+                $(".award-container .swiper-wrapper").html(html);
+
+                // swiper初始化
+                var mySwiper = new Swiper('.swiper-container', {
+                    loop: true,
+                    pagination : '.pagination',
+                    autoplay: 3000,
+		            autoplayStopOnLast: true
+                });
+
+                $('.arrow-left').on('click', function(e){
+                    e.preventDefault()
+                    mySwiper.swipePrev()
+                })
+                $('.arrow-right').on('click', function(e){
+                    e.preventDefault()
+                    mySwiper.swipeNext()
+                })
+            }
+        })
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../files/css/bootstrap.css">
+    <link rel="stylesheet" href="../../files/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../files/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../../files/css/app.css">
+    <link rel="stylesheet" href="../../files/css/paltstyle.css">
+    <title>Title</title>
+</head>
+<body style="background: none;">
+<div class="widget-box reportBox">
+    <div class="widget-title"> <span class="icon"><i class="glyphicon glyphicon-th"></i></span>
+        <h5>产品服务-常见问题</h5>
+    </div>
+    <div class="widget-content ">
+        <div class="operation text-right">
+            <button id="addBtn" class="btn btn-info pull-right">新增</button>
+            <div class="clearfix"></div>
+        </div>
+        <table class="table data-table table-bordered">
+            <thead>
+            <tr>
+                <th>ID号</th>
+                <th>问题</th>
+                <th style="display: none;">答案</th>
+                <th>排序号</th>
+                <th>排序操作</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody id="list">
+            
+            
+            </tbody>
+        </table>
+		</div>
+		
+		<div class="layui-layer-shade" id="layui-layer-shade11" times="1"
+				style="display: none; z-index: 14; background-color: #000; opacity: 0.3; filter: alpha(opacity = 30);"></div>
+		<div class="layui-layer layui-anim layui-layer-page "
+			id="layui-layer11" type="page"
+			style="display: none; z-index: 15; width: 900px; height: 300px; left: 50%; top: 50%; margin-left: -470px; margin-top: -250px;">
+			<div class="layui-layer-content" style="height: 500px;">
+				<div class='form-horizontal edit-block'>
+					<input type='hidden' id='editId' name='editId' />
+					<div class='double-input'>
+						<div class='l input-groups'>
+							<label>问题描述：</label> <input id='advantage-title' type='text'
+								class='title' placeholder='请输入不超过27个字的问题描述' maxlength="27">
+						</div>
+					</div>
+					<div class='input-groups  sel-input'>
+						<label>答案内容：</label>
+						<div>
+						 <textarea rows="1" id="txtContent" cols="2" maxlength="170"></textarea>
+						</div>
+					</div>
+					<div class='input-groups btns'>
+						  <button id="close-btn" onclick="closeDiv()" class="btn btn-default pull-right">关闭</button>
+						<button id='confirm-btn' class='btn btn-info pull-right'>确认</button>
+					</div>
+				</div>
+			</div>
+			<span class="layui-layer-setwin"></span>
+		</div>
+</div>
+
+
+<script src="../../files/js/jquery.min.js"></script>
+<script src="../../files/js/bootstrap.js"></script>
+<script src="../../files/layer/layer.js"></script>
+<script src="../../files/js/comment.js"></script>
+<script>
+
+    
+$(function() {
+	getData();
+}); 
+function closeDiv(){
+  	$('#layui-layer-shade11').hide();
+  	$('#layui-layer11').hide();
+}
+
+$(function(){
+$('#layui-layer-shade11').click(function () {
+    $('#layui-layer-shade11').hide();
+    $('#layui-layer11').hide();
+});
+
+});
+
+$(function(){
+    $('#layui-layer-shade11').click(function () {
+        $('#layui-layer-shade11').hide();
+        $('#layui-layer11').hide();
+    });
+});
+
+$(function(){
+    $('#addBtn').click(function () {
+    	$('#editId').val('');
+        $('#advantage-title').val('');
+       // document.getElementById("content-multiple").contentWindow.document.getElementById('editor').innerHTML = '请输入…';
+       $("#txtContent").val("");
+        $('#layui-layer-shade11').show();
+        $('#layui-layer11').show();
+    });
+    $('#layui-layer-shade11').click(function () {
+        $('#layui-layer-shade11').hide();
+        $('#layui-layer11').hide();
+    });
+});
+
+//提交按钮
+$(document).on('click','#confirm-btn',function() {
+					/* content = document
+							.getElementById("content-multiple").contentWindow.document
+							.getElementById('editor').innerHTML; */
+					var id = $('#editId').val();
+					var title = $('#advantage-title').val();
+					var pos = {'status': '2','baseContent': $("#txtContent").val(), 'textDesc':title};
+					if(id==''||id.length==0){
+						addData(pos);
+						$('#layui-layer-shade11').hide();
+			            $('#layui-layer11').hide();
+					}else{
+						upData(pos, id);
+						$('#layui-layer-shade11').hide();
+			            $('#layui-layer11').hide();
+					}
+				});
+				
+				
+
+function editEvent(othis){
+	var id = $(othis).parents('tr').find('.id-num').text();
+    var title = $(othis).parents('tr').find('.title-num').text();
+    var detail = $(othis).parents('tr').find('.detail-num').text();
+    $('#editId').val(id);
+    $('#advantage-title').val(title);
+    //document.getElementById("content-multiple").contentWindow.document.getElementById("editor").innerHTML = detail;
+    $("#txtContent").val(detail);
+    $('#layui-layer-shade11').show();
+    $('#layui-layer11').show();
+}
+
+
+function getData(){
+	$.ajax({
+		type : "POST",
+		async: false,
+		url : "/api/DsWebsit/getDatas.do",
+		data : {
+			type : "service.problem",
+			page : "0",
+			size : "10"
+		},
+		dataType : "json",
+		success : function(jsonResult) {
+			if (jsonResult.code == "0000"&& jsonResult.data.length > 0) {
+				$("#list").empty();
+        		$.each(jsonResult.data, function(i,val){
+        			if(i==0){
+        				$("#list").append("<tr><td><span class='id-num'>"+val.baseNo+"</span></td>"+
+								"<td><span class='title-num'>"+val.textDesc+"</span></td>"+
+								"<td style='display: none;'><span class='detail-num'>"+val.baseContent+"</span></td>"+
+								"<td><span class='sort-num'>"+val.sortIndex+"</span></td>"+
+								"<td><a class='sort-up sort  disable 'href='javascript:void(0)' onclick='sortUp(this)'><i class='glyphicon glyphicon-arrow-up'></i></a> <a class='sort-down sort ' href='javascript:void(0)' onclick='sortDown(this)'><i class='glyphicon glyphicon-arrow-down'></i></a></td><td><a class='edit-btn-mul' href='javascript:void(0)' onclick='editEvent(this)'>编辑</a><a class='delete-btn' href='javascript:void(0)' onclick='deleteAdvantage(this)'>删除</a></td></tr>");
+        			}else if(i==jsonResult.data.length-1){
+        				$("#list").append("<tr><td><span class='id-num'>"+val.baseNo+"</span></td>"+
+								"<td><span class='title-num'>"+val.textDesc+"</span></td>"+
+								"<td style='display: none;'><span class='detail-num'>"+val.baseContent+"</span></td>"+
+								"<td><span class='sort-num'>"+val.sortIndex+"</span></td>"+
+								"<td><a class='sort-up sort 'href='javascript:void(0)' onclick='sortUp(this)'><i class='glyphicon glyphicon-arrow-up'></i></a> <a class='sort-down sort disable' href='javascript:void(0)' onclick='sortDown(this)'><i class='glyphicon glyphicon-arrow-down'></i></a></td><td><a class='edit-btn-mul' href='javascript:void(0)' onclick='editEvent(this)'>编辑</a><a class='delete-btn' href='javascript:void(0)' onclick='deleteAdvantage(this)'>删除</a></td></tr>");
+        				if(i==9){
+	        				$("#addBtn").attr("disabled","disabled");
+		         			$("#addBtn").attr("style","background:#ccc;border:none");
+	        			}else{
+	        				$("#addBtn").attr("disabled",false);
+		         			$("#addBtn").attr("style","");
+	        			}
+        			}else{
+        				$("#list").append("<tr><td><span class='id-num'>"+val.baseNo+"</span></td>"+
+								"<td><span class='title-num'>"+val.textDesc+"</span></td>"+
+								"<td style='display: none;'><span class='detail-num'>"+val.baseContent+"</span></td>"+
+								"<td><span class='sort-num'>"+val.sortIndex+"</span></td>"+
+								"<td><a class='sort-up sort 'href='javascript:void(0)' onclick='sortUp(this)'><i class='glyphicon glyphicon-arrow-up'></i></a> <a class='sort-down sort ' href='javascript:void(0)' onclick='sortDown(this)'><i class='glyphicon glyphicon-arrow-down'></i></a></td><td><a class='edit-btn-mul' href='javascript:void(0)' onclick='editEvent(this)'>编辑</a><a class='delete-btn' href='javascript:void(0)' onclick='deleteAdvantage(this)'>删除</a></td></tr>");
+        			}
+        		});
+			} else {
+				$("#list").html("");
+			}
+		},
+		error : function(XMLHttpRequest, textStatus, errorThrown) {
+			layer.msg("系统异常，请稍后再试！");
+		}
+	});
+}
+
+function addData(pos) {
+	$.ajax({
+		type : "POST",
+		url : "/api/DsWebsit/addData.do",
+		dataType : "json",
+		data : {
+			"pos" : JSON.stringify(pos),
+			type : "service.problem",
+		},
+		success : function(jsonResult) {
+			layer.msg(jsonResult.message);
+			getData();
+		},
+		error : function(XMLHttpRequest, textStatus, errorThrown) {
+			layer.msg("系统异常，请稍后再试！");
+		}
+	});
+}
+
+function upData(pos, serailNo) {
+	$.ajax({
+		type : "POST",
+		url : "/api/DsWebsit/upData.do",
+		dataType : "json",
+		data : {
+			"pos" : JSON.stringify(pos),
+			type : "service.problem",
+			serailNo : serailNo
+		},
+		success : function(jsonResult) {
+			layer.msg(jsonResult.message);
+			getData();
+		},
+		error : function(XMLHttpRequest, textStatus, errorThrown) {
+			layer.msg("系统异常，请稍后再试！");
+		}
+	});
+}
+
+function delData(id){
+	$.ajax({  
+        type: "POST",  
+        url: "/api/DsWebsit/delData.do",  
+        data:{
+        	type : "service.problem",
+        	serailNo : id
+        },
+        dataType: "json",
+        success: function (jsonResult) {
+        	if(jsonResult.code=="0000"){
+        		layer.msg(jsonResult.message);
+        		getData();
+        	} else {
+        		layer.msg('删除失败');
+        	}
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+			layer.msg("系统异常，请稍后再试！");
+        }
+    });   
+}
+
+//删除
+function deleteAdvantage(othis) {
+    var id = $(othis).parents('tr').find('.id-num').text();
+    layer.confirm('确定删除id为"'+ id +'"的记录吗？',{
+        btn:['Y','N']
+    },function(){
+    	delData(id);
+    });
+}
+
+function sortDown(othis){
+	if($(othis).hasClass('disable')){
+        return ;
+    }else{
+    	var onNum =  $(othis).parents('tr').find('.id-num').text();
+        setSorting(onNum,"down");
+    }
+}
+
+function sortUp(othis){
+	if($(othis).hasClass('disable')){
+        return ;
+    }else{
+        var onNum =   $(othis).parents('tr').find('.id-num').text();
+        setSorting(onNum,"up");
+    }
+}
+
+function setSorting(sSerialNo,flag){
+	$.ajax({
+		type : "POST",
+		url : "/api/DsWebsit/sortData.do",
+		dataType : "json",
+		data : {
+			type : 'service.problem',
+			serailNo : sSerialNo,
+			flag : flag
+		},
+		success : function(jsonResult) {
+			layer.msg(jsonResult.message);
+			getData();
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) {
+			layer.msg("系统异常，请稍后再试！");
+        }
+	});
+}
+
+
+
+
+
+    
+    
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+		<link rel="stylesheet" href="files/css/bootstrap.min.css">
+		<link rel="stylesheet" href="files/css/font-awesome.min.css">
+		<link rel="stylesheet" href="files/css/reset.css">
+		<link rel="stylesheet" href="files/css/animate.css">
+		<link rel="stylesheet" href="files/css/styles.css">
+		<title>【产品服务】融资担保_第三代小微贷款- 大数金融_中国领先的信贷科技解决方案提供商</title>
+		<meta name="keywords" content="融资担保，第三代小微贷款，融资担保贷款"/>
+		<meta name="description" content="大数金融第三代小微贷款技术，目前有大数时贷、评估神、e担保等服务，专注融资担保业务，为小微企业融资难的问题提供解决方案。"/>
+		<link rel="icon" type="image/x-icon" href="./files/images/dashu.ico" />
+	</head>
+
+	<body>
+		<div class="hover"></div>
+		<header>
+			<!-- header -->
+			<iframe src="header.html?type=2" id="headerIframe" frameborder="0" scrolling="no" width="100%" height="102px"></iframe>
+			<!-- end header -->
+		</header>
+
+		<div class="product main">
+
+			<!-- banner -->
+			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+				<!-- Indicators -->
+				<ol class="carousel-indicators"></ol>
+				<!-- Wrapper for slides -->
+				<div class="carousel-inner" role="listbox" style="height: 500px;"></div>
+				<!-- Controls -->
+				<!--<a class="left carousel-control my-carousel" href="#carousel-example-generic" role="button" data-slide="prev">
+					<span class="icon-prev" aria-hidden="true"></span>
+				</a>
+				<a class="right carousel-control my-carousel" href="#carousel-example-generic" role="button" data-slide="next">
+					<span class="icon-next" aria-hidden="true"></span>
+				</a>-->
+			</div>
+			<!-- / banner -->
+
+			<!-- 大数时贷 -->
+			<div id="dashuLoan">
+				<img class="block-img" th:src="${introduceimageSrc}" alt="额度5-70万元，无抵押、无担保个人贷款产品，主要针对微型企业主、个体工商户、白领等"/>
+			</div>
+			<!-- / 大数时贷 -->
+
+			<!-- 如何代理我们的产品 -->
+			<div class="agent relative" id="agency" style="height: 900px;">
+				<img id="agentImg" th:src="${productimageSrc}" class="block-img animate-box item-animate" alt="评估神" data-animate-effect="fadeInLeft">
+			</div>
+			<!-- / 如何代理我们的产品 -->
+
+      		<!-- E担保-->
+			<div class="block block-gray" id="eDanBao" style="height: 900px;" th:if="${edanbaoimageSrc} != '--'">
+				<img id="EdanbaoImg" th:src="${edanbaoimageSrc}" alt="E担保"  class="block-img animate-box item-animate" data-animate-effect="fadeInLeft">
+			</div>
+
+			<!-- E担保-->
+			<!-- 常见问题 -->
+			<div class="block block-gray" id="question" style="min-height: 800px;">
+				<div class="qa containers text-center">
+					<h3 class="block-title animate-box" data-animate-effect="fadeInRight">常见问题</h3>
+					<div class="problem-list" th:each="item,items : ${problem}">
+						<div class="col-xs-6 list1" th:if="${items.index%2==0}">
+							<div class="question-panel">
+								<div class="q">
+									<span th:text="${item.textDesc}"></span>
+									<span class="btn-icon down" onclick="btnClick(this)"></span>
+								</div>
+								<div class="a" th:text="${item.baseContent}"></div>
+							</div>
+						</div>
+						<div class="col-xs-6 list2" th:if="${items.index%2!=0}">
+							<div class="question-panel">
+									<div class="q">
+										<span th:text="${item.textDesc}"></span>
+										<span class="btn-icon down" onclick="btnClick(this)"></span>
+									</div>
+									<div class="a" th:text="${item.baseContent}"></div>
+								</div>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<!-- / 常见问题 -->
+
+			<!-- <div id="loan" class="block loan">
+				<img src="files/images/product/bg.jpg" class="bg">
+				<div class="containers  text-center">
+					<h3 class="block-title">我要贷款</h3>
+					<div class="loan-box">
+						<ul>
+							<li>
+								<img src="files/images/product/icon-name.png" class="icons">
+								<input type="text" class="user-name" placeholder="您的姓名">
+							</li>
+							<li>
+								<span id="man" class="sex">男</span> <span id="woman" class="sex">女</span>
+								<div class="clearfix"></div>
+							</li>
+							<li>
+								<img src="files/images/product/icon-phone.png" class="icons">
+								<input type="text" class="user-phone" placeholder="联系电话">
+							</li>
+							<li>
+								<img src="files/images/product/icon-map.png" class="icons">
+								<input type="text" class="user-city" readonly placeholder="所在城市">
+								<img src="files/images/product/icon-arr.png" class="img-arrow" alt="" />
+								<div class="hidden-city-block">
+									<div class="letterList clearfix">
+										<p class="active">ABCDEFG</p>
+										<p>HJKLMN</p>
+										<p>OPQRST</p>
+										<p>WXYZ</p>
+									</div>
+									<div class="cityList clearfix">
+
+									</div>
+									<div class="cityList clearfix">
+
+									</div>
+									<div class="cityList clearfix">
+
+									</div>
+									<div class="cityList clearfix">
+
+									</div>
+								</div>
+							</li>
+
+							<li>
+								<button class="loan-btn">立即申请</button>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="notice">
+					请输入姓名
+				</div>
+
+				<div class="clearfix"></div>
+			</div>
+			-->
+
+		</div>
+
+		<footer>
+			<iframe src="footer.html" id="footerIframe" frameborder="0" scrolling="no" width="100%" height="308px"></iframe>
+		</footer>
+
+		<div class="notice-success">
+			<img src="files/images/product/success-btn.png">
+			<h4>您的信息已提交成功</h4>
+			<p>客服会在2小时内与您联系，请您保持电话畅通哦~非工作时间将会在 <br> 第二天与您联系。</p>
+			<span>客服工作时间（周一至周五9:00-18:00）</span>
+			<button class="close-btn">关闭</button>
+		</div>
+
+		<div class="gototop js-top">
+			<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+		</div>
+
+		<script src="files/js/jquery-1.9.1.min.js"></script>
+		<script src="files/js/placeholders.jquery.min.js"></script>
+		<script src="files/js/bootstrap.min.js"></script>
+		<script src="files/js/jquery.waypoints.min.js"></script>
+		<script src="dsWebsite/files/layer/layer.js"></script>
+		<script src="files/js/common.js"></script>
+		<script>
+
+			//console.log($('#loan').offset().top);
+
+			$(function() {
+				/* 获取页面数据 */
+				getBanner("service.banner"); //获取产品服务banner
+				getCity();	//获取城市
+
+				/* 处理申请贷款 */
+				$('.loan .sex').click(function() { //选择性别事件
+					$(this).addClass('active').siblings().removeClass('active');
+				});
+
+				$('.loan-btn').click(function() { //申请贷款按钮
+					if($('.user-name').val() == '') {
+						$('.user-name').focus();
+						msg('请输入您的姓名');
+					} else if($('.user-phone').val() == '' || !isPhone($('.user-phone').val())) {
+						$('.user-phone').focus();
+						msg('请输入正确的手机号');
+					} else if($(".cityList .active").text() == '') {
+						$(".hidden-city-block").toggle();
+						$(".img-arrow").toggleClass("active");
+						msg('请选择您所在的城市');
+					} else if($('.sex.active').attr('id') == undefined) {
+						msg('请选择您的性别');
+					} else {
+						$.ajax({
+							url: ipConfig + "/api/newsManagerSystem/apploLoan.action",
+							type: 'POST',
+							data: {
+								"name": $('.user-name').val(),
+								"sex": $('.sex.active').attr('id'),
+								"phone": $('.user-phone').val(),
+								"city": $(".cityList .active").text()
+							},
+							success: function(data) {
+								console.log("申请贷款：",data);
+								if(data.code == "00") {
+									$('.hover').show();
+									$('.notice-success').fadeIn();
+								}else if(data.code == "01"){
+									layer.msg(data.message);
+								}
+							},
+							error: function(XMLHttpRequest, textStatus, errorThrown) {
+								layer.msg("系统异常，请稍后再试！");
+							}
+						});
+					}
+				});
+
+				$('.close-btn').click(function() { //关闭提示框
+					$('.hover').hide();
+					$('.notice-success').hide();
+					/* 清空表单内容 */
+					$('.user-name').val("");
+					$('.user-phone').val("");
+					$('.sex').removeClass("active");
+					$(".cityList p.active").removeClass("active");
+					$(".user-city").attr("placeholder","所在城市");
+				});
+
+				$(".cityList").eq(0).show();
+
+				$(".user-city , .img-arrow").click(function() {
+					$(".hidden-city-block").toggle();
+					$(".img-arrow").toggleClass("active");
+				})
+
+				$(".letterList p").on("click", function() { //城市字母点击
+					$(this).siblings().removeClass("active"); //清楚其他兄弟节点的样式
+					$(this).addClass("active"); //给当前元素加样式
+					$(".cityList").hide();
+					$(".cityList").eq($(this).index()).show(); //对应的城市模块显示
+				})
+
+				$(document).on("click", ".cityList p" , function() { //城市名点击
+					$(".cityList p").removeClass("active");
+					$(this).addClass("active"); //给当前元素加样式
+					$(".user-city").attr('placeholder', $(this).text());
+					$(".hidden-city-block").toggle();
+					$(".img-arrow").toggleClass("active");
+				})
+			});
+
+			function getCity(){
+				getCityList(function(jsonResult) {
+					console.log("***",jsonResult);
+					for(var i in jsonResult){
+						for(var j=0;j<jsonResult[i].length;j++){
+							$(".cityList").eq(i-1).append($("<p>" + jsonResult[i][j].cityName + "</p>"))
+						}
+					}
+				})
+			}
+
+			function msg(str) {
+				$('.notice').text(str);
+				$('.notice').show();
+				setTimeout(function() {
+					$('.notice').fadeOut(200);
+				}, '1000');
+			}
+
+			function btnClick(othis) {
+				if($(othis).hasClass('down')) {
+					$(othis).parents('.question-panel').find('.a').slideDown();
+					$(othis).removeClass('down').addClass('up');
+				} else {
+					$(othis).parents('.question-panel').find('.a').slideUp();
+					$(othis).removeClass('up').addClass('down');
+				}
+			}
+		</script>
+	</body>
+
+</html>

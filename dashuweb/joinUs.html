@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+		<link rel="stylesheet" href="files/css/bootstrap.min.css">
+		<link rel="stylesheet" href="files/css/font-awesome.min.css">
+		<link rel="stylesheet" href="files/css/reset.css">
+		<link rel="stylesheet" href="files/css/animate.css">
+		<link rel="stylesheet" href="files/css/styles.css">
+		<title>【加入我们】普惠金融和小额信贷- 大数金融_中国领先的信贷科技解决方案提供商</title>
+		<meta name="keywords" content="普惠金融和小额信贷, 小微企业贷款怎么办"/>
+		<meta name="description" content="大数金融目前在深圳、广州、北京等21个城市设有分公司，员工人数超1800人，公司有完善的福利薪酬制度、培训和晋升体系，欢迎加入我们。"/>
+		<link rel="icon" type="image/x-icon" href="./files/images/dashu.ico" />
+	</head>
+
+	<body>
+		<div class="hover"></div>
+		<header>
+			<!-- header -->
+			<iframe src="header.html?type=5" id="headerIframe" frameborder="0" scrolling="no" width="100%" height="102px"></iframe>
+			<!-- end header -->
+		</header>
+
+		<div class="join-us main">
+
+			<!-- banner -->
+			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+				<!-- Indicators -->
+				<ol class="carousel-indicators"></ol>
+				<!-- Wrapper for slides -->
+				<div class="carousel-inner" role="listbox" style="height: 500px;"></div>
+				<!-- Controls -->
+				<!--<a class="left carousel-control my-carousel" href="#carousel-example-generic" role="button" data-slide="prev">
+					<span class="icon-prev" aria-hidden="true"></span>
+				</a>
+				<a class="right carousel-control my-carousel" href="#carousel-example-generic" role="button" data-slide="next">
+					<span class="icon-next" aria-hidden="true"></span>
+				</a>-->
+			</div>
+			<!-- end banner -->
+
+			<!-- 职位 -->
+			<div id="jobs" class="block block-gray" style="height: 587px;">
+				<div class="containers job text-center">
+					<h3 class="block-title animate-box" data-animate-effect="fadeInLeft" th:text="${titlebaseContent}">找到您合适的职位</h3>
+					<div class="inner-job">
+						<div class="panels animate-box" data-animate-effect="fadeIn" th:each="item,items : ${position}">
+								<a target="_blank" th:href="${item.imageSrc}">
+									<img th:src="'files/images/joinUs/icon'+${items.count}+'.png'">
+									<h4 th:text="${item.textDesc}"></h4>
+								</a>
+								<span th:each=" baseContent : ${#strings.arraySplit(item.baseContent,'；')}" >
+								<p th:text="${baseContent}"></p>
+								</span>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+			<!-- end 职位 -->
+
+			<!-- 薪酬福利 -->
+			<div id="welfare" class="block" style="height:615px; ">
+				<div class="containers benefits">
+					<h3 class="block-title animate-box text-center" data-animate-effect="fadeInLeft">薪酬福利</h3>
+					<div class="benefits-list">
+						<div class="col-sm-4 col-xs-12"  th:each="item2,itemStat : ${compensation}">
+							<div th:class="'list animate-box benefits-list'+${itemStat.index}" data-animate-effect="fadeIn">
+								<img th:src="${item2.imageSrc}"></img>
+								<span th:utext="${item2.textDesc}"></span>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<ul class="act-img">
+					</ul>
+				</div>
+
+				<div class="clearfix"></div>
+			</div>
+			<!-- / 薪酬福利 -->
+
+			<div class="branch-office-area" id="maps">
+
+				<img class="branch-office-map" width="1920" height="875" src="files/images/joinUs/mapbg.jpg" alt="" />
+
+				<div class="spot-block">
+					<span attr-code="101040100" class="chongqing"></span>
+					<p attr-code="101040100" class="chongqing">重庆</p>
+					<span attr-code="101270101" class="chengdu"></span>
+					<p attr-code="101270101" class="chengdu">成都</p>
+					<span attr-code="101200901"  class="yichang"></span>
+					<p attr-code="101200901"  class="yichang">宜昌</p>
+					<span attr-code="101200101"  class="wuhang"></span>
+					<p attr-code="101200101"  class="wuhang">武汉</p>
+					<span attr-code="101250101"  class="changsha"></span>
+					<p attr-code="101250101"  class="changsha">长沙</p>
+					<span attr-code="101280101"  class="guangzhou"></span>
+					<p attr-code="101280101"  class="guangzhou">广州</p>
+					<span attr-code="101280800"  class="foshan"></span>
+					<p attr-code="101280800"  class="foshan">佛山</p>
+					<span attr-code="101281601"  class="dongguan"></span>
+					<p attr-code="101281601"  class="dongguan">东莞</p>
+					<span attr-code="101281701"  class="zhongshan"></span>
+					<p attr-code="101281701"  class="zhongshan">中山</p>
+					<span attr-code="101280701"  class="zhuhai"></span>
+					<p attr-code="101280701"  class="zhuhai">珠海</p>
+					<span attr-code="101280601"  class="shenzhen"></span>
+					<p attr-code="101280601"  class="shenzhen">深圳</p>
+					<span attr-code="101280301"  class="huizhou"></span>
+					<p attr-code="101280301"  class="huizhou">惠州</p>
+					<span attr-code="101230201"  class="xiamen"></span>
+					<p attr-code="101230201"  class="xiamen">厦门</p>
+					<span attr-code="101240101"  class="nanchang"></span>
+					<p attr-code="101240101"  class="nanchang">南昌</p>
+					<span attr-code="101190101"  class="nanjing"></span>
+					<p attr-code="101190101"  class="nanjing">南京</p>
+					<span attr-code="101190401"  class="suzhou"></span>
+					<p attr-code="101190401"  class="suzhou">苏州</p>
+					<span attr-code="101210101"  class="hangzhou"></span>
+					<p attr-code="101210101"  class="hangzhou">杭州</p>
+					<span attr-code="101020100"  class="shanghai"></span>
+					<p attr-code="101020100"  class="shanghai">上海</p>
+					<span attr-code="101030100"  class="tianjin"></span>
+					<p attr-code="101030100"  class="tianjin">天津</p>
+					<span attr-code="101010100"  class="beijing"></span>
+					<p attr-code="101010100"  class="beijing">北京</p>
+					<span attr-code="101180101"  class="zhengzhou"></span>
+					<p attr-code="101180101"  class="zhengzhou">郑州</p>
+				</div>
+
+				<div class="company-address-block">
+					<div class="company-address">
+					</div>
+				<!--	<div class="company-address" dest="chongqing">
+						<h4>重庆分公司</h4>
+						<p>地址：重庆市江北区江北嘴IFS国金中心T2栋609室</p>
+						<p>电话：023-88950875</p>
+					</div>
+					<div class="company-address" dest="chengdu">
+						<h4>成都分公司</h4>
+						<p>地址：成都市高新区萃华路89号国际科技节能大厦写字楼1栋1单元 第20层 2005、2006 </p>
+						<p>电话：15114063137</p>
+					</div>
+					<div class="company-address" dest="yichang">
+						<h4>宜昌分公司</h4>
+						<p>地址：湖北省宜昌市西陵区西陵一路18号中环广场1003</p>
+						<p>电话：0717-6296565</p>
+					</div>
+					<div class="company-address" dest="wuhang">
+						<h4>武汉分公司</h4>
+						<p>地址：湖北省武汉市武昌区汉街总部国际C座23A</p>
+						<p>电话：027-87274388</p>
+					</div>
+					<div class="company-address" dest="changsha">
+						<h4>长沙分公司</h4>
+						<p>地址：长沙市开福区中山路589号万达广场C区1号楼2103</p>
+						<p>电话：0731-85572509</p>
+					</div>
+					<div class="company-address" dest="foshan">
+						<h4>佛山分公司</h4>
+						<p>地址：广东省佛山市禅城区石湾镇街道季华五路2号卓远国际商务中心一座1406-1407室</p>
+						<p>电话：0757-83309113</p>
+					</div>
+					<div class="company-address" dest="guangzhou">
+						<h4>广州分公司</h4>
+						<p>地址：广东省广州市天河区珠江新城花城大道18号建滔广场1601、1504</p>
+						<p>电话：13609002523</p>
+					</div>
+					<div class="company-address" dest="dongguan">
+						<h4>东莞分公司</h4>
+						<p>地址：广东省东莞市莞城区旗峰路汇峰中心F区701</p>
+						<p>电话：0769-33335668 转 8032</p>
+					</div>
+					<div class="company-address" dest="zhongshan">
+						<h4>中山分公司</h4>
+						<p>地址：广东省中山市东区中山四路88号尚峰金融商务中心2座9层1卡</p>
+						<p>电话：0760-88233298</p>
+					</div>
+					<div class="company-address" dest="zhuhai">
+						<h4>珠海分公司</h4>
+						<p>地址：广东省珠海市香洲区拱北九州大道西2021号中海富华里B座405室</p>
+						<p>电话：0756-3965977</p>
+					</div>
+					<div class="company-address" dest="shenzhen">
+						<h4>深圳总部公司</h4>
+						<p>地址：广东省深圳市南山区铜鼓路大冲国际中心五号楼34层</p>
+						<p>电话：0755-84034000</p>
+						<br>
+						<h4>深圳分公司</h4>
+						<p>地址：广东省深圳市福田区民田路178号华融大厦7楼</p>
+						<p>电话：0755-88318996</p>
+						<br>
+						<h4>深圳龙岗分公司</h4>
+						<p>地址：深圳市龙岗区龙翔大道万科天誉中央广场D座低区1408室</p>
+						<p>电话：0755-89312475</p>
+					</div>
+					<div class="company-address" dest="huizhou">
+						<h4>惠州分公司</h4>
+						<p>地址：广东省惠州市惠城区江北文明一路3号中信城市时代B座803</p>
+						<p>电话：0752－2803316</p>
+					</div>
+					<div class="company-address" dest="xiamen">
+						<h4>厦门分公司</h4>
+						<p>地址：福建省厦门市思明区七星西路178号七星大厦24楼0305单元</p>
+						<p>电话：0592-3357658</p>
+					</div>
+					<div class="company-address" dest="nanchang">
+						<h4>南昌分公司</h4>
+						<p>地址：江西省南昌市红谷滩新区绿地中央广场双子塔A2栋1305-1306</p>
+						<p>电话：0791-83819550</p>
+					</div>
+					<div class="company-address" dest="nanjing">
+						<h4>南京分公司</h4>
+						<p>地址：江苏省南京市建邺区汉中门大街65号11楼大数金融</p>
+						<p>电话：025-86297951</p>
+					</div>
+					<div class="company-address" dest="suzhou">
+						<h4>苏州分公司</h4>
+						<p>地址：江苏省苏州工业园区华池街88号1幢6楼03B、05单元</p>
+						<p>电话：0512-67990272</p>
+					</div>
+					<div class="company-address" dest="nanjing">
+						<h4>南京分公司</h4>
+						<p>地址：江苏省南京市建邺区汉中门大街65号11楼大数金融</p>
+						<p>电话：025-86297951</p>
+					</div>
+					<div class="company-address" dest="hangzhou">
+						<h4>杭州分公司</h4>
+						<p>地址：浙江省杭州市江干区新业路228号来福士广场T2 1508 1509室</p>
+						<p>电话：0571-88355051 / 0571-88357165</p>
+					</div>
+					<div class="company-address" dest="shanghai">
+						<h4>上海分公司</h4>
+						<p>地址：上海市浦东新区浦东南路360号新上海国际大厦5层A座</p>
+						<p>电话：021-60752850</p>
+					</div>
+					<div class="company-address" dest="zhengzhou">
+						<h4>郑州分公司</h4>
+						<p>地址：郑州市郑东新区商务外环路24号中国人保大厦22层2205、2206</p>
+						<p>电话：0371-63382630</p>
+					</div>
+
+					<div class="company-address" dest="tianjin">
+						<h4>天津分公司</h4>
+						<p>地址：天津市红桥区张自忠路5号海河华鼎大厦A座7层</p>
+						<p>电话：022-59005500</p>
+					</div>
+					<div class="company-address" dest="beijing">
+						<h4>北京分公司</h4>
+						<p>地址：北京市朝阳区光华路丙12号数码01大厦502-504室</p>
+						<p>电话：010-65060027转822</p>
+						<br />
+						<h4>北京海淀分公司</h4>
+						<p>地址：北京市中关村南大街2号数码大厦B座1003</p>
+						<p>电话：010-51627215 / 010-51627216</p>
+					</div>-->
+				</div>
+
+			</div>
+
+		</div>
+		<footer>
+			<iframe src="footer.html" id="footerIframe" frameborder="0" scrolling="no" width="100%" height="308px"></iframe>
+		</footer>
+
+		<div class="gototop js-top">
+			<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+		</div>
+
+		<script src="files/js/jquery-1.9.1.min.js"></script>
+		<script src="files/js/bootstrap.min.js"></script>
+		<script src="files/js/jquery.waypoints.min.js"></script>
+		<script src="dsWebsite/files/layer/layer.js"></script>
+		<script src="files/js/common.js"></script>
+		<script>
+
+			function scroll(data) {
+				for(var i = 0; i < data.length; i++) {
+					anim(i, data.length);
+				}
+			}
+
+			function anim(i, len) {
+				$('.act-img li:eq(' + i + ')').animate({
+					left: '-=292.5px'
+				}, 5000, 'linear', function() {
+					anim(i, len)
+				});
+				if($('.act-img li:eq(' + i + ')').position().left == (-292.5)) {
+					$('.act-img li:eq(' + i + ')').css('left', 292.5 * (len - 1));
+				}
+			}
+
+			function setScroll(data) {
+				$('.act-img').css('width', '1170px');
+				for(var i = 0; i < data.length; i++) {
+					var imgContent = data[i].baseContent ? data[i].baseContent : "";
+					var aLink =  data[i].imageLink ? data[i].imageLink : "javascript:void(0);"
+					$('.act-img').append(' <li class="col-sm-3" style="left: ' + i * 292.5 + 'px"> ' +
+						'<a href="' + aLink + '"><img src="'
+						+ ipConfig + data[i].imageSrc +
+						'" alt = "'
+						+ imgContent +
+						'"><p>'
+						+ imgContent +
+						'</p></a></li>');
+				}
+			}
+
+
+
+			$(function() {
+				// 默认显示深圳
+				$('div[dest="shenzhen"]').css("display","block");
+				$('p[class="shenzhen"]').css("font-weight","bold");
+
+				var cityInfo;
+				getCompanyInfo(function(reg){
+					cityInfo = reg;
+					setCompanyInfo(cityInfo,"101280601");
+					console.log(cityInfo);
+				});
+
+				// 点哪个城市显示相应的信息
+				$('.spot-block span,.spot-block P').click(function() {
+					var clickedCity = $(this).attr('attr-code');
+
+					setCompanyInfo(cityInfo,clickedCity);
+/*					$.map($(".company-address"),function(ele){
+						var targetCity = $(ele).attr("dest");
+						if (clickedCity == targetCity){
+							$(ele).css("display","block");
+						}else{
+							$(ele).css("display","none");
+						}
+					})*/
+					$.map($(".spot-block p"),function(ele){
+						var targetCity = $(ele).attr("attr-code");
+						if (clickedCity == targetCity){
+							$(ele).css("font-weight","bold");
+						}else{
+							$(ele).css("font-weight","normal");
+						}
+					})
+				});
+
+				getBanner("join.banner"); //获取banner
+				getDataBenefits(); //获取薪酬福利轮播
+
+			});
+
+			//设置分公司信息
+			function setCompanyInfo(cityInfo,clickedCity) {
+				$('.company-address-block .company-address').empty();
+				for (var i=0;i<cityInfo.length;i++){
+					if(cityInfo[i].parentNode == clickedCity){
+						console.log(clickedCity+","+cityInfo[i].parentNode);
+						$('.company-address-block .company-address').append('<div class="panel1"> ' +
+								'<h4>'+ cityInfo[i].companyName +'</h4> ' +
+								'<p>'+ cityInfo[i].address +'</p> ' +
+								'<p>'+ cityInfo[i].phone +'</p> </div>')
+					}
+				}
+			}
+
+			function getDataBenefits(type) {
+				ajaxRequest({
+		            type : "join.benefits",
+		            page : "0",
+		            size : "50"
+		        },function(jsonResult){
+					setScroll(jsonResult.data);
+					scroll(jsonResult.data);
+				})
+			}
+		</script>
+	</body>
+
+</html>

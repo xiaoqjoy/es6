@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="../files/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../files/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../files/css/reset.css">
+		<link rel="stylesheet" href="../files/css/animate.css">
+		<link rel="stylesheet" href="../files/css/styles.css">
+		<title>【顾问团队】小微贷款技术_ 小微企业融资- 大数金融_中国领先的信贷科技解决方案提供商</title>
+		<meta name="keywords" content="小微贷款技术， 小微企业融资，小微企业融资难怎么办"/>
+		<meta name="description" content="大数金融顾问团队来自红杉资本、PAG领投等国内知名专家，小微贷款风控技术，实现风险与规模的双重效应，为“小微企业融资难“提供解决方案。"/>
+	</head>
+
+	<body>
+		<header style="height: 85px; background: #ffffff;">
+			<!-- header -->
+			<iframe src="../header.html?type=1" id="headerIframe" frameborder="0" scrolling="no" width="100%" height="102px"></iframe>
+			<!-- end header -->
+		</header>
+
+		<div class="manage-team">
+			<div class=" block-gray main">
+				<div class="containers text-center">
+					<h3 class="block-title animate-box" data-animate-effect="fadeInRight">顾问团队</h3>
+
+					<div class="list">
+						<div class="col-xs-12" th:each="item : ${counselor}">
+							<div class="counselor-card">
+								<img th:src="${item.leaderImg}" th:alt="${item.leaderName,item.successive,item.titles}">
+								<div class="counselor-card-content">
+									<h3 class="counselor-card-title" th:text="${item.leaderName}">
+										<span th:text="${item.successive}"></span>
+										<span th:text="${item.titles}"></span>
+									</h3>
+									<div class="counselor-introduction" th:text="${item.introduce}"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+
+		<footer>
+			<iframe src="../footer.html" id="footerIframe" frameborder="0" scrolling="no" width="100%" height="308px"></iframe>
+		</footer>
+
+		<div class="gototop js-top">
+			<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+		</div>
+
+		<script src="../files/js/jquery-1.9.1.min.js"></script>
+		<script src="../files/js/bootstrap.min.js"></script>
+		<script src="../files/js/jquery.waypoints.min.js"></script>
+		<script src="../files/js/common.js"></script>
+		<script>
+
+			function btnClick(othis) {
+				if($(othis).hasClass('down')) {
+					$(othis).parents('.team-panel').find('.b').slideDown();
+					$(othis).removeClass('down').addClass('up');
+				} else {
+					$(othis).parents('.team-panel').find('.b').slideUp();
+					$(othis).removeClass('up').addClass('down');
+				}
+			}
+		</script>
+	</body>
+
+</html>

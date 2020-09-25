@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../files/css/bootstrap.css">
+    <link rel="stylesheet" href="../../files/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../files/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../../files/css/app.css">
+    <link rel="stylesheet" href="../../files/css/paltstyle.css">
+    <title>Title</title>
+</head>
+<body style="background: none;" class="index">
+<div class="widget-box reportBox">
+    <div class="widget-title"> <span class="icon"><i class="glyphicon glyphicon-th"></i></span>
+        <h5>加入我们-职位编辑</h5>
+    </div>
+    <div class="widget-content ">
+      	<div class="input-groups">
+				<label>标题：</label>
+				<input type="text" id="title-input" placeholder='请输入不超过10个字的标题' style="margin: 25px;" maxlength="10">
+				<input type="hidden" id="title-no">
+				 <button id="add-title-btn" onclick="saveTitle()" class="btn btn-info">保存</button>
+		</div>
+        <div class="operation text-right">
+        	 <label style="float:left">提示：请按照官网对应图标位置顺序添加数据</label>
+            <button id="add-btn" class="btn btn-info pull-right">新增</button>
+            <div class="clearfix"></div>
+        </div>
+       
+        <table class="table data-table table-bordered">
+            <thead>
+            <tr>
+                <th>ID号</th>
+                <th>岗位分类</th>
+                <th>具体岗位</th>
+                <th>链接</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody id="list">
+        
+            </tbody>
+        </table>
+      
+    </div>
+
+</div>
+
+<script src="../../files/js/jquery.min.js"></script>
+<script src="../../files/js/bootstrap.js"></script>
+<script src="../../files/layer/layer.js"></script>
+<script src="../../files/js/comment.js"></script>
+<script>
+    var editHtml = '<div class="form-horizontal edit-block"> ' +
+    		'<input type="hidden" class="id-hidden">'+
+            '<div class="input-groups"> ' +
+            '<label>岗位分类：</label> ' +
+            '<input type="text" placeholder="请输入不超过6个字的岗位分类，例如“市场/产品岗”" maxlength="6" class="class-input">' +
+            '<div> ' +
+            '</div> </div> ' +
+            '<div class="input-groups"> ' +
+            '<label>具体岗位：</label> ' +
+            '<input type="text" placeholder="请输入岗位（多个按中文分号“ ; ”隔开）" class="content-input">' +
+            ' </div> ' +
+            '<div class="input-groups"> ' +
+            '<label>链接：</label> ' +
+            '<input type="text" placeholder="请输入链接" class="link-input">' +
+            ' </div> ' +
+            '<div class="input-groups btns"> ' +
+            '<button id="cancel-btn" class="btn btn-info pull-right">关闭</button> ' +
+            '<button id="confirm-btn" class="btn btn-info pull-right" style="margin-right:10px">提交</button> ' +
+            '</div> </div>';
+
+    $(function(){
+        //增加
+        $('#add-btn').click(function (){
+            layer.open({
+                type: 1,
+                title: false,
+                closeBtn: 0,
+                area: ['700px', '300px'],
+                shadeClose: true,
+                content: editHtml
+            });
+        });
+        getTitleData();
+        getDatas();
+    });
+   
+   $(document).on('click','#cancel-btn',function(){
+   	 layer.closeAll();
+   }); 
+    function editFun(othis) {
+        
+        var positionClass = $(othis).parents('tr').find('.position-class').text();
+        var positionContent = $(othis).parents('tr').find('.position-content').text();
+        var positionlink = $(othis).parents('tr').find('.link-content').text();
+        var id = $(othis).parents('tr').find('.id-num').text();
+        layer.open({
+            type: 1,
+            title: false,
+            closeBtn: 0,
+            area: ['700px', '300px'],
+            shadeClose: true,
+            content: editHtml
+        });
+        $('.edit-block .class-input').val(positionClass);
+        $('.edit-block .content-input').val(positionContent);
+        $('.edit-block .link-input').val(positionlink);
+        $('.edit-block .id-hidden').val(id);
+    }
+
+    //删除
+    function deleteFun(othis) {
+        var id = $(othis).parents('tr').find('.id-num').text();
+        layer.confirm('确定删除id为"'+ id +'"的职位吗？',{
+            btn:['Y','N']
+        },function(){
+        	delData(id);
+           
+        })
+    }
+    function delData(id){
+    	$.ajax({  
+	        type: "POST",  
+	        url: "/api/DsWebsit/delData.do",  
+	        data:{
+	        	type : "join.position",
+	        	serailNo : id
+	        },
+	        dataType: "json",
+	        success: function (jsonResult) {
+	        	if(jsonResult.code=="0000"){
+	        		layer.msg(jsonResult.message);
+	        		getDatas();
+	        	} else {
+	        		layer.msg('删除失败');
+	        	}
+	        },
+	        error: function(XMLHttpRequest, textStatus, errorThrown) {
+				layer.msg("系统异常，请稍后再试！");
+            }
+	    });   
+    }
+    function saveTitle(){
+    	var id = $("#title-no").val();    
+    	var pos = {'status': '2','baseContent': $("#title-input").val()};   
+        var url =isEmpty(id)?"/api/DsWebsit/addData.do":"/api/DsWebsit/upData.do";
+    	$.ajax({  
+	        type: "POST",  
+	        url: url,  
+	        data:{
+	        	type : "join.title",
+	        	pos : JSON.stringify(pos),
+	        	serailNo : id
+	        },
+	        dataType: "json",
+	        success: function (jsonResult) {
+	        	 
+	        	layer.msg(jsonResult.message);	        		
+	        	 
+	        },
+	        error: function(XMLHttpRequest, textStatus, errorThrown) {
+				layer.msg("系统异常，请稍后再试！");
+            }
+	    });   
+    }
+    function sortDown(othis){
+    	if($(othis).hasClass('disable')){
+            return ;
+        }else{
+        	var onNum =  $(othis).parents('tr').find('.id-num').text();         
+            setSorting(onNum,"down");
+        }
+    }
+
+    function sortUp(othis){
+    	if($(othis).hasClass('disable')){
+            return ;
+        }else{
+            var onNum =   $(othis).parents('tr').find('.id-num').text();
+            setSorting(onNum,"up");
+        }
+    }
+
+    function setSorting(sSerialNo,flag){   	
+    	$.ajax({
+			type : "POST",
+			url : "/api/DsWebsit/sortData.do",
+			dataType : "json",
+			data : {
+				type : 'join.position',
+				serailNo : sSerialNo,
+				flag : flag
+			},
+			success : function(jsonResult) {
+				layer.msg(jsonResult.message);
+				getDatas();
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				layer.msg("系统异常，请稍后再试！");
+            }
+		});
+    }
+    $(document).on('click','#confirm-btn',function(){
+    	var pclass= $('.edit-block .class-input').val();
+        var content= $('.edit-block .content-input').val();
+        var id=  $('.edit-block .id-hidden').val();
+        var link= $('.edit-block .link-input').val();
+        if(isEmpty(pclass)){
+        	layer.msg("请输入岗位分类！");
+        	return false;
+        }
+        if(isEmpty(content)){
+        	layer.msg("请输入具体岗位！");
+        	return false;
+        }
+        if(isEmpty(link)){
+        	layer.msg("请输入链接！");
+        	return false;
+        }
+        var contentlist = content.split("；");
+        var index = 0;
+        for(var i=0;i<contentlist.length;i++){
+        	if(contentlist[i].length>6){
+        		index+=1;
+        	}
+        }
+        if(index>0){
+        	layer.msg("每一个具体岗位不能超过6个字！");
+        	return false;
+        }
+         var pos = {'status': '2','textDesc': pclass,'baseContent': content,imageSrc:link};   
+        var url =isEmpty(id)?"/api/DsWebsit/addData.do":"/api/DsWebsit/upData.do"
+        $.ajax({
+			type : "POST",
+			url : url,
+			dataType : "json",
+			data : {
+				"pos":JSON.stringify(pos),
+				type : 'join.position',
+				serailNo:id
+			},
+			success : function(jsonResult) {
+				layer.msg(jsonResult.message);
+				getDatas();
+				layer.closeAll();
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				layer.msg("系统异常，请稍后再试！");
+            }
+		}); 
+     
+        
+    });
+    function getDatas(){
+    	$.ajax({  
+	        type: "POST",  
+	        url: "/api/DsWebsit/getDatas.do",  
+	        data:{
+	        	type : "join.position",
+	        	page : "0",
+	        	size : "100"
+	        },
+	        dataType: "json",
+	        success: function (jsonResult) {
+	        	if(jsonResult.code=="0000" && jsonResult.data.length>0){
+	        		$("#list").empty();
+	        		$.each(jsonResult.data, function(i,val){
+	        			var tr = '<tr><td><span class="id-num">'+val.baseNo+'</span></td>'+
+	        			'<td ><span class="position-class">'+val.textDesc+'</span></td>'+
+	        			'<td><span class="position-content">'+val.baseContent+'</span></td>'+
+	        			'<td><span class="link-content">'+val.imageSrc+'</span></td>'+	
+	        			'<td><a class="edit-btn" href="javascript:void(0)" onclick="editFun(this)">编辑</a><a class="delete-btn" href="javascript:void(0)" onclick="deleteFun(this)">删除</a></td> </tr>';	  //<a class="delete-btn" href="javascript:void(0)" onclick="deleteFun(this)">删除</a>  删除掉了一个删除按钮功能      			
+	        			$("#list").append(tr);	        			 
+	        		});	         
+	        		if(jsonResult.data.length>=5){	        		 
+	        			$("#add-btn").attr("disabled","disabled");
+	        			$("#add-btn").attr("style","background:#ccc;border:none");
+	        		}else{
+	        			$("#add-btn").attr("disabled",false);
+	        			$("#add-btn").attr("style","");
+	        		}
+	        	} else {
+	        		$("#list").html("");
+	        	}
+	        },
+	        error: function(XMLHttpRequest, textStatus, errorThrown) {
+				layer.msg("系统异常，请稍后再试！");
+            }
+	    });   
+    
+    }
+    function getTitleData(){
+    	$.ajax({  
+	        type: "POST",  
+	        url: "/api/DsWebsit/getDatas.do",  
+	        data:{
+	        	type : "join.title",
+	        	page : "0",
+	        	size : "1"
+	        },
+	        dataType: "json",
+	        success: function (jsonResult) {
+	        	if(jsonResult.code=="0000" && jsonResult.data.length>0){
+	        		$("#title-input").val(jsonResult.data[0].baseContent);
+	        		$("#title-no").val(jsonResult.data[0].baseNo);
+	        	}
+	        },
+	        error: function(XMLHttpRequest, textStatus, errorThrown) {
+				layer.msg("系统异常，请稍后再试！");
+            }
+	    });   
+    }
+</script>
+</body>
+</html>

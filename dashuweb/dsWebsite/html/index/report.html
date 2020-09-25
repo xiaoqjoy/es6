@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../files/css/bootstrap.css">
+    <link rel="stylesheet" href="../../files/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../files/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../../files/css/app.css">
+    <link rel="stylesheet" href="../../files/css/paltstyle.css">
+    <title>Title</title>
+</head>
+<body style="background: none;" class="index">
+<div class="widget-box reportBox">
+    <div class="widget-title"> <span class="icon"><i class="glyphicon glyphicon-th"></i></span>
+        <h5>首页-媒体报道编辑</h5>
+    </div>
+    <div class="widget-content ">
+        <div class="operation text-right">
+            <button id="addBtn" class="btn btn-info pull-right">新增</button>
+            <div class="clearfix"></div>
+        </div>
+        <table class="table data-table table-bordered">
+            <thead>
+            <tr>
+                <th>ID号</th>
+                <th>图片</th>
+                <th>文本显示&&链接</th>
+                <th>排序号</th>
+                <th>排序操作</th>
+                <th style="width: 90px;">操作</th>
+            </tr>
+            </thead>
+            <tbody id="list">
+
+            </tbody>
+        </table>
+      
+    </div>
+
+</div>
+
+<script src="../../files/js/jquery.min.js"></script>
+<script src="../../files/js/bootstrap.js"></script>
+<script src="../../files/layer/layer.js"></script>
+<script src="../../files/js/comment.js"></script>
+<script>
+    var editHtml = '<div class="form-horizontal edit-block"> ' +
+    		'<input type="hidden" class="id-hidden">'+
+            '<div class="input-groups"> ' +
+            '<label>图片：</label> ' +
+            '<div> ' +
+            '<img src="" class="edit-block-img" style="width:170px; height: 70px; "> ' +
+            '<div class="operation " > ' +
+            '<button id="uploadBtn" class="btn btn-info pull-right">上传</button> ' +
+            '<form id="tf">'+
+            '<div class="file-panel"> ' +
+            '<input id="bannerInput" type="text" class="file-input" disabled placeholder="选择图片（图片尺寸为170*70px）"> ' +
+            '<div class="file-box"> ' +
+            '<input type="file" class="file" id="files" name="image" onchange="fileChange(this)"> ' +
+            '</div> </div> </from> </div> </div> </div> ' +
+            '<div class="input-groups"> ' +
+            '<label>链接：</label> ' +
+            '<input type="text" class="link-input">' +
+            ' </div> ' +
+            '<div class="input-groups btns"> ' +
+            '<button id="cancel-btn" class="btn btn-info pull-right">关闭</button> ' +
+            '<button id="confirm-btn" class="btn btn-info pull-right" style="margin-right:10px">提交</button> ' +
+            '</div> </div>';
+
+    $(function(){
+        //增加
+        $('#addBtn').click(function (){
+            layer.open({
+                type: 1,
+                title: false,
+                closeBtn: 0,
+                area: ['700px', '300px'],
+                shadeClose: true,
+                content: editHtml
+            });
+        });
+        getDatas();
+    });
+    $(document).on('click','#uploadBtn',function(){
+        var form = new FormData(document.getElementById("tf"));
+     	$.ajax({
+         url:"/api/uploadImageLocal.do",
+         type:"POST",
+         data: form,
+         processData: false,  // 告诉jQuery不要去处理发送的数据
+         contentType: false,  // 告诉jQuery不要去设置Content-Type请求头
+         success:function(jsonResult){
+          if(!isEmpty(jsonResult) && jsonResult.code == '0000'){
+           	$(".edit-block-img").attr("src", jsonResult.data); 
+           }
+         },
+         	error: function(XMLHttpRequest, textStatus, errorThrown) {
+       	 	layer.msg("系统异常，请稍后再试！");
+           }
+     	});
+    });
+   $(document).on('click','#cancel-btn',function(){
+   	 layer.closeAll();
+   }); 
+    function editFun(othis) {
+        var src = $(othis).parents('tr').find('.report-img').attr('src');
+        var link = $(othis).parents('tr').find('.link').text();
+        var id = $(othis).parents('tr').find('.id-num').text();
+        layer.open({
+            type: 1,
+            title: false,
+            closeBtn: 0,
+            area: ['700px', '300px'],
+            shadeClose: true,
+            content: editHtml
+        });
+        $('.edit-block .edit-block-img').attr('src',src);
+        $('.edit-block .link-input').val(link);
+        $('.edit-block .id-hidden').val(id);
+    }
+
+    //删除
+    function deleteFun(othis) {
+        var id = $(othis).parents('tr').find('.id-num').text();
+        layer.confirm('确定删除id为"'+ id +'"的媒体报道吗？',{
+            btn:['Y','N']
+        },function(){
+        	delData(id);
+           
+        })
+    }
+    function delData(id){
+    	$.ajax({  
+	        type: "POST",  
+	        url: "/api/DsWebsit/delData.do",  
+	        data:{
+	        	type : "main.report",
+	        	serailNo : id
+	        },
+	        dataType: "json",
+	        success: function (jsonResult) {
+	        	if(jsonResult.code=="0000"){
+	        		layer.msg(jsonResult.message);
+	        		getDatas();
+	        	} else {
+	        		layer.msg('删除失败');
+	        	}
+	        },
+	        error: function(XMLHttpRequest, textStatus, errorThrown) {
+				layer.msg("系统异常，请稍后再试！");
+            }
+	    });   
+    }
+    function sortDown(othis){
+    	if($(othis).hasClass('disable')){
+            return ;
+        }else{
+        	var onNum =  $(othis).parents('tr').find('.id-num').text();         
+            setSorting(onNum,"down");
+        }
+    }
+
+    function sortUp(othis){
+    	if($(othis).hasClass('disable')){
+            return ;
+        }else{
+            var onNum =   $(othis).parents('tr').find('.id-num').text();
+            setSorting(onNum,"up");
+        }
+    }
+
+    function setSorting(sSerialNo,flag){   	
+    	$.ajax({
+			type : "POST",
+			url : "/api/DsWebsit/sortData.do",
+			dataType : "json",
+			data : {
+				type : 'main.report',
+				serailNo : sSerialNo,
+				flag : flag
+			},
+			success : function(jsonResult) {
+				layer.msg(jsonResult.message);
+				getDatas();
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				layer.msg("系统异常，请稍后再试！");
+            }
+		});
+    }
+    $(document).on('click','#confirm-btn',function(){
+    	var imgSrc= $('.edit-block .edit-block-img').attr('src');
+        var link= $('.edit-block .link-input').val();
+        var id=  $('.edit-block .id-hidden').val();
+      
+        if(isEmpty(imgSrc)){
+        	layer.msg("请上传图片！");
+        	return false;
+        }
+        if(isEmpty(link)){
+        	layer.msg("请输入链接！");
+        	return false;
+        }
+        
+         var pos = {'status': '2','imageSrc': imgSrc,'baseContent': link};   
+        var url =isEmpty(id)?"/api/DsWebsit/addData.do":"/api/DsWebsit/upData.do"
+        $.ajax({
+			type : "POST",
+			url : url,
+			dataType : "json",
+			data : {
+				"pos":JSON.stringify(pos),
+				type : 'main.report',
+				serailNo:id
+			},
+			success : function(jsonResult) {
+				layer.msg(jsonResult.message);
+				getDatas();
+				layer.closeAll();
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				layer.msg("系统异常，请稍后再试！");
+            }
+		}); 
+     
+        
+    });
+    function getDatas(){
+    	$.ajax({  
+	        type: "POST",  
+	        url: "/api/DsWebsit/getDatas.do",  
+	        data:{
+	        	type : "main.report",
+	        	page : "0",
+	        	size : "100"
+	        },
+	        dataType: "json",
+	        success: function (jsonResult) {
+	        	if(jsonResult.code=="0000" && jsonResult.data.length>0){
+	        		$("#list").empty();
+	        		$.each(jsonResult.data, function(i,val){
+	        			var tr = '<tr><td><span class="id-num">'+val.baseNo+'</span></td>'+
+	        			'<td><img src="'+val.imageSrc+'" class="report-img"></td>'+
+	        			'<td><a target="_blank" class="link">'+val.baseContent+'</a></td>'+
+	        			'<td><span class="sort-num">'+val.sortIndex+'</span></td>';
+	        			if(i==0){
+	        				tr+='<td><a class="sort-up sort  disable " href="javascript:void(0)" onclick="sortUp(this)"><i class="glyphicon glyphicon-arrow-up"></i></a>';
+	        				tr+='<a class="sort-down sort " href="javascript:void(0)" onclick="sortDown(this)"><i class="glyphicon glyphicon-arrow-down"></i></a>';
+	        			}
+	        			else if(i>0 && i==jsonResult.data.length-1){
+	        				tr+='<td><a class="sort-up sort" href="javascript:void(0)" onclick="sortUp(this)"><i class="glyphicon glyphicon-arrow-up"></i></a>';
+	        				tr+='<a class="sort-down sort disable" href="javascript:void(0)" onclick="sortDown(this)"><i class="glyphicon glyphicon-arrow-down"></i></a>';
+	        			}else{
+	        				tr+='<td><a class="sort-up sort" href="javascript:void(0)" onclick="sortUp(this)"><i class="glyphicon glyphicon-arrow-up"></i></a>';
+	        				tr+='<a class="sort-down sort" href="javascript:void(0)" onclick="sortDown(this)"><i class="glyphicon glyphicon-arrow-down"></i></a>';
+	        			}
+	        			tr+='<td><a class="edit-btn" href="javascript:void(0)" onclick="editFun(this)">编辑</a><a class="delete-btn" href="javascript:void(0)" onclick="deleteFun(this)">删除</a></td> </tr>';	        			
+	        			$("#list").append(tr);	        			 
+	        		});	         
+	        		 
+	        	} else {
+	        		$("#list").html("");
+	        	}
+	        },
+	        error: function(XMLHttpRequest, textStatus, errorThrown) {
+				layer.msg("系统异常，请稍后再试！");
+            }
+	    });   
+    }
+</script>
+</body>
+</html>

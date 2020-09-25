@@ -1,0 +1,12 @@
+.tree_table .vsStyle_node, .tree_table .vsStyle_active_node {width:16px;height:16px;border: medium none; margin: 0; padding: 0;display: inline-block;}
+.tree_table .vsStyle_active_node {cursor: pointer;}
+.tree_table .vsStyle_open, .tree_table .vsStyle_last_open{background:url(../img/allbgs.png) no-repeat 0px 0px;width:16px;}
+.tree_table .vsStyle_shut, .tree_table .vsStyle_last_shut{background:url(../img/allbgs.png) no-repeat -16px 0px;width:16px;}
+.tree_table .vsStyle_hover_open, .tree_table .vsStyle_hover_last_open{background:url(../img/allbgs.png) no-repeat -32px 0px;width:16px;}
+.tree_table .vsStyle_hover_shut, .tree_table .vsStyle_hover_last_shut{background:url(../img/allbgs.png) no-repeat -48px 0px;width:16px;}
+.tree_table {width: 100%; margin-bottom: 20px;}
+.tree_table  th{ color: #333333;border-bottom: 1px solid #e6e6e6; padding: 8px 0;text-align: left;}
+.tree_table  td{border-bottom: 1px solid #e6e6e6; padding: 6px 0; font-size: 14px; }
+.tree_table  td a{color:#428bca; text-decoration: none; }
+.tree_table  td input[type='text']{padding-left: 5px;  }
+.configure-box{padding: 15px;}

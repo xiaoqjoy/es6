@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+		<link rel="stylesheet" href="files/css/bootstrap.min.css">
+		<link rel="stylesheet" href="files/css/font-awesome.min.css">
+		<link rel="stylesheet" href="files/css/reset.css">
+		<link rel="stylesheet" href="files/css/animate.css">
+		<link rel="stylesheet" href="files/css/styles.css">
+		<link rel="stylesheet" href="files/css/contactUs.css">
+		<title>【联系我们】客服电话：400-081-9969- 大数金融_中国领先的信贷科技解决方案提供商</title>
+		<meta name="keywords" content="大数小微贷款，小微贷款科技"/>
+		<meta name="description" content="大数金融总部位于广东省深圳市南山区铜鼓路大冲国际中心五号楼34层，目前在深圳、广州、北京等21个城市设有分公司，员工人数超1800人。"/>
+		<link rel="icon" type="image/x-icon" href="./files/images/dashu.ico" />
+	</head>
+
+	<body>
+		<div class="hover"></div>
+		<header>
+			<!-- header -->
+			<iframe src="header.html?type=5" id="headerIframe" frameborder="0" scrolling="no" width="100%" height="102px"></iframe>
+			<!-- end header -->
+		</header>
+		<div class="contactUs">
+			<div class='bg' id="contact-background" th:style="'background-image: url('+${backgroundimageSrc}+')'">
+			<div class='content'>
+				<div class='top'>
+					<img id='addressimg' alt="大数金融地址" th:src="${addressimageSrc}">
+					<div class='top-right'>
+						<p id='address' th:text="${addresstextDesc.split('\|')[0]}"></p>
+						<p id='enaddress' th:text="${addresstextDesc.split('\|')[1]}"></p>
+					</div>
+				</div>
+				<p class="bottom-p" id='contact-address' th:utext="${addressbaseContent}"></p>
+			</div>
+			</div>
+		</div>
+		<div class="contactUs-footer">
+			<div class='bg' id='contact-background-2' th:style="'background-image: url('+${phoneimageSrc}+')'">
+				<p id='us' th:text="${phonetextDesc.split('\|')[0]}"></p>
+				<p id='enus' th:text="${phonetextDesc.split('\|')[1]}"></p>
+				<p id='tel' th:text="${phonebaseContent.split('\|')[0]}+${phonebaseContent.split('\|')[1]}"></p>
+			</div>
+		</div>
+		<footer>
+			<iframe src="footer.html" id="footerIframe" frameborder="0" scrolling="no" width="100%" height="308px"></iframe>
+		</footer>
+		<script src="files/js/jquery-1.9.1.min.js"></script>
+		<script src="files/js/bootstrap.min.js"></script>
+		<script src="files/js/jquery.waypoints.min.js"></script>
+		<script src="dsWebsite/files/layer/layer.js"></script>
+		<script src="files/js/common.js"></script>
+		<script>
+			$(function() {
+				getContactBackground();	//获取背景图片
+				getContactPhone();	//获取地址
+				getContactAddress();	//获取电话
+			});
+			function getContactPhone() {
+				ajaxRequest({
+		            type : "contact.phone",
+		            page : "0",
+		            size : "1"
+		        },function(jsonResult){
+					var baseContent = jsonResult.data[0].baseContent.split('|');//客服电话
+					var textDesc = jsonResult.data[0].textDesc.split('|');//客服标题
+					$('#tel').html(baseContent[0]+baseContent[1]);
+					$('#us').html(textDesc[0]);
+					$('#enus').html(textDesc[1]);
+					$('#contact-background-2').css("background-image","url('"+jsonResult.data[0].imageSrc+"')");
+				})
+			};
+			function getContactAddress() {
+				ajaxRequest({
+					type : "contact.address",
+		            page : "0",
+		            size : "1"
+		        },function(jsonResult){
+					var textDesc = jsonResult.data[0].textDesc.split('|');//地址标题
+					$('#address').html(textDesc[0]);
+					$('#enaddress').html(textDesc[1]);
+					$('#contact-address').html(jsonResult.data[0].baseContent);
+					$('#addressimg').attr('src',jsonResult.data[0].imageSrc);
+				})
+			}
+		</script>
+	</body>
+
+</html>
