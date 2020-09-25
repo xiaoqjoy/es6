@@ -20,7 +20,7 @@
     "eslint-plugin-html": "^4.0.5",
     "font-awesome": "^4.7.0",
     "jsencrypt": "^3.0.0-rc.1",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.19",
     "moment": "^2.22.2",
     "peer": "^0.2.10",
     "to": "^0.2.9",
