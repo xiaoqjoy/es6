@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../files/css/bootstrap.css">
+    <link rel="stylesheet" href="../../files/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../files/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../../files/css/app.css">
+    <link rel="stylesheet" href="../../files/css/paltstyle.css">
+    <title>Title</title>
+</head>
+<body style="background: none;">
+<div class="widget-box bannerBox">
+    <div class="widget-title"> <span class="icon"><i class="glyphicon glyphicon-th"></i></span>
+        <h5>核心优势-数据风控技术编辑</h5>
+    </div>
+    <div class="widget-content ">
+        <div class="img-block">
+            <img src="" id="image">
+            <div class="operation">
+                <button id="uploadBtn" class="btn btn-info pull-right">上传</button>
+                <form id="tf">
+                <div class="file-panel">
+                    <input id="bannerInput" type="text" class="file-input" disabled placeholder="选择图片（图片宽度为1920px,后缀jpg格式）">
+                    <div class="file-box">
+                        <input type="file" class="file" id="files" name="image" onchange="fileChange(this)">
+                    </div>
+                </div>
+                </form>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="../../files/js/jquery.min.js"></script>
+<script src="../../files/js/bootstrap.js"></script>
+<script src="../../files/layer/layer.js"></script>
+<script src="../../files/js/comment.js"></script>
+<script>
+
+	var contains = false;
+	var serailNo = '';
+
+	$(function(){
+		loadGrid();
+	});
+
+    $(function(){
+        $('#uploadBtn').click(function () {
+            layer.confirm('确定修改核心优势-数据风控技术图吗？',{
+                btn:['Y','N']
+            },function(){
+        		var form = new FormData(document.getElementById("tf"));
+        		$.ajax({
+        		    url:"/api/uploadImageLocal.do",
+        		    type:"POST",
+        		    data: form,
+        		    processData: false,  // 告诉jQuery不要去处理发送的数据
+        		    contentType: false,  // 告诉jQuery不要去设置Content-Type请求头
+        		    success:function(jsonResult){
+        		    	if(!isEmpty(jsonResult) && jsonResult.code == '0000'){
+        		    		var pos = {'status': '2','imageSrc': jsonResult.data};
+        		    		if(contains){
+        		            	upData(pos, serailNo);
+        		            } else {
+        		            	addData(pos);
+        		            }
+        		    	} 
+        		    	$("#bannerInput").val("");
+       		    		layer.close(layer.index);
+       		    		layer.msg(jsonResult.data);
+           			},
+           			error: function(XMLHttpRequest, textStatus, errorThrown) {
+           				layer.close(layer.index);
+        				layer.msg("系统异常，请稍后再试！");
+                    }
+        		});
+            })
+            
+        });
+    });
+
+ 	function addData(pos){
+    	$.ajax({
+			type : "POST",
+			url : "/api/DsWebsit/addData.do",
+			dataType : "json",
+			data : {
+				"pos":JSON.stringify(pos),
+				type : 'advantage.technology'
+			},
+			success : function(jsonResult) {
+				layer.msg(jsonResult.message);
+				loadGrid();
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				layer.msg("系统异常，请稍后再试！");
+            }
+		});
+    }	
+    
+    function upData(pos,serailNo){
+    	$.ajax({
+			type : "POST",
+			url : "/api/DsWebsit/upData.do",
+			dataType : "json",
+			data : {
+				"pos":JSON.stringify(pos),
+				type : 'advantage.technology',
+				serailNo : serailNo
+			},
+			success : function(jsonResult) {
+				layer.msg(jsonResult.message);
+				loadGrid();
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				layer.msg("系统异常，请稍后再试！");
+            }
+		});
+    }    
+    
+   function loadGrid(){
+	    $.ajax({  
+	        type: "POST",  
+	        url: "/api/DsWebsit/getDatas.do",  
+	        data:{
+	        	type : "advantage.technology",
+	        	page : "0",
+	        	size : "1"
+	        },
+	        dataType: "json",
+	        success: function (jsonResult) {
+	        	if(jsonResult.code=="0000" && jsonResult.data.length==1){
+	        		$("#image").attr("src", jsonResult.data[0].imageSrc); 
+	        		contains = true;
+	        		serailNo = jsonResult.data[0].baseNo;
+	        	}
+	        },
+	        error: function(XMLHttpRequest, textStatus, errorThrown) {
+				layer.msg("系统异常，请稍后再试！");
+            }
+	    });   
+	}  
+
+</script>
+</body>
+</html>

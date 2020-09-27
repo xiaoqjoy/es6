@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../files/css/bootstrap.css">
+<link rel="stylesheet" href="../../files/css/font-awesome.min.css">
+<link rel="stylesheet" href="../../files/css/simple-line-icons.css">
+<link rel="stylesheet" href="../../files/css/app.css">
+<link rel="stylesheet" href="../../files/css/paltstyle.css">
+<title>Title</title>
+</head>
+<body style="background: none;">
+	<div class="widget-box bannerBox">
+		<div class="widget-title">
+			<span class="icon"><i class="glyphicon glyphicon-th"></i></span>
+			<h5>加入我们-分公司信息编辑</h5>
+		</div>
+		<div class="widget-content ">
+			<div class="input-groups">
+				<label>公司所在地：</label> <select id="selCity"
+					style="height: 41px;width:200px">
+					 <option></option>
+					<!--<option value="2">分公司动态</option> -->
+				</select>
+			</div>
+			<div class=" text-right">
+				<button id="add-btn" onclick="add()" class="btn btn-info pull-right">增加</button>
+
+				<div class="clearfix"></div>
+			</div>
+			<table class="table data-table table-bordered team-table"
+				style="margin-top: 10px">
+				<thead>
+					<tr>
+						<th>ID号</th>
+						<th>分公司</th>
+						<th>地址</th>
+						<th>电话</th>
+						<th>排序号</th>
+						<th>排序操作</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody id="list">
+
+				</tbody>
+			</table>
+
+			<div class="text-right">
+				<ul class="pagination pagination-sm">
+
+				</ul>
+			</div>
+			<div class="layui-layer-shade" id="layui-layer-shade11" times="1"
+				style="display: none; z-index: 14; background-color: #000; opacity: 0.3; filter: alpha(opacity = 30);"></div>
+			<div class="layui-layer layui-anim layui-layer-page "
+				id="layui-layer-alert" type="page"
+				style="display: none; z-index: 15; width: 900px; height: 400px; left: 50%; top: 50%; margin-left: -470px; margin-top: -250px; overflow-y: auto;">
+				<div class="form-horizontal edit-block">
+					<div class="input-groups">
+						<label>分公司名称：</label> <input type="text" id="companyName"
+							maxlength="30" placeholder="公司名称  ">
+					</div>
+					<div class="input-groups">
+						<label>地址：</label> <input type="text" id="address" maxlength="50"
+							placeholder="公司地址 ">
+					</div>
+					<div class="input-groups">
+						<label>电话：</label> <input type="text" id="phone" maxlength="50"
+							placeholder="公司电话  ">
+					</div>
+					<div class="input-groups">
+						<input type="hidden" class="cno_input">
+					</div>
+					<div class="input-groups btns">
+						<button id="confirm-btn" class="btn btn-info pull-right"
+							onclick="saveData()">提交</button>
+						<button id="close-btn" onclick="closeDiv()"
+							class="btn btn-default pull-right">关闭</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script src="../../files/js/jquery.min.js"></script>
+	<script src="../../files/js/bootstrap.js"></script>
+	<script src="../../files/layer/layer.js"></script>
+	<script src="../../files/js/comment.js"></script>
+	<script>
+	
+var cityArr=[{code:"101040100",name:"重庆"},
+	         {code:"101270101",name:"成都"},
+	         {code:"101200901",name:"宜昌"},
+			 {code:"101200101",name:"武汉"},
+			 {code:"101250101",name:"长沙"},
+			 {code:"101280101",name:"广州"},
+			 {code:"101280800",name:"佛山"},
+			 {code:"101281601",name:"东莞"},
+			 {code:"101281701",name:"中山"},
+			 {code:"101280701",name:"珠海"},
+			 {code:"101280601",name:"深圳"},
+			 {code:"101280301",name:"惠州"},
+			 {code:"101230201",name:"厦门"},
+			 {code:"101240101",name:"南昌"},
+			 {code:"101190101",name:"南京"},
+			 {code:"101190401",name:"苏州"},
+			 {code:"101210101",name:"杭州"},
+			 {code:"101020100",name:"上海"},
+			 {code:"101030100",name:"天津"},
+			 {code:"101010100",name:"北京"},
+			 {code:"101180101",name:"郑州"}
+			];
+	var selCityVal;
+	//公司城市筛选
+	$("#selCity").change(function(){
+		var checkValue=$("#selCity").val(); //获取Select选择的Value
+		selCityVal=checkValue;
+		getDatas();
+	}); 
+	
+
+	//加载
+    $(function(){
+    	var selectOb=$("#selCity");
+    	for(i=0;i<cityArr.length;i++){
+    		selectOb.append("<option value="+cityArr[i].code+">"+cityArr[i].name+"</option>");
+    	}
+    	$("#selCity").val("101280601");
+    	selCityVal=$("#selCity").val();
+    	getDatas();
+    });
+    
+    
+   
+    
+    
+	
+    
+    //新增
+	function add(){
+		var checkValue=$("#selCity").val(); //获取Select选择的Value
+    	if(!checkValue){
+    		layer.msg("请先选择分公司所在地！");
+    		return;
+    	}
+		$('#companyName').val('');
+		$('#address').val('');
+		$('#phone').val('');
+		$('.edit-block .cno_input').val('');
+		$("#layui-layer-alert").show();
+		$('#layui-layer-shade11').show();
+	}
+	
+	//关闭弹框
+	 function closeDiv(){
+	      	$('#layui-layer-alert').hide();
+	      	$('#layui-layer-shade11').hide();
+	 }
+	
+	
+	//保存
+	function saveData(){
+		var companyName = $('#companyName').val();
+		var address = $('#address').val();
+		var phone = $('#phone').val();
+		
+		if(isEmpty(selCityVal)){
+			layer.msg("请选择分公司城市！");
+			return false;
+		}
+		
+		if(isEmpty(companyName)){
+			layer.msg("请输入分公司名称！");
+			return false;
+		}
+		if(isEmpty(address)){
+			layer.msg("请输入分公司地址！");
+			return false;
+		}
+		if(isEmpty(phone)){
+			layer.msg("请输入分公司联系电话！");
+			return false;
+		}
+		var pos ={'companyName' : companyName, 'address' : address,'phone':phone,'parentNode' : selCityVal};
+		var cSerailNo=$('.edit-block .cno_input').val();
+		if (!isEmpty(cSerailNo)) {
+			cUpData(pos, cSerailNo);
+		} else {
+			cAddData(pos);
+		} 
+	}
+	 
+   
+   
+    //修改
+ 	$(document).on('click','.eb',function(){
+ 		$('#companyName').val($(this).parents('tr').find('.textDesc').eq(0).text());
+ 		$('#address').val($(this).parents('tr').find('.textDesc').eq(1).text());
+ 		$('#phone').val($(this).parents('tr').find('.textDesc').eq(2).text());
+ 		$('.edit-block .cno_input').val($(this).parents('tr').find('.id-num').text());
+ 		$('#layui-layer-alert').show();
+ 		$('#layui-layer-shade11').show();
+ 	}); 
+     
+     
+ 	function cAddData(pos){
+		$.ajax({
+			type : "POST",
+			url : "/api/company/addCompanyInfo.do",
+			dataType : "json",
+			data : {
+				"pos" : JSON.stringify(pos),
+			},
+			success : function(jsonResult) {
+				layer.msg(jsonResult.message);
+				$('#layui-layer-alert').hide();
+				$('#layui-layer-shade11').hide();
+				getDatas();
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				layer.msg("系统异常，请稍后再试！");
+			}
+		});
+	}
+	
+	function cUpData(pos, cSerailNo){
+		$.ajax({
+			type : "POST",
+			url : "/api/company/upCompanyInfo.do",
+			dataType : "json",
+			data : {
+				"pos" : JSON.stringify(pos),
+				serailNo : cSerailNo
+			},
+			success : function(jsonResult) {
+				layer.msg(jsonResult.message);
+				$('#layui-layer-alert').hide();
+				$('#layui-layer-shade11').hide();
+				getDatas();
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				layer.msg("系统异常，请稍后再试！");
+			}
+		});
+	}
+
+  
+    
+    function sortDown(othis){
+    	if($(othis).hasClass('disable')){
+            return ;
+        }else{
+        	var onNum =  $(othis).parents('tr').find('.id-num').text();
+            setSorting(onNum,"down");
+        }
+    }
+    
+    function sortUp(othis){
+    	if($(othis).hasClass('disable')){
+            return ;
+        }else{
+            var onNum =   $(othis).parents('tr').find('.id-num').text();
+            setSorting(onNum,"up");
+        }
+    }
+//排序
+    function setSorting(sSerialNo,flag){
+    	$.ajax({
+			type : "POST",
+			url : "/api/company/sortData.do",
+			dataType : "json",
+			data : {
+				parentNode : selCityVal,
+				serailNo : sSerialNo,
+				flag : flag
+			},
+			success : function(jsonResult) {
+				layer.msg(jsonResult.message);
+				getDatas();
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				layer.msg("系统异常，请稍后再试！");
+            }
+		});
+    }
+   function getDatas(){
+	    $.ajax({  
+	        type: "POST",  
+	        url: "/api/company/getCompanyInfos.do",  
+	        data:{
+	        	parentNode : selCityVal,
+	        	page : "0",
+	        	size : "10"
+	        },
+	        dataType: "json",
+	        success: function (jsonResult) {
+	        	if(jsonResult.code=="0000" && jsonResult.data.length>0){
+	        		$("#list").empty();
+	        		$.each(jsonResult.data, function(i,val){
+	        		
+	        			if(i==0){
+	        				$("#list").append("<tr><td><span class='id-num'>"+val.baseNo+"</span></td><td><span class='textDesc'>"+val.companyName+"</span></td><td><span class='textDesc'>"+val.address+"</span></td><td><span class='textDesc'>"+val.phone+"</span></td>"+
+		        					"<td><span class='sortIndex'>"+val.sortIndex+"</span></td><td><a class='sort-up sort  disable ' href='javascript:void(0)' onclick='sortUp(this)'><i class='glyphicon glyphicon-arrow-up'></i></a><a class='sort-down sort ' href='javascript:void(0)' onclick='sortDown(this)'><i class='glyphicon glyphicon-arrow-down'></i></a></td><td><a class='edit-btn eb' href='javascript:void(0)'>编辑</a><a class='delete-btn' href='javascript:void(0)' onclick='deleteBanner(this)'>删除</a></td></tr>");
+	        			} else if(i>0 && i==jsonResult.data.length-1){
+	        				$("#list").append("<tr><td><span class='id-num'>"+val.baseNo+"</span></td><td><span class='textDesc'>"+val.companyName+"</span></td><td><span class='textDesc'>"+val.address+"</span></td><td><span class='textDesc'>"+val.phone+"</span></td>"+
+		        					"<td><span class='sortIndex'>"+val.sortIndex+"</span></td><td><a class='sort-up sort  ' href='javascript:void(0)' onclick='sortUp(this)'><i class='glyphicon glyphicon-arrow-up'></i></a><a class='sort-down sort  disable ' href='javascript:void(0)' onclick='sortDown(this)'><i class='glyphicon glyphicon-arrow-down'></i></a></td><td><a class='edit-btn eb' href='javascript:void(0)'>编辑</a><a class='delete-btn' href='javascript:void(0)' onclick='deleteBanner(this)'>删除</a></td></tr>");
+	        			}else{
+	        				$("#list").append("<tr><td><span class='id-num'>"+val.baseNo+"</span></td><td><span class='textDesc'>"+val.companyName+"</span></td><td><span class='textDesc'>"+val.address+"</span></td><td><span class='textDesc'>"+val.phone+"</span></td>"+
+		        					"<td><span class='sortIndex'>"+val.sortIndex+"</span></td><td><a class='sort-up sort ' href='javascript:void(0)' onclick='sortUp(this)'><i class='glyphicon glyphicon-arrow-up'></i></a><a class='sort-down sort ' href='javascript:void(0)' onclick='sortDown(this)'><i class='glyphicon glyphicon-arrow-down'></i></a></td><td><a class='edit-btn eb' href='javascript:void(0)'>编辑</a><a class='delete-btn' href='javascript:void(0)' onclick='deleteBanner(this)'>删除</a></td></tr>");
+	        			}
+	        		});
+	        		if(jsonResult.data.length>=6){	        		 
+	        			$("#add-btn").attr("disabled","disabled");
+	        			$("#add-btn").attr("style","background:#ccc;border:none");
+	        		}else{
+	        			$("#add-btn").attr("disabled",false);
+	        			$("#add-btn").attr("style","");
+	        		}
+	        	} else {
+	        		$("#list").html("");
+	        	}
+	        },
+	        error: function(XMLHttpRequest, textStatus, errorThrown) {
+				layer.msg("系统异常，请稍后再试！");
+            }
+	    });   
+	}
+    
+   
+   //删除
+   function deleteBanner(othis) {
+      var id = $(othis).parents('tr').find('.id-num').text();
+      layer.confirm('确定删除id为"'+ id +'"子公司信息吗？',{
+          btn:['Y','N']
+      },function(){
+      	delData(id);
+      })
+  }  
+  
+   //删除
+    function delData(id){
+    	$.ajax({  
+	        type: "POST",  
+	        url: "/api/company/delCompanyInfo.do",  
+	        data:{
+	        	serailNo : id
+	        },
+	        dataType: "json",
+	        success: function (jsonResult) {
+	        	if(jsonResult.code=="0000"){
+	        		layer.msg(jsonResult.message);
+	        		getDatas();
+	        	} else {
+	        		layer.msg('删除失败');
+	        	}
+	        },
+	        error: function(XMLHttpRequest, textStatus, errorThrown) {
+				layer.msg("系统异常，请稍后再试！");
+            }
+	    });   
+    }
+    
+    
+
+</script>
+</body>
+</html>

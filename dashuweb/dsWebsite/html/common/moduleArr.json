@@ -1,0 +1,115 @@
+var moduleArr = [{	//级联的数据模型
+	page: "首页",
+	pageLink: "/",
+	children: [{
+		anchorName: "banner",
+		anchorId: ""
+	}, {
+		anchorName: "公司简介",
+		anchorId: "companyIntro"
+	}, {
+		anchorName: "业务模式",
+		anchorId: "businessPattern"
+	}, {
+		anchorName: "大数时贷",
+		anchorId: "dashuLoan"
+	}, {
+		anchorName: "了解我们",
+		anchorId: "knowUs"
+	}, {
+		anchorName: "媒体报道",
+		anchorId: "mediaReport"
+	}]
+}, {
+	page: "关于我们",
+	pageLink: "aboutUs.html",
+	children: [{
+		anchorName: "banner",
+		anchorId: ""
+	},{
+		anchorName: "管理团队",
+		anchorId: "manageTeam"
+	}, {
+		anchorName: "公司简介",
+		anchorId: "companyIntro"
+	}, {
+		anchorName: "发展历程",
+		anchorId: "developHistory"
+	}, {
+		anchorName: "投资机构",
+		anchorId: "investOrg"
+	}, {
+		anchorName: "合作金融机构",
+		anchorId: "cooperationOrg"
+	}]
+},{
+	page: "管理团队",
+	pageLink: "twoPage/team.html"
+},{
+	page: "顾问团队",
+	pageLink: "twoPage/counselor.html"
+},{
+	page: "产品服务",
+	pageLink: "product.html",
+	children: [{
+		anchorName: "banner",
+		anchorId: ""
+	},{
+		anchorName: "大数时贷",
+		anchorId: "dashuLoan"
+	},{
+		anchorName: "我要贷款",
+		anchorId: "loan"
+	},{
+		anchorName: "代理产品",
+		anchorId: "agency"
+	}, {
+		anchorName: "常见问题",
+		anchorId: "question"
+	}]
+},{
+	page: "核心优势",
+	pageLink: "advantage.html",
+	children: [{
+		anchorName: "banner",
+		anchorId: ""
+	},{
+		anchorName: "业务模式",
+		anchorId: "businessMode"
+	},{
+		anchorName: "竞争壁垒",
+		anchorId: "competition"
+	}, {
+		anchorName: "数据风控技术",
+		anchorId: "riskManage"
+	}, {
+		anchorName: "创新金融科技",
+		anchorId: "innovate"
+	}]
+},{
+	page: "加入我们",
+	pageLink: "joinUs.html",
+	children: [{
+		anchorName: "banner",
+		anchorId: ""
+	},{
+		anchorName: "职位",
+		anchorId: "jobs"
+	},{
+		anchorName: "薪酬福利",
+		anchorId: "welfare"
+	}]
+},{
+	page: "媒体报道",
+	pageLink: "report.html",
+	children: [{
+		anchorName: "banner",
+		anchorId: ""
+	},{
+		anchorName: "媒体报道列表",
+		anchorId: "reportList"
+	}]
+},{
+	page: "公司动态",
+	pageLink: "newsletter.html"
+}];

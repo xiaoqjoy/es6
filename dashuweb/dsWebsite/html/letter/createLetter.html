@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../files/css/bootstrap.css">
+    <link rel="stylesheet" href="../../files/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../files/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../../files/css/font.css">
+    <link rel="stylesheet" href="../../files/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="../../files/css/app.css">
+    <link rel="stylesheet" href="../../files/css/paltstyle.css">
+    <title>新增简讯</title>
+</head>
+<body>
+<input type="hidden" id="editId" name="editId" />
+<div class="form-horizontal">
+
+    <div class="double-input">
+        <div class="r input-groups" style="width: 300px">
+            <label>发布时间：</label>
+            <div class="input-append date" id="releaseTime" data-date="" data-date-format="dd-mm-yyyy">
+                <input class="span2" size="16" type="text" value="2017-05-24" readonly>
+                <span class="add-on"><i class="icon-th glyphicon glyphicon-calendar"></i></span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="input-groups">
+            <label>显示状态：</label>
+            <div class="checkbox-box"><input type="checkbox" class="status status1" name="show" checked="checked" value="Y">显示</div>
+            <div class="checkbox-box"><input type="checkbox" class="status status2" name="notshow" value="N">不显示</div>
+    </div>
+    <div class="input-groups  sel-input">
+        <label>信息正文：</label>
+       <div>
+           <iframe src="../../wysiwyg.html" id="content" frameborder="0" width="1000px" height="400px"></iframe>
+       </div>
+    </div>
+
+    <div class="input-groups btns">
+        <button id="confirm-btn" class="btn btn-info pull-right">确认</button>
+        <button id="reset-btn" class="btn btn-default pull-right">重置</button>
+    </div>
+
+</div>
+
+<script src="../../files/js/jquery.min.js"></script>
+<script src="../../files/js/bootstrap.js"></script>
+<script src="../../files/js/bootstrap-datetimepicker.js"></script>
+<script src="../../files/js/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="../../files/js/comment.js"></script>
+<script src="../../files/layer/layer.js"></script>
+<script>
+var URL = {
+		'addLbNews':'../../api/newsManagerSystem/insertNewsMsg.do',
+	};
+	
+	
+	
+	
+var newsMsg = {};
+
+  $(function(){
+      init();
+
+     var content = '';
+     var onPage;
+      //提交按钮
+      $('#confirm-btn').click(function(){
+    	  alert("66666");
+          content =  document.getElementById("content").contentWindow.document.getElementById('editor').innerHTML;
+            if(!$("input[name='show']").is(':checked') && !$("input[name='notshow']").is(':checked')){
+                layer.msg('请选择显示状态')
+            }else{
+            	if(newsMsg.id != null && newsMsg.id != 'undefined' &&'' != newsMsg.id){
+            		newsMsg.releaseTime = $('#releaseTime input').val();
+                  	newsMsg.isVisible = $("input.status:checked").val();
+                  	newsMsg.msgContent  = content;
+                  	var pos = getParams();
+                  	$.ajax({
+        			    	url:URL.addLbNews,
+        			    	type:'POST',
+        			    	data:{"pos":JSON.stringify(pos),"flag":"update"},
+        			    	success:function(data){
+        			    		if(data.code=="00"){
+        			    			//loadData(10,onPage);//新增功能,修改过后还是留在当前页
+        			    			window.parent.location.reload();
+        			    		}
+        			    	}
+        			    });
+            	}else{
+            		var pos = getParams();
+            		$.ajax({
+				    	url:URL.addLbNews,
+				    	type:'POST',
+				    	data:{"pos":JSON.stringify(pos)},
+				    	success:function(data){
+				    		if(data.code=="00"){
+				    			//loadData(10,onPage);//新增功能,修改过后还是留在当前页
+				    			parent.location.reload();
+				    		}
+				    	}
+				    });	
+            	}
+            	
+            }
+      });
+
+  });
+  
+  
+function getParams(){
+	  
+	  content =  document.getElementById("content").contentWindow.document.getElementById('editor').innerHTML;
+	  return {
+		    'id': $('#editId').val(),
+		    'onPage':$('#editId').val(),
+		    'moduleFlag': '2',
+	        'releaseTime': $('#releaseTime input').val(),
+	        'isVisible':$("input.status:checked").val(),
+	        'msgContent': content
+	  };
+	    }
+
+    function init(){
+        //时间选择器
+        $('#releaseTime').datetimepicker({
+            language:  'zh-CN',
+            format: 'yyyy-mm-dd',
+            startDate:'2016-04-01',
+            weekStart: 1,  //一周从星期一开始。0（星期日）到6（星期六）
+            todayBtn:  'linked',
+            autoclose: 1,//当选择一个日期之后是否立即关闭此日期时间选择器。
+            todayHighlight: true, //高亮显示今天的时间
+            keyboardNavigation:true,
+            startView: 2, //日期时间选择器打开之后首先显示的视图。0 or 'hour' for the hour view;1 or 'day' for the day view;2 or 'month' for month view (the default);3 or 'year' for the 12-month overview;4 or 'decade' for the 10-year overview.
+            forceParse: 0,
+            minView:2
+        });
+
+
+        //封面选择事件
+        $('.file-box .file').change(function(){
+            $('.file-input').val($(this).val());
+            
+        });
+
+        //状态选择事件
+        $('.status').click(function(){
+            $(this).parent().siblings().find('.status').prop('checked',false);
+        });
+
+        //重置按钮事件
+        $('#reset-btn').click(function(){
+            $('input.title ,input.author, input.file , input.cover').val('');
+            $('.status').prop('checked',false);
+            document.getElementById("content").contentWindow.document.getElementById('editor').innerHTML='请输入...';
+        });
+
+        var id ;
+       //判断页面是编辑还是新建
+        if(GetQueryString('id') == null){        //新建
+            var date = format1(new Date());
+            $('#releaseTime input').val(date);
+        }else{                                       //编辑
+        	id = GetQueryString('id');       //获取ID编号
+        	$('#editId').val(id);
+        	$.ajax({
+                type:'post',
+                dataType:'json',
+                url : '../../api/newsManagerSystem/findNewsMsgById.do',
+                data:{"id":id}, 
+                success : function(rtnData){
+                	if(rtnData.code=="00"){
+                		$('#releaseTime input').val(rtnData.data.newsMsgPo.releaseTime);
+                		if(rtnData.data.newsMsgPo.isVisible=='Y'){
+                			$('.status1').prop('checked',true);
+                			$('.status2').prop('checked',false);
+                		}else{
+                			$('.status1').prop('checked',false);
+                			$('.status2').prop('checked',true);
+                		}
+                		 document.getElementById("content").contentWindow.document.getElementById('editor').innerHTML= rtnData.data.newsMsgPo.msgContent ;
+                		 newsMsg = rtnData.data.newsMsgPo;
+//                 		 
+                	}
+                }
+            });
+        }
+    }
+
+
+  function GetQueryString(name) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)","i");
+      var r = window.location.search.substr(1).match(reg);
+      if (r!=null) return (r[2]); return null;
+  }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+		<link rel="stylesheet" href="files/css/bootstrap.min.css">
+		<link rel="stylesheet" href="files/css/font-awesome.min.css">
+		<link rel="stylesheet" href="files/css/reset.css">
+		<link rel="stylesheet" href="files/css/animate.css">
+		<link rel="stylesheet" href="files/css/styles.css">
+		<title>【核心优势】无担保贷款_第三代小微贷款- 大数金融_中国领先的信贷科技解决方案提供商</title>
+		<meta name="keywords" content="无担保贷款，第三代小微贷款，小微企业无担保贷款"/>
+		<meta name="description" content="大数金融资本雄厚，商业模式获行业广泛认可并与数十家银行机构尝试合作，第三代小微贷款技术已应用于3000亿无担保贷款的发放，实证经验丰富。"/>
+		<link rel="icon" type="image/x-icon" href="./files/images/dashu.ico" />
+	</head>
+
+	<body>
+		<div class="hover"></div>
+		<header>
+			<!-- header -->
+			<iframe src="header.html?type=3" id="headerIframe" frameborder="0" scrolling="no" width="100%" height="102px"></iframe>
+			<!-- end header -->
+		</header>
+
+		<div class="advantage main">
+
+			<!-- banner -->
+			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+				<!-- Indicators -->
+				<ol class="carousel-indicators"></ol>
+				<!-- Wrapper for slides -->
+				<div class="carousel-inner" role="listbox" style="height: 500px;"></div>
+				<!-- Controls -->
+				<!--<a class="left carousel-control my-carousel" href="#carousel-example-generic" role="button" data-slide="prev">
+					<span class="icon-prev" aria-hidden="true"></span>
+				</a>
+				<a class="right carousel-control my-carousel" href="#carousel-example-generic" role="button" data-slide="next">
+					<span class="icon-next" aria-hidden="true"></span>
+				</a>-->
+			</div>
+			<!-- / banner -->
+
+			<!-- 业务模式 -->
+			<div id="businessMode">
+				<img id="businessModeImg" class="block-img business-model-img" th:src="${businessimageSrc}" alt="第三代小微贷款技术，实现小微贷款规模与风险双重效应；规模扩张可实现，风险结果可预测">
+			</div>
+			<!-- end 业务模式 -->
+
+			<!-- 竞争壁垒 -->
+			<div id="competition" class="jzbl relative">
+				<img id="jzbl" th:src="${competeimageSrc}" class="block-img animate-box item-animate" data-animate-effect="fadeInLeft" alt="核心竞争力">
+			</div>
+			<!-- end 竞争壁垒 -->
+
+			<!-- 风控技术 -->
+			<div id="riskManage" class="fkjj relative">
+				<img id="fkjj" th:src="${technologyimageSrc}" class="block-img animate-box item-animate" data-animate-effect="fadeInRight" alt="现代零售风控体系">
+			</div>
+			<!-- end 风控技术 -->
+
+			<!-- 金融科技 -->
+			<div id="innovate" class="jrkj relative">
+				<img id="jrkj" th:src="${scienceimageSrc}" alt="创新的金融科技" class="block-img animate-box item-animate" data-animate-effect="fadeInLeft">
+			</div>
+			<!-- end 金融科技 -->
+
+		</div>
+		<footer>
+			<iframe src="footer.html" id="footerIframe" frameborder="0" scrolling="no" width="100%" height="308px"></iframe>
+		</footer>
+
+		<div class="gototop js-top">
+			<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+		</div>
+
+		<script src="files/js/jquery-1.9.1.min.js"></script>
+		<script src="files/js/bootstrap.min.js"></script>
+		<script src="files/js/jquery.waypoints.min.js"></script>
+		<script src="dsWebsite/files/layer/layer.js"></script>
+		<script src="files/js/common.js"></script>
+		<script>
+
+			$(function() {
+				getBanner("advantage.banner");	//获取核心优势banner
+			});
+
+		</script>
+	</body>
+
+</html>

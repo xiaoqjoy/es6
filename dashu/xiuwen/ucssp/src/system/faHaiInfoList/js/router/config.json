@@ -1,0 +1,650 @@
+{
+  "cpws": [
+    {
+      "desc": "数据类型",
+      "code": "dataType"
+    },
+    {
+      "desc": "当事人名称",
+      "code": "pname"
+    },
+    {
+      "desc": "标题",
+      "code": "title"
+    },
+    {
+      "desc": "案号",
+      "code": "caseNo"
+    },
+    {
+      "desc": "代字",
+      "code": "caseNoKwordT"
+    },
+    {
+      "desc": "文书类型",
+      "code": "caseTypeT"
+    },
+    {
+      "desc": "审理状态",
+      "code": "trialProcedure"
+    },
+    {
+      "desc": "案由",
+      "code": "caseCauseT"
+    },
+    {
+      "desc": "当前称号",
+      "code": "partyTitleT"
+    },
+    {
+      "desc": "诉讼地位（原审）",
+      "code": "partyPositionT"
+    },
+    {
+      "desc": "主体类型",
+      "code": "partyType"
+    },
+    {
+      "desc": "当事人出生日期",
+      "code": "birthday"
+    },
+    {
+      "desc": "内容",
+      "code": "body"
+    },
+    {
+      "desc": "依据",
+      "code": "yiju"
+    },
+    {
+      "desc": "胜负关系",
+      "code": "partyResultT"
+    },
+    {
+      "desc": "判决结果",
+      "code": "judgeResult"
+    },
+    {
+      "desc": "判决金额",
+      "code": "partyFeeT"
+    },
+    {
+      "desc": "受理费",
+      "code": "caf"
+    },
+    {
+      "desc": "审结日期",
+      "code": "sortTime"
+    },
+    {
+      "desc": "律师事务所",
+      "code": "lawOffice"
+    },
+    {
+      "desc": "委托律师（辩护人）",
+      "code": "lawyer"
+    },
+    {
+      "desc": "审判员",
+      "code": "judge"
+    },
+    {
+      "desc": "法院",
+      "code": "court"
+    },
+    {
+      "desc": "法院类型",
+      "code": "courtTypeT"
+    }
+  ],
+  "ktgg": [
+    {
+      "desc": "数据类型",
+      "code": "dataType"
+    },
+    {
+      "desc": "当事人名称",
+      "code": "pname"
+    },
+    {
+      "desc": "标题",
+      "code": "title"
+    },
+    {
+      "desc": "案号",
+      "code": "caseNo"
+    },
+    {
+      "desc": "代字",
+      "code": "caseNoKwordT"
+    },
+    {
+      "desc": "案由",
+      "code": "caseCauseT"
+    },
+    {
+      "desc": "当前称号",
+      "code": "partyTitleT"
+    },
+    {
+      "desc": "诉讼地位（原审）",
+      "code": "partyPositionT"
+    },
+    {
+      "desc": "主体类型",
+      "code": "partyType"
+    },
+    {
+      "desc": "内容",
+      "code": "body"
+    },
+    {
+      "desc": "开庭时间",
+      "code": "sortTime"
+    },
+    {
+      "desc": "法官",
+      "code": "judge"
+    },
+    {
+      "desc": "法院",
+      "code": "court"
+    },
+    {
+      "desc": "法庭",
+      "code": "courtroom"
+    }
+  ],
+  "zxgg": [
+    {
+      "desc": "数据类型",
+      "code": "dataType"
+    },
+    {
+      "desc": "当事人名称",
+      "code": "pname"
+    },
+    {
+      "desc": "标题",
+      "code": "title"
+    },
+    {
+      "desc": "案号",
+      "code": "caseNo"
+    },
+    {
+      "desc": "代字",
+      "code": "caseNoKwordT"
+    },
+    {
+      "desc": "立案日期",
+      "code": "sortTime"
+    },
+    {
+      "desc": "案件状态",
+      "code": "caseStateT"
+    },
+    {
+      "desc": "主体类型",
+      "code": "partyType"
+    },
+    {
+      "desc": "申请人",
+      "code": "proposer"
+    },
+    {
+      "desc": "身份证号码",
+      "code": "idcardNo"
+    },
+    {
+      "desc": "执行金额",
+      "code": "execMoney"
+    },
+    {
+      "desc": "依据文书",
+      "code": "yjCode"
+    },
+    {
+      "desc": "依据单位",
+      "code": "yjdw"
+    },
+    {
+      "desc": "地址",
+      "code": "address"
+    },
+    {
+      "desc": "终本日期",
+      "code": "closeDate"
+    },
+    {
+      "desc": "法院名称",
+      "code": "court"
+    }
+  ],
+  "shixin": [
+    {
+      "desc": "数据类型",
+      "code": "dataType"
+    },
+    {
+      "desc": "当事人名称",
+      "code": "pname"
+    },
+    {
+      "desc": "省份",
+      "code": "province"
+    },
+    {
+      "desc": "案号",
+      "code": "caseNo"
+    },
+    {
+      "desc": "代字",
+      "code": "caseNoKwordT"
+    },
+    {
+      "desc": "发布时间",
+      "code": "postTime"
+    },
+    {
+      "desc": "立案时间",
+      "code": "sortTime"
+    },
+    {
+      "desc": "主体类型",
+      "code": "partyType"
+    },
+    {
+      "desc": "年龄",
+      "code": "age"
+    },
+    {
+      "desc": "身份证号码",
+      "code": "idcardNo"
+    },
+    {
+      "desc": "履行情况",
+      "code": "lxqkT"
+    },
+    {
+      "desc": "具体情形",
+      "code": "jtqx"
+    },
+    {
+      "desc": "涉案金额",
+      "code": "money"
+    },
+    {
+      "desc": "义务",
+      "code": "yiwu"
+    },
+    {
+      "desc": "依据文号",
+      "code": "yjCode"
+    },
+    {
+      "desc": "依据单位",
+      "code": "yjdw"
+    },
+    {
+      "desc": "法院名称",
+      "code": "court"
+    }
+  ],
+  "fygg": [
+    {
+      "desc": "数据类型",
+      "code": "dataType"
+    },
+    {
+      "desc": "当事人名称",
+      "code": "pname"
+    },
+    {
+      "desc": "标题",
+      "code": "title"
+    },
+    {
+      "desc": "案号",
+      "code": "caseNo"
+    },
+    {
+      "desc": "代字",
+      "code": "caseNoKwordT"
+    },
+    {
+      "desc": "案由",
+      "code": "caseCauseT"
+    },
+    {
+      "desc": "当前称号",
+      "code": "partyTitleT"
+    },
+    {
+      "desc": "诉讼地位（原审）",
+      "code": "partyPositionT"
+    },
+    {
+      "desc": "主体类型",
+      "code": "partyType"
+    },
+    {
+      "desc": "内容",
+      "code": "body"
+    },
+    {
+      "desc": "公告类型",
+      "code": "ggTypeT"
+    },
+    {
+      "desc": "立案时间",
+      "code": "sortTime"
+    },
+    {
+      "desc": "法院名称",
+      "code": "court"
+    },
+    {
+      "desc": "法院类型",
+      "code": "courtTypeT"
+    }
+  ],
+  "ajlc": [
+    {
+      "desc": "数据类型",
+      "code": "dataType"
+    },
+    {
+      "desc": "案号",
+      "code": "caseNo"
+    },
+    {
+      "desc": "代字",
+      "code": "caseNoKwordT"
+    },
+    {
+      "desc": "标题",
+      "code": "title"
+    },
+    {
+      "desc": "审理状态",
+      "code": "trialProcedureS"
+    },
+    {
+      "desc": "案由",
+      "code": "caseCauseT"
+    },
+    {
+      "desc": "当前称号",
+      "code": "partyTitleT"
+    },
+    {
+      "desc": "诉讼地位（原审）",
+      "code": "partyPositionT"
+    },
+    {
+      "desc": "主体类型",
+      "code": "partyType"
+    },
+    {
+      "desc": "当事人名称",
+      "code": "pname"
+    },
+    {
+      "desc": "内容",
+      "code": "body"
+    },
+    {
+      "desc": "诉讼标的",
+      "code": "actionObject"
+    },
+    {
+      "desc": "案件状态",
+      "code": "ajlcStatusT"
+    },
+    {
+      "desc": "案件时间",
+      "code": "sortTime"
+    },
+    {
+      "desc": "组织者",
+      "code": "organizer"
+    },
+    {
+      "desc": "法院",
+      "code": "courtS"
+    },
+    {
+      "desc": "法院类型",
+      "code": "courtTypeT"
+    }
+  ],
+  "bgt": [
+    {
+      "desc": "数据类型",
+      "code": "dataType"
+    },
+    {
+      "desc": "当事人名称",
+      "code": "pname"
+    },
+    {
+      "desc": "标题",
+      "code": "title"
+    },
+    {
+      "desc": "案号",
+      "code": "caseNo"
+    },
+    {
+      "desc": "代字",
+      "code": "caseNoKwordT"
+    },
+    {
+      "desc": "立案时间",
+      "code": "sortTime"
+    },
+    {
+      "desc": "主体类型",
+      "code": "partyType"
+    },
+    {
+      "desc": "申请人",
+      "code": "proposer"
+    },
+    {
+      "desc": "身份证号码",
+      "code": "idcardNo"
+    },
+    {
+      "desc": "案由",
+      "code": "caseCauseT"
+    },
+    {
+      "desc": "地址",
+      "code": "address"
+    },
+    {
+      "desc": "内容",
+      "code": "body"
+    },
+    {
+      "desc": "标的金额",
+      "code": "execMoney"
+    },
+    {
+      "desc": "依据",
+      "code": "yiju"
+    },
+    {
+      "desc": "依据文书",
+      "code": "yjCode"
+    },
+    {
+      "desc": "法院名称",
+      "code": "court"
+    }
+  ],
+  "satparty_qs": [
+    {
+      "desc": "数据类型",
+      "code": "dataType"
+    },
+    {
+      "desc": "标题",
+      "code": "title"
+    },
+    {
+      "desc": "事件名称",
+      "code": "eventName"
+    },
+    {
+      "desc": "发布时间",
+      "code": "postTime"
+    },
+    {
+      "desc": "欠税时间",
+      "code": "sortTime"
+    },
+    {
+      "desc": "企业名称",
+      "code": "pname"
+    },
+    {
+      "desc": "企业法定代表人",
+      "code": "legalRepresentative"
+    },
+    {
+      "desc": "法人身份证号码",
+      "code": "lrIdcard"
+    },
+    {
+      "desc": "税务登记号",
+      "code": "taxpayerId"
+    },
+    {
+      "desc": "内容",
+      "code": "body"
+    },
+    {
+      "desc": "税种",
+      "code": "taxCategory"
+    },
+    {
+      "desc": "欠税金额",
+      "code": "money"
+    },
+    {
+      "desc": "局（政府单位）",
+      "code": "authority"
+    },
+    {
+      "desc": "税务局等级",
+      "code": "authorityRank"
+    }
+  ],
+  "satparty_chufa": [
+    {
+      "desc": "数据类型",
+      "code": "dataType"
+    },
+    {
+      "desc": "标题",
+      "code": "title"
+    },
+    {
+      "desc": "事件名称",
+      "code": "eventName"
+    },
+    {
+      "desc": "发布时间",
+      "code": "postTime"
+    },
+    {
+      "desc": "处罚时间",
+      "code": "sortTime"
+    },
+    {
+      "desc": "企业名称",
+      "code": "pname"
+    },
+    {
+      "desc": "企业法定代表人",
+      "code": "legalRepresentative"
+    },
+    {
+      "desc": "法人身份证号码",
+      "code": "lrIdcard"
+    },
+    {
+      "desc": "税务登记号",
+      "code": "taxpayerId"
+    },
+    {
+      "desc": "内容",
+      "code": "body"
+    },
+    {
+      "desc": "事件结果",
+      "code": "eventResult"
+    },
+    {
+      "desc": "处罚金额",
+      "code": "money"
+    },
+    {
+      "desc": "局（政府单位）",
+      "code": "authority"
+    }
+  ],
+  "satparty_fzc": [
+    {
+      "desc": "数据类型",
+      "code": "dataType"
+    },
+    {
+      "desc": "标题",
+      "code": "title"
+    },
+    {
+      "desc": "事件名称",
+      "code": "eventName"
+    },
+    {
+      "desc": "发布时间",
+      "code": "postTime"
+    },
+    {
+      "desc": "认定时间",
+      "code": "sortTime"
+    },
+    {
+      "desc": "企业名称",
+      "code": "pname"
+    },
+    {
+      "desc": "企业法定代表人",
+      "code": "legalRepresentative"
+    },
+    {
+      "desc": "法人身份证号码",
+      "code": "lrIdcard"
+    },
+    {
+      "desc": "税务登记号",
+      "code": "taxpayerId"
+    },
+    {
+      "desc": "内容",
+      "code": "body"
+    },
+    {
+      "desc": "事件结果",
+      "code": "eventResult"
+    },
+    {
+      "desc": "局（政府单位）",
+      "code": "authority"
+    }
+  ]
+}

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="../../files/css/bootstrap.css">
+		<link rel="stylesheet" href="../../files/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../../files/css/simple-line-icons.css">
+		<link rel="stylesheet" href="../../files/css/app.css">
+		<link rel="stylesheet" href="../../files/css/paltstyle.css">
+		<title>Title</title>
+	</head>
+
+	<body style="background: none;">
+
+		<input type="hidden" id="hidId">
+		<div class="widget-box bannerBox">
+			<div class="widget-title"> <span class="icon"><i class="glyphicon glyphicon-th"></i></span>
+				<h5>首页-了解我们</h5>
+			</div>
+			<div class="widget-content ">
+				<div class="operation text-right">
+
+					<div class="clearfix"></div>
+				</div>
+				<table class="table data-table table-bordered">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>图片</th>
+							<th>标题</th>
+							<th>英文标题</th>
+							<th>内容</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody id="list">
+
+					</tbody>
+				</table>
+
+				<div class="text-right">
+					<ul class="pagination pagination-sm">
+
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="layui-layer-shade" id="layui-layer-shade11" times="1" style="display: none; z-index: 14; background-color: #000; opacity: 0.3; filter: alpha(opacity = 30);"></div>
+		<div class="layui-layer layui-anim layui-layer-page " id="layui-layer11" type="page" style="display: none; z-index: 15; width: 960px; height: 400px; left: 50%; top: 50%; margin-left: -480px; margin-top: -250px;overflow-y: auto;overflow-x: auto;">
+			<div class="layui-layer-content" style="height: 380px;">
+
+				<div class="form-horizontal">
+
+					<div class="double-input" style="margin-top:20px">
+						<div class="l input-groups">
+							<label>图片：</label>
+							<form id="tf">
+								<div class="file-panel">
+									<input id="bannerInput" type="text" class="file-input" placeholder="选择图片（图片的尺寸为：1920*500px）">
+									<div class="file-box">
+										<input type="file" class="file" id="files" name="image" onchange="fileChange(this)">
+									</div>
+								</div>
+							</form>
+							<input type="hidden" id="fileId">
+							<button class="btn btn-info pull-left" onclick="uploadImg()">上传图片</button>
+						</div>
+						<div class="r input-groups">
+							<label>图片预览：</label>
+							<img src="" id="img" width="250px">
+						</div>
+					</div>
+					<div class="l input-groups">
+						<label>标题：</label>
+						<input id="textDesc" type="text" class="textDesc" placeholder="请输入标题">
+					</div>
+					<div class="l input-groups">
+						<label>英文标题：</label>
+						<input id="entextDesc" type="text" class="entextDesc" placeholder="请输入英文标题">
+					</div>
+					<div class="l input-groups">
+						<label>内容：</label>
+						<input id="baseContent" type="text" class="baseContent" placeholder="请输入内容">
+					</div>
+
+					<div class="input-groups btns">
+						<button id="close-btn" onclick="closeDiv()" class="btn btn-default pull-right">关闭</button>
+						<button id="confirm-btn" class="btn btn-info pull-right">确认</button>
+
+					</div>
+
+				</div>
+			</div>
+			<span class="layui-layer-setwin"></span>
+		</div>
+
+		<script src="../../files/js/jquery.min.js"></script>
+		<script src="../../files/js/bootstrap.js"></script>
+		<script src="../../files/layer/layer.js"></script>
+		<script src="../../files/js/comment.js"></script>
+		<script src="../../files/js/jquery.form.js"></script>
+		<script>
+			$(function() {
+				getDatas();
+			});
+			/*保存数据*/
+			$('#confirm-btn').click(function() {
+				var id = $("#hidId").val();
+				var textDesc = $("#textDesc").val()+'|'+$("#entextDesc").val();
+				var baseContent = $("#baseContent").val();
+				var imgSrc = "";
+				if(isEmpty($("#img").attr("src"))) {
+					imgSrc = $("#fileId").val();
+				} else {
+					imgSrc = $("#img").attr("src");
+				}
+				console.log(imgSrc,'imgSrc2')
+				var pos = {
+					status: status,
+					imageSrc: imgSrc,
+					textDesc: textDesc,
+					baseContent: baseContent
+				};
+
+				if(isEmpty(imgSrc)) {
+					layer.msg('请上传图片');
+					return;
+				}
+
+				var url = isEmpty(id) ? "/api/DsWebsit/addData.do" : "/api/DsWebsit/upData.do";
+				$.ajax({
+					type: 'post',
+					dataType: 'json',
+					url: url,
+					data: {
+						pos: JSON.stringify(pos),
+						type: 'contact.address',
+						serailNo: id
+					},
+					success: function(rtnData) {
+						layer.msg(rtnData.message);
+						if(rtnData.code == "0000") {
+							resetDiv();
+							closeDiv();
+							getDatas();
+						}
+					},
+					error: function(XMLHttpRequest, textStatus, errorThrown) {
+						layer.msg("系统异常，请稍后再试！");
+					}
+				});
+
+			});
+
+			function closeDiv() {
+				$('#layui-layer-shade11').hide();
+				$('#layui-layer11').hide();
+			}
+			function resetDiv() {
+				$("#hidId").val("");
+				$("#fileId").val("");
+				$("#img").attr("src", "");
+				$("#bannerInput").val("");
+				$("#files").val("");
+				$("#entextDesc").val("");
+				$("#textDesc").val("");
+				$("#baseContent").val("");			
+			}
+
+			function uploadImg() {
+				var form = new FormData(document.getElementById("tf"));
+				$.ajax({
+					url: "/api/uploadImageLocal.do",
+					async: false,
+					type: "post",
+					data: form,
+					processData: false, // 告诉jQuery不要去处理发送的数据
+					contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+					success: function(jsonResult) {
+						if(jsonResult.code == "0000") {
+							layer.msg("上传成功");
+							$("#fileId").val(jsonResult.data);
+							$("#img").attr("src", jsonResult.data);
+						} else {
+							layer.msg("上传失败");
+						}
+					},
+					error: function(XMLHttpRequest, textStatus, errorThrown) {
+						layer.msg("系统异常，请稍后再试！");
+					}
+				});
+			}
+		/*查询数据*/
+			function getDatas() {
+				$.ajax({
+					type: "POST",
+					url: "/api/DsWebsit/getDatas.action",
+					data: {
+						type: "contact.address",
+						page: 0,
+						size: 1,
+					},
+					dataType: "json",
+					success: function(jsonResult) {
+						if(jsonResult.code == "0000" && jsonResult.data.length > 0) {
+							$("#list").empty();
+							var baseNo = jsonResult.data[0].baseNo; /*id*/
+							var imageSrc = jsonResult.data[0].imageSrc; /*图片src*/
+							var textDesc = jsonResult.data[0].textDesc.split('|'); /*标题*/
+							var baseContent = jsonResult.data[0].baseContent; /*内容*/
+							$("#list").append("<tr><td><span class='id-num'>" + baseNo + "</span></td><td><img src='" + imageSrc + "' class='banners'></td><td>" + textDesc[0] + "</td><td>" + textDesc[1] + "</td>" +
+											"<td><span class='textDesc'>" + baseContent + "</span></td><td><a class='edit-btn' href='javascript:void(0)' onclick='editBanner(this)'>编辑</a></td></tr>");
+												
+						} else {
+							$("#list").html("");
+						}
+					},
+					error: function(XMLHttpRequest, textStatus, errorThrown) {
+						layer.msg("系统异常，请稍后再试！");
+					}
+				});
+			}
+
+			function editBanner(othis) {
+				var id = $(othis).parents('tr').find('.id-num').text();
+				$.ajax({
+					type: "POST",
+					url: "/api/DsWebsit/getDatas.action",
+					data: {
+						type: "contact.address",
+						page: 0,
+						size: 1,
+					},
+					dataType: "json",
+					success: function(jsonResult) {
+						if(jsonResult.code == "0000") {
+							var textDesc = jsonResult.data[0].textDesc.split('|');
+							$("#hidId").val(id);
+							$("#textDesc").val(textDesc[0]);
+							$("#entextDesc").val(textDesc[1]);
+							$("#baseContent").val(jsonResult.data[0].baseContent);
+							$("#img").attr("src", jsonResult.data[0].imageSrc);
+							$('#layui-layer-shade11').show();
+							$('#layui-layer11').show();
+							
+						} else {
+							layer.msg('获取数据失败');
+						}
+					},
+					error: function(XMLHttpRequest, textStatus, errorThrown) {
+						layer.msg("系统异常，请稍后再试！");
+					}
+				});
+			}
+
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,225 @@
+<template>
+	<div class="processed">
+		<div class="search clearfix">
+			<el-input maxlength="18" v-model="certificateNum" style="width: 200px;height: 40px;float: left;margin-right: 10px;" placeholder="证件号码"></el-input>
+			<el-input maxlength="15" v-model="custName" style="width: 200px;height: 40px;float: left;margin-right: 10px;" placeholder="客户姓名"></el-input>
+			<button @click="cardReading()" class="authorization_button yellow_button float_left">读卡录入</button>
+			<button @click="getProcessedList('search')" class="authorization_button blue_button float_left">查询</button>
+			<button @click="custName='';certificateNum='';processedList=[];getList()" class="authorization_button white_button float_left">清空</button>
+		</div>
+		<div class="table clearfix">
+			<table>
+				<thead>
+					<tr>
+						<th>申请编号</th>
+						<th>客户名称</th>
+						<th>证件号码</th>
+						<th>产品名称</th>
+						<th>合作机构</th>
+						<th>信用报告来源</th>
+						<th>信用报告提供机构</th>
+						<th>客户经理</th>
+						<!--<th>是否有效</th>-->
+						<th>是否电子授权</th>
+						<th>提交人</th>
+						<th>提交时间</th>
+						<th>征信报告是否返回</th>
+						<th>备注</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for='(item,key) in processedList' :key="key">
+						<td><span :title="item.applicationId" v-if="!item.grantInd">{{item.applicationId}}</span></td>
+						<td><span :title="item.custName">{{item.custName}}</span></td>
+						<td><span>{{item.certificateNum.slice(0,6)}}*****{{item.certificateNum.slice(14)}}</span></td>
+						<td><b :title="i.productName" v-for="(i,ikey) in item.creditProductDtos" :key="ikey" v-if="i.productName">{{i.productName}}</b><b v-else>&nbsp;</b></td>
+						<td><b :title="i.orgName" v-for="(i,ikey) in item.creditProductDtos" :key="ikey" v-if="i.orgName">{{i.orgName}}</b><b v-else>&nbsp;</b></td>
+						<td><span>{{item.reportSourceCode}}</span></td>
+						<td><span>{{item.reportSourceOrg}}</span></td>
+						<td><span>{{item.custManagerName}}</span></td>
+						<!--<td><span v-for="(i,ikey) in item.creditProductDtos" :key="ikey" v-if="i.availableInd">是</span><span v-else>否</span></td>-->
+						<td><span v-if="item.electronicAuthInd">是</span><span v-else>否</span></td>
+						<td><b v-for="(i,ikey) in item.creditProductDtos" :key="ikey" v-if="i.handlerId">{{i.handlerId}}</b><b v-else>&nbsp;</b></td>
+						<td><b :title="i.handleTime" v-for="(i,ikey) in item.creditProductDtos" :key="ikey" v-if="i.handleTime">{{i.handleTime}}</b><b v-else>&nbsp;</b></td>
+						<td><span>{{item.creditBackInd?"是":'否'}}</span></td>
+						<td><b :title="i.reportResult" v-for="(i,ikey) in item.creditProductDtos" :key="ikey" v-if="i.reportResult">{{i.reportResult}}</b><b v-else>&nbsp;</b></td>
+						<td><span @click="toImage(item.applicationId?item.applicationId:item.grantNum,item.creditProductDtos)" class="color538BF1">查看详情</span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<pagination style="float: right;margin: 20px 0;" :page="pageConfig" class="pagination" @jump-page="handleCurrentChange"></pagination>
+		<!--<el-pagination style="margin: 20px 0;float: right;" @current-change="handleCurrentChange" :current-page="page" :page-size="pagesize" layout="total, prev, pager, next, jumper" :total="total">
+		</el-pagination>-->
+	</div>
+</template>
+
+<script>
+	import { authorizationApi } from '../js/server.js';
+	import rule from '@/common/js/rules.js';
+	import pagination from '@components/pagination';
+	export default{
+		data() {
+			return {
+				pageConfig: {
+					account: 0,
+					currentPage: 1,
+					pageSize: 10,
+					showJumpButton: true
+				},
+				certificateNum: "",
+				custName: "",
+				processedList: [],
+				idCardFalg1: true
+			};
+		},
+		methods: {
+			handleCurrentChange(val) {
+				this.getProcessedList();
+			},
+			// 获取已处理列表
+			getProcessedList(value) {
+				if (value === 'search') {
+					this.pageConfig.currentPage = 1;
+					if (!this.certificateNum && !this.custName) {
+						this.$error("请先输入证件号码和客户姓名");
+					} else if (!this.certificateNum && this.custName) {
+						this.$error("请先输入证件号码");
+					} else if (this.certificateNum && !this.custName) {
+						this.$error("请先输入客户姓名");
+					} else {
+						this.getList();
+					}
+				} else {
+					this.getList();
+				}
+			},
+			// 请求数据
+			getList(value) {
+				let json = {
+					certificateNum: this.certificateNum,
+					custName: this.custName
+				};
+				rule.identityCardRule("身份验证", this.certificateNum, (rules) => {
+					if (!rules) {
+						this.$MyFetch.post(`${authorizationApi.processedList}?pageNum=${this.pageConfig.currentPage}&pageSize=${this.pageConfig.pageSize}`, json)
+							.then((data = {}) => {
+								console.log(data.list);
+								this.pageConfig.account = data.total;
+								this.processedList = data.list;
+							})
+							.catch((err) => {
+								console.log(err);
+								this.pageConfig.account = 0;
+								this.processedList = [];
+								this.$error(err.message);
+							});
+					} else {
+						this.$error("请输入正确的身份证");
+					};
+				});
+			},
+			// 查询读卡读卡
+			cardReading() {
+				window.idcardInfo = {};
+				if (this.idCardFalg1) {
+					window.myopen_onclick(1);
+					this.idCardFalg1 = false;
+					var x = setInterval(() => {
+						this.certificateNum = window.idcardInfo.CardNo;
+						this.custName = window.idcardInfo.NameS;
+						this.idCardFalg1 = true;
+						clearInterval(x);
+						if (!window.idcardInfo.CardNo) {
+							this.cardReading();
+						}
+					}, 1000);
+				}
+			},
+			toImage(applicationId, creditProductDtos) {
+				console.log(applicationId, creditProductDtos);
+				this.$showImage(applicationId, "征信授权", {imageUrl: authorizationApi.creditAuthInfo, parameterData: creditProductDtos});
+			}
+		},
+		mounted() {
+			this.getProcessedList();
+		},
+		components: {
+			pagination
+		}
+	};
+</script>
+
+<style scoped lang="less">
+	.processed{
+		padding: 20px 30px;
+		.search {
+			padding: 0 0 20px;
+			.authorization_button {
+				margin: 0 10px;
+			}
+		}
+		.table {
+			width: 100%;
+			// height: 520px;
+			overflow-x: scroll;
+			background: #FFFFFF;
+			border: 1px solid #E9E9E9;
+			border-radius: 4px;
+			table {
+				width: 150%;
+				tbody {
+					display: block;
+					height: 460px;
+					overflow-y: scroll;
+					tr {
+						border-bottom: 1px solid #E9E9E9;
+						b,span {
+							line-height: 30px;
+							font-size: 14px;
+							color: #333333;
+							letter-spacing: 0;
+							text-align: center;
+							display: block;
+							overflow: hidden;
+							text-overflow:ellipsis;
+							white-space:nowrap;
+							-o-text-overflow:ellipsis;
+							-webkit-text-overflow:ellipsis;
+							-moz-text-overflow:ellipsis;
+						}
+						b.color538BF1,span.color538BF1{
+							color: #538BF1;
+							cursor: pointer;
+						}
+						b{
+							border-bottom: 1px solid #E9E9E9;
+						}
+						b:last-child{
+							border: 0;
+						}
+					}
+				}
+				thead,
+				tr {
+					display: table;
+					width: 100%;
+					min-height: 60px;
+					table-layout: fixed;
+				}
+				thead tr {
+					height: 40px;
+					background: #ececec;
+					box-shadow: 0 1px 0 0 #d0d0d0;
+					th {
+						font-size: 12px;
+						color: #666;
+						letter-spacing: 0;
+						line-height: 40px;
+					}
+				}
+			}
+		}
+	}
+</style>

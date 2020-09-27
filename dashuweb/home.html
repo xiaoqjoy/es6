@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" class="bg-html">
+<head>
+<meta charset="UTF-8">
+<meta name="renderer" content="webkit">
+
+<title>大数官网后台管理</title>
+<script src="dsWebsite/files/js/jquery.min.js"></script>
+<script src="dsWebsite/files/js/bootstrap.js"></script>
+<script src="dsWebsite/files/layer/layer.js"></script>
+<script src="dsWebsite/files/js/comment.js"></script>
+<script>
+	var ip = '..';
+	$.ajax({
+		type : "POST",
+		url : ip + "/api/DsWebsit/checkLoginUser.do",
+		data : {},
+		dataType : "json",
+		success : function(jsonResult) {
+			if (jsonResult.code != "0000") {
+				layer.alert("您没有权限操作该页面!",function(){
+					parent.location = "/webjars/login.html";
+				});
+			}
+		},
+		error : function(XMLHttpRequest, textStatus, errorThrown) {
+			layer.msg("系统异常，请稍后再试！");
+		}
+	});
+	
+</script>
+</head>
+<body>
+</body>
+</html>

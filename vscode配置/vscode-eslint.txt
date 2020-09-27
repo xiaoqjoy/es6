@@ -1,0 +1,43 @@
+打开vscode=>文件=>首选项=>设置=>扩展=>JSON文件
+
+
+
+{
+    "eslint.options": {
+        "extensions": [".js", ".vue"]
+    },
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "vue-html",
+        {
+            "language": "vue",
+            "autoFix": true
+        },
+        {
+            "language": "html",
+            "autoFix": true
+        }
+    ],
+    "eslint.run": "onSave",
+    "eslint.autoFixOnSave": true,
+}
+
+
+
+
+每次保存文件的时候就可以根据 .eslintrc.js 配置规则来检查代码和做一些简单的修复
+
+
+
+
+
+
+Chinese (Simplified) Language Pack for Visual Studio Code  汉化
+
+ESLint
+
+GitLens — Git supercharged   git提交历史记录
+
+
+ 

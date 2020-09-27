@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <!--<meta name="renderer" content="IE11">
+    <meta http-equiv="X-UA-Compatible" content="IE=IE11"/>-->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <meta http-equiv="x-dns-prefetch-control" content="on" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta http-equiv="Expires" content="0" />
+    <title>credit_system</title>
+    <link rel="icon" type="image/x-icon" href="./static/dashu.png" />
+    <style>
+      .phoneSelect .el-select-dropdown__wrap{
+        max-height:550px!important;
+      }
+    </style>
+    <script src="static/js/jquery.3.3.1.min.js"></script>
+    <script src="static/webVideoCtrl.js"></script>
+    <script>
+      // 全局保存当前选中窗口
+      var g_iWndIndex = 0; // 可以不用设置这个变量，有窗口参数的接口中，不用传值，开发包会默认使用当前选择窗口
+
+      // 登录详细信息（全部通过远程获取）
+      var szIP = "",
+        szPort = "",
+        szUsername = "",
+        szPassword = "",
+        localPath = "", //本地保存路径
+        savePath = ""; //服务中心录像文件保存路径（video组件传参需要）
+      //videoFileName = ""; //录像文件名称
+
+      // 录像初始化
+      function videoInit(info, callback) {
+        // console.log(JSON.stringify(info));
+
+        //给ip等信息赋值（注意：IE11不能用对象的解构赋值，会报错：Unhandled promise rejection TypeError: 对象不支持“videoInit”属性或方法）
+        //let {ip: szIP, port: szPort, deviceLoginUser: szUsername} = info;
+        //console.log(info);
+        szIP = info.ip;
+        szPort = info.port;
+        szUsername = info.deviceLoginUser;
+        szPassword = info.deviceLoginPwd;
+        localPath = info.localPath;
+        savePath = info.savePath.replace(/\\/g, "/");
+        //console.log(localPath);
+        //console.log(savePath);
+
+        // 检查插件是否已经安装过
+        if (WebVideoCtrl.I_CheckPluginInstall() == -1) {
+          alert("您还未安装过插件，双击开发包目录里的WebComponents.exe安装！");
+          return;
+        }
+
+        // 初始化插件参数及插入插件
+        WebVideoCtrl.I_InitPlugin("100%", "100%", {
+          iWndowType: 1, // 分频类型（窗口分割数），默认为1：单画面
+          cbSelWnd: function(xmlDoc) {
+            g_iWndIndex = $(xmlDoc)
+              .find("SelectWnd")
+              .eq(0)
+              .text();
+            var szInfo = "当前选择的窗口编号：" + g_iWndIndex;
+          }
+        });
+        WebVideoCtrl.I_InsertOBJECTPlugin("divPlugin");
+        
+        // 检查插件是否最新
+        if (WebVideoCtrl.I_CheckPluginVersion() == -1) {
+          // alert(
+          //   "检测到新的插件版本，双击开发包目录里的WebComponents.exe升级！"
+          // );
+          // return;
+        } else if(WebVideoCtrl.I_CheckPluginVersion() == -2){
+          alert(
+            "你还没有安装插件，请双击开发包目录里的WebComponents.exe升级！"
+          );
+          return;
+        }
+
+        // 登录
+        // clickLogin();
+        callback();
+      }
+
+      // 显示操作信息
+      function showOPInfo(szInfo) {
+        console.log(szInfo + "状态码为：" + (WebVideoCtrl.I_GetLastError() || '无'));
+      }
+
+      // 登录
+      function clickLogin(callback) {
+        console.log("------正在登录------");
+        if (szIP == "" || szPort == "") {
+          return;
+        }
+
+        console.log(szIP, szPort, szUsername, szPassword);
+        var iRet = WebVideoCtrl.I_Login(
+          szIP,
+          1,
+          szPort,
+          szUsername,
+          szPassword,
+          {
+            success: function(xmlDoc) {
+              showOPInfo(szIP + " 登录成功！");
+
+              // 设置本地参数
+              // clickSetLocalCfg();
+              callback();
+            },
+            error: function() {
+              showOPInfo(szIP + " 登录失败！");
+
+              // 摄像头（千里眼）登录失败，面签时无法正常开启
+              alert("登录失败！千里眼无法正常使用，请检查！");
+            }
+          }
+        );
+        // console.log(iRet);
+
+        if (iRet == -1) {
+          showOPInfo(szIP + " 已登录过！");
+          callback();
+        }
+
+        //启动成功和失败都为undefined
+        // console.log(iRet);
+        // if(iRet == undefined){
+        //   alert("摄像头启动失败，请检查摄像头");
+        // }
+      }
+
+      // 退出登录
+      function clickLogout(callback) {
+        console.log("------退出登录------");
+        var szInfo = "";
+
+        if (szIP == "") {
+          return;
+        }
+
+        var iRet = WebVideoCtrl.I_Logout(szIP); // 登出设备
+        if (iRet == 0) {
+          szInfo = "退出登录成功！";
+
+          callback();
+
+          // getChannelInfo();
+        } else {
+          szInfo = "退出登录失败！";
+          alert("退出登录失败！");
+        }
+        showOPInfo(szIP + " " + szInfo);
+      }
+
+      // 开始预览
+      function clickStartRealPlay(callback) {
+        console.log("------开始预览------");
+        var oWndInfo = WebVideoCtrl.I_GetWindowStatus(g_iWndIndex), // 获取当前窗口的信息
+          iStreamType = 2,
+          iChannelID = 1,
+          bZeroChannel = false,
+          szInfo = "";
+
+        if (szIP == "") {
+          return;
+        }
+
+        if (oWndInfo != null) {
+          // 已经在播放了，先停止
+          WebVideoCtrl.I_Stop();
+        }
+
+        var iRet = WebVideoCtrl.I_StartRealPlay(
+          szIP, // 设备的IP地址或者普通域名(比如花生壳域名)
+          {
+            iWndIndex: g_iWndIndex, //播放窗口，如果不传，则默认使用当前选择窗口播放（默认选中窗口0）
+            iStreamType: iStreamType, // 码流类型1-主码流，2-子码流，默认使用主码流预览
+            iChannelID: iChannelID, // 播放通道号，默认通道1
+            bZeroChannel: bZeroChannel // 是否播放零通道，默认为false
+            // iPort: "" //RTSP端口号，可以选择传入，如果不传，开发包会自动判断设备的RTSP端口
+          }
+        );
+
+        if (iRet == 0) {
+          szInfo = "开始预览成功！";
+
+          // 开始录像
+          // clickStartRecord();
+          callback();
+        } else {
+          szInfo = "开始预览失败！";
+
+          // 摄像头（千里眼）未配置或损坏，面签时无法正常开启
+          alert("开始预览失败，千里眼无法正常使用，请检查！");
+        }
+
+        showOPInfo(szIP + " " + szInfo);
+      }
+
+      // 停止预览
+      function clickStopRealPlay(callback) {
+        console.log("------停止预览------");
+        var oWndInfo = WebVideoCtrl.I_GetWindowStatus(g_iWndIndex),
+          szInfo = "";
+
+        if (oWndInfo != null) {
+          var iRet = WebVideoCtrl.I_Stop(); // 停止播放（停止预览和停止回放统一使用该函数）
+          if (iRet == 0) {
+            szInfo = "停止预览成功！";
+            callback();
+          } else {
+            szInfo = "停止预览失败！";
+            alert("停止预览失败，千里眼无法正常使用，请检查！");
+          }
+          showOPInfo(oWndInfo.szIP + " " + szInfo);
+        }
+      }
+
+      // 设置本地参数
+      function clickSetLocalCfg(callback) {
+        console.log("------设置本地参数配置------");
+        //如果是localPath，view文件夹若不存在，会自动创建，Sign及以上目录必须不自动创建，必须存在，否则录像失败（重要）
+        //如果是savePath，share1文件夹若不存在，会自动创建
+        isExistFileStatus(savePath);
+        let info = {
+          PackgeSize: "0",
+          PlayWndType: "0",
+          BuffNumberType: "0",
+          RecordPath: savePath,
+          CapturePath: "",
+          PlaybackFilePath: "",
+          PlaybackPicPath: "",
+          DownloadPath: "",
+          IVSMode: "0",
+          CaptureFileFormat: "0",
+          ProtocolType: "0"
+        };
+        var arrXml = [],
+          szInfo = "";
+        // console.log(info.RecordPath);
+
+        arrXml.push("<LocalConfigInfo>");
+        arrXml.push("<PackgeSize>" + info.PackgeSize + "</PackgeSize>"); //录像打包大小，0：256M，1：512M，2：1G
+        arrXml.push("<PlayWndType>" + info.PlayWndType + "</PlayWndType>"); //播放窗口模式，0：充满，1：4：3，2：16：9
+        arrXml.push(
+          "<BuffNumberType>" + info.BuffNumberType + "</BuffNumberType>"
+        ); //播放库缓冲区大小，0：最短延时，1：实时性好，2：均衡，3：流畅性好
+        arrXml.push("<RecordPath>" + info.RecordPath + "</RecordPath>"); //录像文件保存路径
+        arrXml.push("<CapturePath>" + info.CapturePath + "</CapturePath>"); //抓图文件保存路径
+        arrXml.push(
+          "<PlaybackFilePath>" + info.PlaybackFilePath + "</PlaybackFilePath>"
+        ); //回放录像文件保存路径
+        arrXml.push(
+          "<PlaybackPicPath>" + info.PlaybackPicPath + "</PlaybackPicPath>"
+        ); //回放抓图文件保存路径
+        arrXml.push("<DownloadPath>" + info.DownloadPath + "</DownloadPath>"); //回放下载文件保存路径
+        arrXml.push("<IVSMode>" + info.IVSMode + "</IVSMode>"); //是否开启规则信息，0：禁用，1：启用
+        arrXml.push(
+          "<CaptureFileFormat>" +
+            info.CaptureFileFormat +
+            "</CaptureFileFormat>"
+        ); //抓图格式，0：JPEG，1：BMP
+        arrXml.push("<ProtocolType>" + info.ProtocolType + "</ProtocolType>"); //协议类型，0：TCP，2：UDP
+        arrXml.push("</LocalConfigInfo>");
+
+        var iRet = WebVideoCtrl.I_SetLocalCfg(arrXml.join("")); //设置插件的本地配置参数
+
+        if (0 == iRet) {
+          szInfo = "本地配置设置成功！";
+
+          // 开始预览 -- 开始录像
+          // clickStartRealPlay();
+          callback();
+        } else {
+          szInfo = "本地配置设置失败！";
+          alert("本地配置设置失败！千里眼无法正常使用，请检查");
+        }
+        showOPInfo(szInfo);
+      }
+
+      // 开始录像
+      function clickStartRecord(info, callback) {
+        console.log("------开始录像------，录像文件名：", info.videoFileName);
+        //console.log(info);
+        //console.log(g_iWndIndex);
+        var oWndInfo = WebVideoCtrl.I_GetWindowStatus(g_iWndIndex), //获取播放窗口信息
+          szInfo = "";
+
+        if (oWndInfo != null) {
+          var szChannelID = 1, //通道
+            //szFileName = oWndInfo.szIP + "_" + szChannelID + "_" + new Date().getTime(),
+            iRet = WebVideoCtrl.I_StartRecord(info.videoFileName); //预览/回放录像，保存录像到PC中，路径在本地参数配置中
+          if (0 == iRet) {
+            szInfo = "开始录像成功！";
+            callback();
+          } else {
+            szInfo = "开始录像失败！";
+            alert("开始录像失败！");
+          }
+          showOPInfo(oWndInfo.szIP + " " + szInfo);
+        }
+      }
+
+      // 停止录像
+      function clickStopRecord(callback) {
+        console.log("------停止录像------");
+        var oWndInfo = WebVideoCtrl.I_GetWindowStatus(g_iWndIndex),
+          szInfo = "";
+
+        if (oWndInfo != null) {
+          var iRet = WebVideoCtrl.I_StopRecord();
+          if (iRet == 0) {
+            szInfo = "停止录像成功！";
+
+            // 停止预览
+            // clickStopRealPlay();
+            callback();
+          } else {
+            szInfo = "停止录像失败！";
+            alert("停止录像失败！");
+          }
+          showOPInfo(oWndInfo.szIP + " " + szInfo);
+        }
+      }
+
+      // 判断文件夹是否存在
+      // 加载Scripting.FileSystemObject
+      var fso = null;
+      getFileSystemObject();
+      function getFileSystemObject(){
+        if (navigator.userAgent.indexOf(".NET") > -1) {
+          fso = new ActiveXObject("Scripting.FileSystemObject");
+
+          // 如果fso不存在，就不断的递归调用进行获取
+          if(!fso){
+            console.log("Scripting.FileSystemObject获取失败：");
+            arguments.callee();
+          } else {
+            console.log("Scripting.FileSystemObject获取成功：");
+            console.log(fso);
+          }
+        }
+      }
+
+      function isExistFileStatus(path, flag) {
+        // 如果fso不存在，就重新获取
+        if(!fso){
+          console.log("Scripting.FileSystemObject获取失败，正在为你重新获取");
+          getFileSystemObject();
+          return;
+        }
+        if (!fso.FolderExists(path)) {
+          //fso.FolderExists(localPath)：判断文件夹是否存在，存在为true
+          //1 是判断路径是否存在，其他都是创建文件夹
+          if (flag != null && "1" == flag) {
+            return true;
+          } else {
+            //创建文件夹
+            newCreateFolder(path);
+          }
+        }
+      }
+
+      //新建文件夹
+      function newCreateFolder(path) {
+        var pathArr = path.split("/");
+        var path;
+        for (var i = 0, pathLength = pathArr.length; i < pathLength; i++) {
+          if (i == 0) {
+            path = pathArr[i];
+          } else {
+            path = path + "/" + pathArr[i];
+            if (!fso.FolderExists(path)) {
+              fso.CreateFolder(path);
+            }
+          }
+        }
+        fso.quit;
+      }
+      // 选择下载路径
+      function browseFolder(path) {
+        try {
+          var Message = "\u8bf7\u9009\u62e9\u6587\u4ef6\u5939"; //选择框提示信息
+          var Shell = new ActiveXObject("Shell.Application");
+          var Folder = Shell.BrowseForFolder(0, Message, 64, 17); //起始目录为：我的电脑
+          //var Folder = Shell.BrowseForFolder(0,Message,0); //起始目录为：桌面
+          if (Folder != null) {
+            Folder = Folder.items(); // 返回 FolderItems 对象
+            Folder = Folder.item(); // 返回 Folderitem 对象
+            Folder = Folder.Path; // 返回路径
+            if (Folder.charAt(Folder.length - 1) != "\\") {
+              Folder = Folder + "\\";
+            }
+            document.getElementById(path).value = Folder;
+            return Folder;
+          }
+        } catch (e) {
+          alert(e.message);
+        }
+      }
+    </script>
+      <!-- 身份证识别认证 -->
+    <!-- Readed()：读卡成功事件（） -->
+    <script for="idcard" event="Readed()">
+      window.isCard = true; // 读卡开始
+      console.log("放入读卡：", rdcard.NameS);
+      //document.getElementsByName("tName")[0].value = rdcard.NameS;
+      //var name = rdcard.NameS; //注意：不能定义全局变量
+      window.idcardInfo = {};
+      getIdcardInfo(rdcard);
+      rdcard.DeleteOutputFile(); // 删除读卡过程中产生的文件
+    </script>
+  </head>
+  <!-- 影像扫描中上传影像成功后回调 -->
+  <script type="text/javascript" language="javascript" for="UBSCAN"  event="SendAuthResult(args)" >
+    args = JSON.parse(args);
+    if (args.code === "0") {
+      if (window.opener.loanDataComponent instanceof window.opener.Object) {
+        try {
+          window.opener.loanDataComponent.signature(); // 用于贷后重签上传标记
+          window.opener.loanDataComponent = null;
+        } catch (error) {
+          console.error(new Error('window.opener.loanDataComponent 没有signature函数'));
+        }
+      }
+      alert("上传完成");
+      window.open(location, "_self").close();
+    } else {
+      alert("上传影像失败");
+    }
+  </script>
+  <body>
+    <!-- <a href="./static/image.html" target="_target">点击</a> -->
+    <div id="app"></div>
+    <!-- built files will be auto injected 测试 -->
+
+    <!-- 身份证信息 -->
+    <object classid="clsid:F1317711-6BDE-4658-ABAA-39E31D3704D3" codebase="SDRdCard.cab#version=2,0,1,0" width=390 height=300
+    align=center hspace=0 vspace=0 id=idcard name=rdcard style="position:absolute;top: 0;z-index: -9999;left:-100%;">
+    </object>
+
+    <!-- 获取ip地址，mac地址 -->
+    <object
+      classid="CLSID:76A64158-CB41-11D1-8B02-00600806D9B6"
+      id="locator"
+      style="display:none;visibility:hidden"
+    ></object>
+    <object
+      classid="CLSID:75718C9A-F029-11d1-A1AC-00C04FB6C223"
+      id="foo"
+      style="display:none;visibility:hidden"
+    ></object>
+  </body>
+
+  <script>
+    //判断是否为IE11浏览器
+    //获取客户端浏览器信息
+    // console.log(navigator);
+    // let userAgent = navigator.userAgent; //返回由客户机发送服务器的 user-agent 头部的值。
+    // if (userAgent.indexOf("Chrome") > -1) {
+    //   console.log("谷歌浏览器");
+    // } else if (userAgent.indexOf("Firefox") > -1) {
+    //   console.log("火狐浏览器");
+    // } else if (userAgent.indexOf(".NET") > -1 && userAgent.indexOf("NT 10.0") > -1) {
+    //   console.log("IE11浏览器");
+    // } else {
+    //   console.log("其他浏览器");
+    // }
+
+    // 影像平台
+    // function cutImg (param) {
+    //   UBSCAN.init(param)
+    //   UBSCAN.SetToken(localStorage.getItem('DSF-token'),'');
+    // }
+  </script>
+  <!-- 定义全局函数，在face2face-undisposed使用 -->
+  <script>
+    // 打开端口连接设备
+    function myopen_onclick(param) {
+      window.isCard = true; // 读卡开始
+      const pp = rdcard.openport(); // 打开端口连接设备
+      //alert(pp);
+      if (pp == 0) {
+        console.log("打开端口连接设备成功");
+
+        if (param === 0) {
+          // 自动
+          beginread_onclick();
+        } else if (param === 1) {
+          // 手动
+          read3_onclick();
+        }
+      } else {
+        console.error("打开端口连接设备失败：", pp);
+        alert("二代系统身份证识别仪故障或没有插好，请检查");
+        window.isCard = false; // 读卡结束
+      }
+    }
+    function beginread_onclick() {
+      const pp = rdcard.ReadCard2(); //自动读取信息 - 自动读卡方式，一直循环读卡，用户身份证放在设备上即自动读卡（自动）
+      if (pp == 0) {
+        console.log("开始读卡成功");
+      } else {
+        console.log("开始读卡失败：", pp);
+        alert("开始读卡失败：", pp);
+        window.isCard = false; // 读卡结束
+        rdcard.ClosePort();
+      }
+    }
+    function read3_onclick() {
+      const pp = rdcard.ReadCard3(); //自动读取信息 - 自动读卡方式，用户身份证放在设备上即自动读卡，当读到身份证后自动停止读卡（手动）
+      if (pp == 0) {
+        console.log("等待读卡成功");
+      } else {
+        console.error("等待读卡失败：", pp);
+        alert("等待读卡失败：", pp);
+        rdcard.ClosePort();
+      }
+    }
+
+    // 初始化
+    var isCard = true;
+    var idcardInfo = {};
+    function getIdcardInfo(rdcard) {
+      window.idcardInfo = {
+        BornL: rdcard.BornL, //出生年月
+        NameS: rdcard.NameS, //姓名
+        Address: rdcard.Address, //地址
+        CardNo: rdcard.CardNo, //证件号码
+        Police: rdcard.Police, //签发机关
+        SexL: rdcard.SexL, //性别
+        ActivityL: rdcard.ActivityL, //有效期限
+        NationL: rdcard.NationL //民族
+      };
+      window.eventBus.$emit('identityInfo', idcardInfo);
+      rdcard.ClosePort();
+    }
+  </script>
+  <script
+    FOR="foo"
+    EVENT="OnObjectReady(objObject,objAsyncContext)"
+    LANGUAGE="JScript"
+  >
+    if (
+      objObject.IPEnabled != null &&
+      objObject.IPEnabled != "undefined" &&
+      objObject.IPEnabled == true
+    ) {
+      if (
+        objObject.IPEnabled &&
+        objObject.IPAddress(0) != null &&
+        objObject.IPAddress(0) != "undefined"
+      )
+        window.sIPAddr = objObject.IPAddress(0);
+      if (objObject.MACAddress != null && objObject.MACAddress != "undefined")
+        window.sMacAddr = objObject.MACAddress;
+      if (objObject.DNSHostName != null && objObject.DNSHostName != "undefined")
+      window.sDNSName = objObject.DNSHostName;
+    }
+  </script>
+  <script
+    FOR="foo"
+    EVENT="OnCompleted(hResult,pErrorObject, pAsyncContext)"
+    LANGUAGE="JScript"
+  >
+    console.log(
+      "获取mac地址成功：",
+      sMacAddr,
+      "，获取ip地址成功：",
+      sIPAddr,
+      "，获取主机名成功：",
+      sDNSName
+    );
+
+    //是否获取到mac地址和ip地址
+    if (sMacAddr && sIPAddr && sDNSName) {
+      // 把mac地址和ip地址缓存起来
+      console.log("把mac地址，ip地址，主机名缓存起来");
+      localStorage.setItem("sMacAddr", sMacAddr);
+      localStorage.setItem("sIPAddr", sIPAddr);
+      localStorage.setItem("sDNSName", sDNSName);
+      window.sMacAddr = sMacAddr;
+      window.sIPAddr = sIPAddr;
+      window.sDNSName = sDNSName;
+    } else {
+      alert("获取mac地址，ip地址，主机名失败，请刷新重试或者使用IE11浏览器");
+      location.reload();
+    }
+    // 先判断是否存在window.componentThis，这里window.componentThis为vue组件实例
+    // 具体在global.js Vue.prototype.$getMac函数;
+    if (window.componentThis) {
+      // 将mac地址赋予实例的一个属性
+      window.componentThis.sMacAddr = window.sMacAddr;
+      // 致空，以免造成内存泄露；
+      window.componentThis = null;
+      // console.log(window.componentThis);
+    }
+  </script>
+
+  <!-- 远程摄像头 -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script> -->
+  <!-- <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="static/webVideoCtrl.js"></script> -->
+
+  <script type="text/javascript" language="javascript" for="printWB">
+    //-----  下面是打印控制语句  ----------
+    window.onbeforeprint = beforePrint;
+    window.onafterprint = afterPrint;
+    //打印之前隐藏不想打印出来的信息
+    function beforePrint() {
+      var tag = document.getElementById("hide_btn");
+      tag.style.display = "none";
+    }
+    //打印之后将隐藏掉的信息再显示出来
+    function afterPrint() {
+      var tag = document.getElementById("hide_btn");
+      tag.style.display = "";
+    }
+  </script>
+  <script
+    type="text/javascript"
+    language="javascript"
+    for="DownLoad"
+    event="SendResult(args)"
+  >
+    if (args == "0") {
+      //下载成功处理方法
+    } else {
+      //下载失败处理方法
+    }
+    window.close();
+  </script>
+  <script>
+    // 方法一（只针对IE且客户端的IE允许AcitiveX运行）：
+    // var WshShell = new ActiveXObject("WScript.Shell");
+    // console.log(WshShell);
+    // console.log("计算机名 = " + WshShell.ExpandEnvironmentStrings("%COMPUTERNAME%"));
+    // console.log("登录用户名 = " + WshShell.ExpandEnvironmentStrings("%USERNAME%"));
+
+    // 方法二（只针对IE且客户端的IE允许AcitiveX运行）：
+    // var wshNetwork = new ActiveXObject("WScript.Network");
+    // console.log(wshNetwork);
+    // console.log("域名       = " + wshNetwork.UserDomain);
+    // console.log("计算机名   = " + wshNetwork.ComputerName);
+    // console.log("登录用户名 = " + wshNetwork.UserName);
+
+    //方法三（只针对IE且客户端的IE允许AcitiveX运行）：
+  </script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      //禁止退格键 作用于Firefox、Opera
+      document.onkeypress = banBackSpace;
+      //禁止退格键 作用于IE、Chrome
+      document.onkeydown = banBackSpace;
+    });
+    //处理键盘事件 禁止后退键（Backspace）密码或单行、多行文本框除外
+    function banBackSpace(e) {
+      var ev = e || window.event;
+      //各种浏览器下获取事件对象
+      var obj =
+        ev.relatedTarget || ev.srcElement || ev.target || ev.currentTarget;
+      //按下Backspace键
+      if (ev.keyCode == 8) {
+        var tagName = obj.nodeName; //标签名称
+        //如果标签不是input或者textarea则阻止Backspace
+        if (tagName != "INPUT" && tagName != "TEXTAREA") {
+          return stopIt(ev);
+        }
+        var tagType = obj.type.toUpperCase(); //标签类型
+        //input标签除了下面几种类型，全部阻止Backspace
+        if (
+          tagName == "INPUT" &&
+          (tagType != "TEXT" && tagType != "TEXTAREA" && tagType != "PASSWORD")
+        ) {
+          return stopIt(ev);
+        }
+        //input或者textarea输入框如果不可编辑则阻止Backspace
+        if (
+          (tagName == "INPUT" || tagName == "TEXTAREA") &&
+          (obj.readOnly == true || obj.disabled == true)
+        ) {
+          return stopIt(ev);
+        }
+      }
+    }
+    function stopIt(ev) {
+      if (ev.preventDefault) {
+        //preventDefault()方法阻止元素发生默认的行为
+        ev.preventDefault();
+      }
+      if (ev.returnValue) {
+        //IE浏览器下用window.event.returnValue = false;实现阻止元素发生默认的行为
+        ev.returnValue = false;
+      }
+      return false;
+    }
+  </script>
+</html>
