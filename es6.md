@@ -1102,14 +1102,7 @@ function getNowFormatDate(){
   return currentdate;
 }
 
-table的使用方法
 
-<table border="1" cellspacing="0" cellpadding="0" width="100%">
-  <tr>
-	<td></td>
-	<td colspan="5"></td>
-  </tr>
-<table>
 
 //千分符的使用方法
 template.helper('format',function(par){
