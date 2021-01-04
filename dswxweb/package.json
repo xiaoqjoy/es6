@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "mand-mobile": "^1.6.7",
     "mint-ui": "^2.2.13",
     "vconsole": "^3.3.4",
