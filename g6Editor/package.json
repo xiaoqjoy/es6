@@ -31,7 +31,7 @@
     "d3-queue": "~3.0.7",
     "dagre": "^0.8.2",
     "debug": "~3.1.0",
-    "electron": "~2.0.2",
+    "electron": "~9.1.0",
     "eslint": "~3.19.0",
     "eslint-config-airbnb": "~15.0.1",
     "eslint-config-egg": "~4.2.0",
