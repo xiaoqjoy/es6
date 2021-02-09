@@ -1,0 +1,104 @@
+* { margin: 0; padding: 0; border: none;}
+
+a { text-decoration: none;}
+
+ul { list-style: none;}
+
+
+/* 设计稿指定宽度320px css rem指定20px */
+html {
+    font-size : 20px;
+}
+@media only screen and (min-width: 401px){
+    html {
+        font-size: 25px !important;
+    }
+}
+@media only screen and (min-width: 428px){
+    html {
+        font-size: 26.75px !important;
+    }
+}
+@media only screen and (min-width: 481px){
+    html {
+        font-size: 30px !important; 
+    }
+}
+@media only screen and (min-width: 569px){
+    html {
+        font-size: 35px !important; 
+    }
+}
+@media only screen and (min-width: 641px){
+    html {
+        font-size: 40px !important; 
+    }
+}
+
+body{
+    background: #202129;
+}
+
+.box img{
+    width: 100%;
+}
+
+.title{
+    font-size: 0.85rem;
+    color: #F0F0F0;
+    height: 2.2rem;
+    text-align: center;
+    line-height: 2.2rem;
+}
+
+.title strong{
+    float: left;
+    margin-left: 0.4rem;
+}
+
+ul li{
+    height: 2.6rem;
+    font-size: 0.75rem;
+    color: #EEEEEE;
+    font-weight: 500;
+    border-bottom: 1px solid #191A21;
+    line-height: 2.6rem;
+}
+
+ul li span:first-child{
+    margin-left: 0.8rem;
+}
+
+ul li span:last-child{
+    color: #647DD4;
+    font-size: 0.7rem;
+    float: right;
+    margin-right: 0.8rem;
+}
+
+ul li strong{
+    color: #7F829A;
+    float: right;
+    margin-right: 0.8rem;
+}
+.about{
+    text-align: center;
+    margin-top: 1.6rem;
+}
+.about p{
+    font-size: 0.7rem;
+    color: #EEEEEE;
+}
+.about span{
+    font-size: 0.6rem;
+    color: #7F829A;
+}
+footer{
+    color: #7F829A;
+    font-size: 0.6rem;
+    text-align: center;
+    width: 100%;
+    height: 1rem;
+    position: absolute;
+    bottom: 2.5rem;
+}

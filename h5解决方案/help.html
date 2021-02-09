@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="App-Config" content="fullscreen=yes,useHistoryState=yes,transition=yes">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <meta name="viewport" content="width=320,maximum-scale=1.3,user-scalable=no">
+    <title>帮助说明</title>
+    <link rel="stylesheet" href="./style.css">
+
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+
+</head>
+<body>
+    <header>
+        <div class="title">
+            <strong class="back">〈 </strong>
+            <span>帮助说明</span>
+        </div>
+    </header>
+
+    <div class="box">
+
+        <img src="./header.png">
+
+        <section class="main"></section>
+
+    </div>
+
+</body>
+
+<script>
+
+    $(function(){
+
+        let type = [];
+
+        var dict = {"msg":"操作成功","code":200,"data":[{"searchValue":null,"createBy":"admin","createTime":"2021-01-30 01:14:54","updateBy":null,"updateTime":null,"remark":"数据管理-二级分类","params":{},"dictCode":620,"dictSort":0,"dictLabel":"全部","parentCode":null,"dictValue":"0","dictType":"content_second_cls","cssClass":null,"listClass":null,"isDefault":"N","status":"0","hasNext":0,"default":false},{"searchValue":null,"createBy":"admin","createTime":"2021-01-30 01:15:11","updateBy":null,"updateTime":null,"remark":"数据管理-二级分类","params":{},"dictCode":621,"dictSort":1,"dictLabel":"策略相关","parentCode":null,"dictValue":"1","dictType":"content_second_cls","cssClass":null,"listClass":null,"isDefault":"N","status":"0","hasNext":0,"default":false},{"searchValue":null,"createBy":"admin","createTime":"2021-01-30 01:15:25","updateBy":null,"updateTime":null,"remark":"数据管理-二级分类","params":{},"dictCode":622,"dictSort":2,"dictLabel":"统计相关","parentCode":null,"dictValue":"2","dictType":"content_second_cls","cssClass":null,"listClass":null,"isDefault":"N","status":"0","hasNext":0,"default":false},{"searchValue":null,"createBy":"admin","createTime":"2021-01-30 01:15:54","updateBy":null,"updateTime":null,"remark":"数据管理-二级分类","params":{},"dictCode":623,"dictSort":3,"dictLabel":"账户与账号相关","parentCode":null,"dictValue":"3","dictType":"content_second_cls","cssClass":null,"listClass":null,"isDefault":"N","status":"0","hasNext":0,"default":false}]}
+
+        console.log(dict)
+
+        for(var i = 0; i < dict.data.length; i++){
+            type.push({
+                secondType: dict.data[i].dictSort,
+                name: dict.data[i].dictLabel,
+                par: []
+            })
+        }
+
+        console.log(type)
+
+        $.ajax({ 
+            url: "http://172.16.6.213:8086/content/note/list",
+            //url: "/content/note/list",
+            success: function(res){
+
+                let data = res.data.records,
+                    len = data.length,
+                    arr = [];
+
+                if(window.location.hash){
+
+                    let hash = window.location.hash;
+
+                    var str = hash.substr(1)
+                    console.log(str)
+
+                    getHtml(data, str)
+
+                }
+
+                console.log(res)
+
+                for(var i = 0; i < len; i++){
+
+                    for(var j = 0; j < type.length; j++){
+
+                        if(type[j].secondType == data[i].secondType){
+                            type[j].par.push({
+                                name: data[i].name,
+                                //content: data[i].content,
+                                id: data[i].id
+                            })
+                        }
+                    }
+
+                }
+
+
+                loadData(type);   
+
+                loadMore(type);
+
+                $(".box").on("click", ".look", function(){
+
+                    let id = $(this).attr('data-id')
+
+                    console.log(window.location.href)
+
+                    window.location.hash = id
+
+                    console.log(id)
+                    console.log(data)
+
+                    getHtml(data, id)
+
+                })
+
+
+            }
+        });
+
+        function getHtml(data, id){
+            let len = data.length;
+            for(var i = 0; i < len; i++){
+                if(data[i].id == id){
+                    $(".box").html(data[i].content)
+                }
+            }
+        }
+
+
+        $(".back").click(function(){
+
+            loadData(type);
+
+            if(window.location.hash){
+
+                $(".box").html("<img src='./header.png'><section class='main'></section>")
+
+                loadData(type)
+
+                window.location.hash = ""
+
+            }
+
+        })
+
+
+        function loadData(type){    //加载数据
+
+            console.log(type)
+
+            let dom = [];
+
+            for(var a = 0; a < type.length; a++){
+
+                dom.push("<ul><li><span>" + type[a].name + "</span><span class='more' data-type="+ type[a].secondType +">查看更多</span></li></ul>")
+
+                for(var j = 0; j < type[a].par.length; j++){
+
+                    if(j < 4){
+
+                        dom.push("<ul><li class='look' data-id="+ type[a].par[j].id +"><span>" + type[a].par[j].name + "</span><strong> > </strong></li></ul>")
+
+                    }
+
+                }
+
+            }
+
+            $(".main").html(dom.join(""))
+
+        }
+
+        function loadMore(type){  //加载 查看更多
+
+            let html = [];
+
+            $(".box").on("click", ".more", function(){
+
+                let id = $(this).attr('data-type')
+
+                for(var a = 0; a < type.length; a++){
+
+                    if(type[a].secondType == id){
+
+                        for(var j = 0; j < type[a].par.length; j++){
+
+                            html.push("<ul><li class='look' data-id="+ type[a].par[j].id +"><span>" + type[a].par[j].name + "</span><strong> > </strong></li></ul>")
+
+                        }
+                    }
+                }
+
+                $(".main").html(html.join(""))
+
+            })
+
+        }
+
+
+        $.ajax({ 
+            url: "http://172.16.6.213:8086/auth/system/dict/data/type/content_second_cls",
+            //url: "/auth/system/dict/data/type/content_second_cls",
+            success: function(res){
+
+            }
+        });
+
+    })
+</script>
+</html>
